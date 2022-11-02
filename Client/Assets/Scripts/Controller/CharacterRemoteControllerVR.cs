@@ -67,6 +67,7 @@ public class CharacterRemoteControllerVR : BaseController
 
     public override void Init()
     {
+        base.Init();
         InitComponent();
     }
 
@@ -87,9 +88,9 @@ public class CharacterRemoteControllerVR : BaseController
         Com.CameraRig = Util.FindChild(transform.gameObject, "CameraRig");
         Com.RightController = Util.FindChild(Com.CameraRig, "RightController");
         Com.LeftController = Util.FindChild(Com.CameraRig, "LeftController");
-
-        Com.weaponSlot = new GameObject[_weaponSlotSize];
         _weaponSlotSize = 4;
+        Com.weaponSlot = new GameObject[_weaponSlotSize];
+       
 
         TryGetComponent(out Com.movement3D);
         if (Com.movement3D == null)

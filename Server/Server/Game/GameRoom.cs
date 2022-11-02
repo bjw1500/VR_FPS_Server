@@ -154,6 +154,7 @@ namespace Server
                     //몬스터 생성
                     Monster monster = gameObject as Monster;
                     monster.Room = this;
+                    _monsters.Add(monster.ObjectId, monster);
                     objectSpawnPacket.Infos.Add(monster.Info);
 
 
@@ -163,6 +164,7 @@ namespace Server
                 {
                     Item item = gameObject as Item;
                     item.Room = this;
+                    _items.Add(item.Info.ObjectId, item);
                     itemSpawnPacket.Infos.Add(item.Info);
 
                 }

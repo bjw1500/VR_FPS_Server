@@ -194,7 +194,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/interactui"
+                     "output" : "/actions/default/in/weaponwheel"
                   },
                   "position" : {
                      "output" : "/actions/default/in/touchposition"
@@ -206,7 +206,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/interactui"
+                     "output" : "/actions/default/in/weaponwheel"
                   },
                   "position" : {
                      "output" : "/actions/default/in/touchposition"
@@ -261,6 +261,7 @@
    "category" : "steamvr_input",
    "controller_type" : "vive_controller",
    "description" : "",
+   "interaction_profile" : "",
    "name" : "vive_controller",
    "options" : {},
    "simulated_actions" : []

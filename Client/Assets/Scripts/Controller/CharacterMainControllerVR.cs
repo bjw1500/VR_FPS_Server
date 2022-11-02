@@ -85,6 +85,8 @@ public class CharacterMainControllerVR : BaseController, IDamageable
 
     public override void Init()
     {
+
+        base.Init();
         InitComponents();
         InitSettings();
     }
@@ -267,6 +269,7 @@ public class CharacterMainControllerVR : BaseController, IDamageable
 
                 _currentWeaponSlot = i;
                 item.transform.SetParent(Com.RightController.transform, false);
+
 
 
                 Com.myGun = item.transform.GetComponent<WeaponController>();
