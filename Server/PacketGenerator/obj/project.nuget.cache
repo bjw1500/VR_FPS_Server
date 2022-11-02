@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "rQMA/4qSAkhfijtQ7cbz39jAhueazufJGeWq7H7r+fKHJ+rX5wT/Zq45geSZji1isQn7QWDLwCWoY8TL5QHdYQ==",
+  "success": true,
+  "projectFilePath": "D:\\DesignProject\\capstone\\myProject\\Server\\PacketGenerator\\PacketGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bjw14\\.nuget\\packages\\google.protobuf\\3.12.3\\google.protobuf.3.12.3.nupkg.sha512",
+    "C:\\Users\\bjw14\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\bjw14\\.nuget\\packages\\system.memory\\4.5.2\\system.memory.4.5.2.nupkg.sha512",
+    "C:\\Users\\bjw14\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.1\\system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

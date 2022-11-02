@@ -1,0 +1,21 @@
+{
+  "weapons": [
+    {
+      "id": "1",
+      "name": "Gun",
+      "imagePath": "Image/UI/WeaponWheel/Gun",
+      "prefabPath": "Weapon/Gun",
+      "weaponType": "Pistol",
+      "damage": "25"
+    },
+    {
+      "id": "2",
+      "name": "MachineGun",
+      "imagePath": "Image/UI/WeaponWheel/MachineGun",
+      "prefabPath": "Weapon/MachineGun",
+      "weaponType": "Rifle",
+      "damage": "25"
+
+    }
+  ]
+} 
