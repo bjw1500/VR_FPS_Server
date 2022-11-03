@@ -253,7 +253,6 @@ GameObject:
   - component: {fileID: 3628246878150156416}
   - component: {fileID: 6350486118992301380}
   - component: {fileID: 4004158132868506769}
-  - component: {fileID: 6687146377947405146}
   - component: {fileID: 8814767063895841727}
   - component: {fileID: 407498754589886367}
   m_Layer: 0
@@ -311,64 +310,6 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &6687146377947405146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8853657203833230471}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9dd219d4dc119418797a44dd99e6a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  _components:
-    right_hand: 0
-    left_hand: 0
-    move:
-      actionPath: 
-      needsReinit: 0
-    touchPosition:
-      actionPath: 
-      needsReinit: 0
-    fireTrigger:
-      actionPath: 
-      needsReinit: 0
-    jumpTrigger:
-      actionPath: 
-      needsReinit: 0
-    selectTrigger:
-      actionPath: 
-      needsReinit: 0
-    cam: {fileID: 0}
-    weaponSlot:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    myGun: {fileID: 0}
-    anim: {fileID: 0}
-    CameraRig: {fileID: 0}
-    LeftController: {fileID: 0}
-    RightController: {fileID: 0}
-  _animatorOption:
-    paramMoveX: Move X
-    paramMoveZ: Move Z
-    paramDistY: Dist Y
-    paramGrounded: Grounded
-    paramJump: Jump
-  _state:
-    isCurrentFp: 0
-    isMoving: 0
-    isRunning: 0
-    isGrounded: 0
-    isCursorActive: 0
-  _distFromGround: 0
-  _moveDir: {x: 0, y: 0, z: 0}
-  _worldMoveDir: {x: 0, y: 0, z: 0}
-  _weaponSlotSize: 3
-  _currentWeaponSlot: 0
 --- !u!114 &8814767063895841727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,19 +504,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7807694786819327707, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
---- !u!114 &2655145558036471021 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 310374431476478757, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
-  m_PrefabInstance: {fileID: 2348155755204227016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9143debf830525e4c805c37221dd97e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3953433283297581663 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1606441086276089239, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
@@ -1231,4 +1165,4 @@ MonoBehaviour:
     m_Bits: 64
   _HUD: {fileID: 3953433283297581663}
   _actionText: {fileID: 7298582250027824623}
-  _weaponWheel: {fileID: 2655145558036471021}
+  _weaponWheel: {fileID: 0}

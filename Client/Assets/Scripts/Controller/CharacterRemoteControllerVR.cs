@@ -200,10 +200,6 @@ public class CharacterRemoteControllerVR : BaseController
         Com.movement3D.KnockBack(force, time);
     }
 
-    public override void OnDamage(int damage, ObjectInfo attacker)
-    {
-        base.OnDamage(damage, attacker);
-    }
 
     public void GetWeapon(Item item)
     {
@@ -275,5 +271,13 @@ public class CharacterRemoteControllerVR : BaseController
         //서버 부분
         if (GameMng.I.SingleGame == true)
             return;
+    }
+
+    public override void OnDamage(int damage, ObjectInfo attacker)
+    {
+        base.OnDamage(damage, attacker);
+
+        
+    
     }
 }

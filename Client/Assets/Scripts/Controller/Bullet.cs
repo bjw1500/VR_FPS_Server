@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,9 +31,11 @@ public class Bullet : MonoBehaviour
         {
 
 
-            IDamageable target = collision.transform.GetComponent<IDamageable>();
+            BaseController target = collision.transform.GetComponent<BaseController>();
+            ObjectInfo testinfo = target.Info;
             if (target != null && _gun._master != null)
             {
+                ObjectInfo testinfo2 = target.Info;
                 _gun.OnAttack(target, dmg, _gun._master);
                 //데미지 판정 효과는 어떻게 할 것인가?
             }

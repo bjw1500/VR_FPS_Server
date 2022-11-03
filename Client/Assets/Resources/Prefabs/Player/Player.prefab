@@ -255,7 +255,6 @@ GameObject:
   - component: {fileID: 4004158132868506769}
   - component: {fileID: 6687146377947405146}
   - component: {fileID: 8814767063895841727}
-  - component: {fileID: 407498754589886367}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -336,12 +335,6 @@ MonoBehaviour:
     CameraRig: {fileID: 0}
     LeftController: {fileID: 0}
     RightController: {fileID: 0}
-  _animatorOption:
-    paramMoveX: Move X
-    paramMoveZ: Move Z
-    paramDistY: Dist Y
-    paramGrounded: Grounded
-    paramJump: Jump
   _state:
     isCurrentFp: 0
     isMoving: 0
@@ -413,37 +406,6 @@ MonoBehaviour:
   _gizmoRadius: 0.05
   _showGUI: 0
   _guiTextSize: 28
---- !u!114 &407498754589886367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8853657203833230471}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ac1558d2b4de3499130282c9731fb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-    cam: {fileID: 0}
-    weaponSlot: []
-    myGun: {fileID: 0}
-    anim: {fileID: 0}
-    CameraRig: {fileID: 0}
-    LeftController: {fileID: 0}
-    RightController: {fileID: 0}
-  _state:
-    isCurrentFp: 0
-    isMoving: 0
-    isRunning: 0
-    isGrounded: 0
-    isCursorActive: 0
-  _distFromGround: 0
-  _moveDir: {x: 0, y: 0, z: 0}
-  _worldMoveDir: {x: 0, y: 0, z: 0}
-  _weaponSlotSize: 3
-  _currentWeaponSlot: 0
 --- !u!1001 &991374867
 PrefabInstance:
   m_ObjectHideFlags: 0

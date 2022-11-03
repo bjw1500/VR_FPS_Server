@@ -66,6 +66,7 @@ namespace Server
                 StatInfo stat = null;
                 DataManager.StatDict.TryGetValue("Player", out stat);
                 newPlayer.Info.StatInfo = stat;
+                newPlayer.Info.Name = newPlayer.Info.Player.Name;
 
                 //게임룸 안의 플레이어 목록에 추가.
                 _players.Add(newPlayer.Info.ObjectId, newPlayer);
@@ -355,7 +356,7 @@ namespace Server
             //player 모록에 없으면 종료되었거나 죽은거니, 혹시 스킬 사용 도중에 죽었다면 return. 
             if (_players.TryGetValue(skillPacket.Info.ObjectId, out serverInfo) == false)
                 return;
-            serverInfo.Info.MergeFrom(skillPacket.Info);
+            serverInfo.Info = skillPacket.Info;
 
             //패킷 배포
             S_Skill skill = new S_Skill();

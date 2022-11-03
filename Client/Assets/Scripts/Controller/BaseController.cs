@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseController : MonoBehaviour, IDamageable
+public class BaseController : MonoBehaviour
 {
     /*
      * 상속구조
@@ -13,7 +13,8 @@ public class BaseController : MonoBehaviour, IDamageable
      *  HitBox
      */
 
-    private ObjectInfo _info = new ObjectInfo();
+    private ObjectInfo _info;
+
 
 
     public ObjectInfo Info
@@ -50,12 +51,10 @@ public class BaseController : MonoBehaviour, IDamageable
 
     public virtual void Init()
     {
-        if (Info.StatInfo == null)
+
+        if(Info == null)
         {
-            StatInfo stat = new StatInfo();
-            //스탯 정보 만들어주기
-            stat.Hp = 100;
-            Info.StatInfo = stat;
+            Info = new ObjectInfo();
         }
 
         transform.gameObject.tag = "IDamageable";
@@ -64,7 +63,7 @@ public class BaseController : MonoBehaviour, IDamageable
 
     public virtual void OnDamage(int damage, ObjectInfo attacker)
     {
-        Debug.Log($"{attacker.Name}에게서 {damage} 데미지를 받았다.");
+        Debug.Log($"{attacker.Player.Name}에게서 {damage} 데미지를 받았다.");
 
         if (GameMng.I.SingleGame == true)
         {
@@ -80,6 +79,7 @@ public class BaseController : MonoBehaviour, IDamageable
         {
 
             C_ChangeHp packet = new C_ChangeHp();
+
             packet.ObjectId = Info.ObjectId;
             packet.Attacker = attacker;
             packet.Damage = damage;

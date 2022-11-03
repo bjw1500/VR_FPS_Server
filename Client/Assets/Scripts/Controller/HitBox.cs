@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBox : BaseController, IDamageable
+public class HitBox : BaseController
 {
     public override void Init()
     {
@@ -22,5 +22,11 @@ public class HitBox : BaseController, IDamageable
 
             Info.StatInfo = stat;
         }
+    }
+
+    public override void OnDamage(int damage, ObjectInfo attacker)
+    {
+        base.OnDamage(damage, attacker);
+        Debug.Log("오버라이드된 OnDamage");
     }
 }

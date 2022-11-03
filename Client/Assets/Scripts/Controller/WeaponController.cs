@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public virtual void OnAttack(IDamageable target, int damage, BaseController master)
+    public virtual void OnAttack(BaseController target, int damage, BaseController master)
     {
         //데미지를 주는 함수
 

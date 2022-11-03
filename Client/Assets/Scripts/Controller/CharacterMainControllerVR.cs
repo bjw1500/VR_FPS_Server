@@ -6,7 +6,7 @@ using UnityEngine;
 using Valve.VR;
 using static Define;
 
-public class CharacterMainControllerVR : BaseController, IDamageable
+public class CharacterMainControllerVR : BaseController
 {
     [Serializable]
     public class Components
@@ -442,10 +442,4 @@ public class CharacterMainControllerVR : BaseController, IDamageable
         UpdateServerPosition();
     }
 
-
-    public override void OnDamage(int damage, ObjectInfo attacker)
-    {
-        Debug.Log($"{attacker.Name}에게서 {damage} 데미지를 받았다.");
-
-    }
 }

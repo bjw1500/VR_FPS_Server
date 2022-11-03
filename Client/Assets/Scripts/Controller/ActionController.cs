@@ -45,7 +45,7 @@ bool test = false;
 
     void Update()
     {
-        Debug.LogError(GameMng.I.input.wheelTouch.GetLastState(GameMng.I.input.right_hand));
+       // Debug.LogError(GameMng.I.input.wheelTouch.GetLastState(GameMng.I.input.right_hand));
 
         if(GameMng.I.input.weaponWheel.GetChanged(GameMng.I.input.right_hand))
         {
