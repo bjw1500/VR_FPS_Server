@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemSpawnPoint : MonoBehaviour
 {
-    
     //아이템 스폰 지점.
 
     /*맵 제작툴을 돌리면 아이템 스폰 지점의 위치가 텍스트 파일에 저장이 되어야 한다.
@@ -13,7 +12,6 @@ public class ItemSpawnPoint : MonoBehaviour
     
     그 주변에 아이디 발급이 된 아이템을 생성하여 플레이어들한테 뿌린다.
     */
-
 
     void Start()
     {
@@ -28,11 +26,6 @@ public class ItemSpawnPoint : MonoBehaviour
 
     void Init()
     {
-
-        //게임 시작되면 삭제.
-        Destroy(transform.gameObject);
-
+        Destroy(this.gameObject);
     }
-
-
 }

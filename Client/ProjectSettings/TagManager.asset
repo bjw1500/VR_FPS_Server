@@ -8,7 +8,6 @@ TagManager:
   - Item
   - IDamageable
   - ItemSpawnPoint
-  - HitBoxSpawnPoint
   layers:
   - Default
   - TransparentFX

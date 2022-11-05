@@ -417,10 +417,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponWheel
       objectReference: {fileID: 0}
-    - target: {fileID: 8717178415732409091, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8717178415732409092, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -456,18 +452,6 @@ PrefabInstance:
     - target: {fileID: 8717178415732409092, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
       propertyPath: m_SizeDelta.y
       value: 611.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8717178415732409092, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.0005
-      objectReference: {fileID: 0}
-    - target: {fileID: 8717178415732409092, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.0005
-      objectReference: {fileID: 0}
-    - target: {fileID: 8717178415732409092, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.0005
       objectReference: {fileID: 0}
     - target: {fileID: 8717178415732409092, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -524,38 +508,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 778015655, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
   m_PrefabInstance: {fileID: 991374867}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8717178415615700240}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9143debf830525e4c805c37221dd97e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8717178415615700240 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8717178415732409091, guid: ab4c8c54915582e41bf3393915f8364e, type: 3}
-  m_PrefabInstance: {fileID: 991374867}
-  m_PrefabAsset: {fileID: 0}
---- !u!223 &8230325287629257425
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8717178415615700240}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!1001 &2348155755204227016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -663,19 +621,27 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1606441086276089239, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
---- !u!114 &3953433283297581663 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1606441086276089239, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
+--- !u!1 &4224938466989530202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1889167758943843218, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
   m_PrefabInstance: {fileID: 2348155755204227016}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &2699817315797783790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224938466989530202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce033dcec0778e4ebebdd2e34166e09, type: 3}
+  m_Script: {fileID: 11500000, guid: d1ad428f0caf4f34d8cb9087bc80e906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actionText: {fileID: 7298582250027824623}
 --- !u!114 &7298582250027824623 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5034908749641128487, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
@@ -1286,7 +1252,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  _HUD: {fileID: 3953433283297581663}
+  _HUD: {fileID: 0}
   _actionText: {fileID: 7298582250027824623}
   _weaponWheel: {fileID: 357088692}
 --- !u!20 &6003128882851223250 stripped

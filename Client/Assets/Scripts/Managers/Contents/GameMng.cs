@@ -32,4 +32,26 @@ public class GameMng : MonoBehaviour
         Managers.Init();
         DontDestroyOnLoad(this);
     }
+
+    public event PointerEventHandler PointerIn;
+    public event PointerEventHandler PointerOut;
+    public event PointerEventHandler PointerClick;
+    
+    public virtual void OnPointerIn(PointerEventArgs e)
+    {
+        if (PointerIn != null)
+            PointerIn(this, e);
+    }
+
+    public virtual void OnPointerClick(PointerEventArgs e)
+    {
+        if (PointerClick != null)
+            PointerClick(this, e);
+    }
+
+    public virtual void OnPointerOut(PointerEventArgs e)
+    {
+        if (PointerOut != null)
+            PointerOut(this, e);
+    }
 }

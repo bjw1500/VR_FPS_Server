@@ -18,9 +18,7 @@ public class HitBoxSpawnPoint : MonoBehaviour
 
     void Init()
     {
-
         //게임 시작되면 삭제.
         Destroy(transform.gameObject);
-
     }
 }

@@ -85,7 +85,6 @@ public class CharacterMainControllerVR : BaseController
 
     public override void Init()
     {
-
         base.Init();
         InitComponents();
         InitSettings();
@@ -271,7 +270,6 @@ public class CharacterMainControllerVR : BaseController
                 item.transform.SetParent(Com.RightController.transform, false);
 
 
-
                 Com.myGun = item.transform.GetComponent<WeaponController>();
                 Com.myGun._master = this;
                 break;
@@ -441,5 +439,4 @@ public class CharacterMainControllerVR : BaseController
         #endregion
         UpdateServerPosition();
     }
-
 }

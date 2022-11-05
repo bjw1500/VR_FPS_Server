@@ -12,8 +12,8 @@ public class WeaponWheel : MonoBehaviour
     [SerializeField] int selection;
 
     [SerializeField] private GameObject parent;
-    [SerializeField] private List<UnityEngine.UI.Image> wheelImage = new List<UnityEngine.UI.Image>();
-    // [SerializeField] private Sprite[] sprits = new Sprite[2];
+    [SerializeField] private List<UnityEngine.UI.RawImage> wheelImage = new List<UnityEngine.UI.RawImage>();
+    [SerializeField] private Texture[] selectSprite = new Texture[4];
 
     //코드 추가
     [SerializeField] private Image[] icons = new Image[4];
@@ -25,18 +25,18 @@ public class WeaponWheel : MonoBehaviour
         controllerVR = Managers.Object.MyPlayer;
         for (int i = 0; i < icons.Length; i++)
         {
-            wheelImage.Add(parent.transform.GetChild(i).GetComponent<UnityEngine.UI.Image>());
-            icons[i] = parent.transform.GetChild(i).GetChild(0).GetComponent<UnityEngine.UI.Image>();
-            ammoDisplays[i] = parent.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>();
+            wheelImage.Add(parent.transform.GetChild(i).GetComponent<UnityEngine.UI.RawImage>());
+            // icons[i] = parent.transform.GetChild(i).GetChild(0).GetComponent<UnityEngine.UI.Image>();
+            // ammoDisplays[i] = parent.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>();
         }
 
-        joyStickDot = parent.transform.Find("JoyStickDot").gameObject;
+        // joyStickDot = parent.transform.Find("JoyStickDot").gameObject;
     }
 
     void Update()
     {
         CalcAngle();
-        // Select();
+        
     }
 
     void CalcAngle()
@@ -53,9 +53,12 @@ public class WeaponWheel : MonoBehaviour
          */
 
         currentAngle = Mathf.Atan2(joystickPos.y, joystickPos.x) * Mathf.Rad2Deg;
-        currentAngle = (currentAngle + 315) % 365;
+        currentAngle = (currentAngle + 315) % 360;
 
         selection = (int)currentAngle / 90;
+
+        wheelImage[selection].texture = selection % 2 == 0 ? selectSprite[2] : selectSprite[3];
+        Clear();
 
         //조이스틱 위치 구하기
         //Vector3 currentPosition = new Vector3(Mathf.Cos(currentAngle), Mathf.Sin(currentAngle), 0);
@@ -77,37 +80,32 @@ public class WeaponWheel : MonoBehaviour
 
     public void Select()
     {
-        // if (controllerVR.Com.weaponSlot[selection] == null)
-        //     return;
+        if (controllerVR.Com.weaponSlot[selection] == null)
+            return;
 
         switch (selection)
         {
             case 0:
-                // wheelImage[selection].sprite = sprits[1];
                 controllerVR.ChangeWeapon(selection);
                 break;
             case 1:
-                //  wheelImage[selection].sprite = sprits[1];
                 controllerVR.ChangeWeapon(selection);
                 break;
             case 2:
-                //  wheelImage[selection].sprite = sprits[1];
                 controllerVR.ChangeWeapon(selection);
                 break;
             case 3:
-                //  wheelImage[selection].sprite = sprits[1];
                 controllerVR.ChangeWeapon(selection);
                 break;
-                // Clear(selection);
         }
     }
 
-    // void Clear(int selected)
-    // {
-    //     for (int i = 0; i < wheelImage.Count; i++)
-    //     {
-    //         if (i != selected)
-    //             wheelImage[i].sprite = sprits[0];
-    //     }
-    // }
+    void Clear()
+    {
+        for (int i = 0; i < wheelImage.Count; i++)
+        {
+            if (i != selection)
+                wheelImage[i].texture = i % 2 == 0 ? selectSprite[0] : selectSprite[1];
+        }
+    }
 }

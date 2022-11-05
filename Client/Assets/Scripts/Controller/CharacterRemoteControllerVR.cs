@@ -7,7 +7,6 @@ using Valve.VR;
 
 public class CharacterRemoteControllerVR : BaseController
 {
-
     [Serializable]
     public class Components
     {
@@ -61,7 +60,7 @@ public class CharacterRemoteControllerVR : BaseController
     }
 
     //무기 관련 필드
-    public int _weaponSlotSize = 4;
+    public const int _weaponSlotSize = 4;
     [SerializeField]
     public int _currentWeaponSlot = 0;
 
@@ -80,7 +79,6 @@ public class CharacterRemoteControllerVR : BaseController
 
     public void InitComponent()
     {
-
         Com.myGun = GetComponentInChildren<WeaponController>();
         Com.cam = GetComponentInChildren<Camera>();
         Com.anim = GetComponentInChildren<Animator>();
@@ -88,9 +86,8 @@ public class CharacterRemoteControllerVR : BaseController
         Com.CameraRig = Util.FindChild(transform.gameObject, "CameraRig");
         Com.RightController = Util.FindChild(Com.CameraRig, "RightController");
         Com.LeftController = Util.FindChild(Com.CameraRig, "LeftController");
-        _weaponSlotSize = 4;
+
         Com.weaponSlot = new GameObject[_weaponSlotSize];
-       
 
         TryGetComponent(out Com.movement3D);
         if (Com.movement3D == null)
@@ -200,7 +197,6 @@ public class CharacterRemoteControllerVR : BaseController
         Com.movement3D.KnockBack(force, time);
     }
 
-
     public void GetWeapon(Item item)
     {
         Debug.Log($"{Info.Player.Name}이 {item.Name}를 획득 했습니다.");
@@ -276,8 +272,5 @@ public class CharacterRemoteControllerVR : BaseController
     public override void OnDamage(int damage, ObjectInfo attacker)
     {
         base.OnDamage(damage, attacker);
-
-        
-    
     }
 }

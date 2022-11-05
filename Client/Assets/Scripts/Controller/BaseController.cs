@@ -15,18 +15,10 @@ public class BaseController : MonoBehaviour
 
     private ObjectInfo _info;
 
-
-
     public ObjectInfo Info
     {
         get { return _info; }
         set { _info = value; }
-    }
-
-    public StatInfo Stat
-    {
-        get { return _info.StatInfo; }
-        set { _info.StatInfo = value; }
     }
 
     public int Hp
@@ -39,9 +31,12 @@ public class BaseController : MonoBehaviour
     {
         get { return Info.Name; }
     }
-       
 
-
+    public StatInfo Stat
+    {
+        get { return _info.StatInfo; }
+        set { _info.StatInfo = value; }
+    }
 
 
     void Start()
@@ -51,8 +46,7 @@ public class BaseController : MonoBehaviour
 
     public virtual void Init()
     {
-
-        if(Info == null)
+        if (Info == null)
         {
             Info = new ObjectInfo();
         }
@@ -63,12 +57,13 @@ public class BaseController : MonoBehaviour
 
     public virtual void OnDamage(int damage, ObjectInfo attacker)
     {
-        Debug.Log($"{attacker.Player.Name}에게서 {damage} 데미지를 받았다.");
+        Debug.Log($"{attacker.Name}에게서 {damage} 데미지를 받았다.");
 
         if (GameMng.I.SingleGame == true)
         {
             //싱글모드일때 데미지 판정
             Info.StatInfo.Hp -= damage;
+            Debug.Log($"{attacker.Player.Name}에게서 {damage} 데미지를 받았다.");
             if (Info.StatInfo.Hp <= 0)
                 OnDead(attacker);
 
@@ -79,7 +74,6 @@ public class BaseController : MonoBehaviour
         {
 
             C_ChangeHp packet = new C_ChangeHp();
-
             packet.ObjectId = Info.ObjectId;
             packet.Attacker = attacker;
             packet.Damage = damage;
@@ -88,9 +82,6 @@ public class BaseController : MonoBehaviour
             //데미지 판정은 서버 안에서 이루어져야 한다.
             //그런데 플레이어가 뭘 들고 있는지도 서버에서 다뤄야하나?
         }
-
-
-
     }
 
     public virtual void OnDead(ObjectInfo attacker)

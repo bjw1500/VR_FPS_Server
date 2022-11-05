@@ -14,10 +14,10 @@ public class Custom_LaserPointer : MonoBehaviour
     public GameObject holder;
     public GameObject pointer;
     bool isActive = false;
-    public event PointerEventHandler PointerIn;
-    public event PointerEventHandler PointerOut;
-    public event PointerEventHandler PointerClick;
-    public event PointerEventHandler PointerGrip;
+    // public event PointerEventHandler PointerIn;
+    // public event PointerEventHandler PointerOut;
+    // public event PointerEventHandler PointerClick;
+    // public event PointerEventHandler PointerGrip;
     [SerializeField] private float customdist = 100.0f;
     Transform previousContact = null;
     private Vector3 dotVec = new Vector3(9999.0f, 9999.0f, 9999.0f);        // <! 레이저 끝 점 미국보내기
@@ -63,29 +63,29 @@ public class Custom_LaserPointer : MonoBehaviour
         pointer.GetComponent<MeshRenderer>().material = newMaterial;
     }
 
-    public virtual void OnPointerIn(PointerEventArgs e)
-    {
-        if (PointerIn != null)
-            PointerIn(this, e);
-    }
+    // public virtual void OnPointerIn(PointerEventArgs e)
+    // {
+    //     if (PointerIn != null)
+    //         PointerIn(this, e);
+    // }
 
-    public virtual void OnPointerClick(PointerEventArgs e)
-    {
-        if (PointerClick != null)
-            PointerClick(this, e);
-    }
+    // public virtual void OnPointerClick(PointerEventArgs e)
+    // {
+    //     if (PointerClick != null)
+    //         PointerClick(this, e);
+    // }
 
-    public virtual void OnPointerOut(PointerEventArgs e)
-    {
-        if (PointerOut != null)
-            PointerOut(this, e);
-    }
+    // public virtual void OnPointerOut(PointerEventArgs e)
+    // {
+    //     if (PointerOut != null)
+    //         PointerOut(this, e);
+    // }
     
-    public virtual void OnPointerGrip(PointerEventArgs e)
-    {
-        if(PointerGrip != null)
-            PointerGrip(this, e);
-    }
+    // public virtual void OnPointerGrip(PointerEventArgs e)
+    // {
+    //     if(PointerGrip != null)
+    //         PointerGrip(this, e);
+    // }
 
     private void Update()
     {
@@ -108,7 +108,7 @@ public class Custom_LaserPointer : MonoBehaviour
             args.distance = 0f;
             args.flags = 0;
             args.target = previousContact;
-            OnPointerOut(args);
+            GameMng.I.OnPointerOut(args);
             previousContact = null;
         }
         if (bHit && previousContact != hit.transform)
@@ -118,7 +118,7 @@ public class Custom_LaserPointer : MonoBehaviour
             argsIn.distance = hit.distance;
             argsIn.flags = 0;
             argsIn.target = hit.transform;
-            OnPointerIn(argsIn);
+            GameMng.I.OnPointerIn(argsIn);
             previousContact = hit.transform;
         }
         if (!bHit)
@@ -136,7 +136,7 @@ public class Custom_LaserPointer : MonoBehaviour
             argsClick.distance = hit.distance;
             argsClick.flags = 0;
             argsClick.target = hit.transform;
-            OnPointerClick(argsClick);
+            GameMng.I.OnPointerClick(argsClick);
         }
         if (GameMng.I.input.interactWithUI != null && GameMng.I.input.interactWithUI.GetState(pose.inputSource))
         {

@@ -399,7 +399,6 @@ MonoBehaviour:
   _distFromGround: 0
   _moveDir: {x: 0, y: 0, z: 0}
   _worldMoveDir: {x: 0, y: 0, z: 0}
-  _weaponSlotSize: 3
   _currentWeaponSlot: 0
 --- !u!1001 &2348155755204227016
 PrefabInstance:
@@ -508,19 +507,9 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1606441086276089239, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
---- !u!114 &3953433283297581663 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1606441086276089239, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
-  m_PrefabInstance: {fileID: 2348155755204227016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce033dcec0778e4ebebdd2e34166e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7298582250027824623 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5034908749641128487, guid: 9f9e61cc01da89248a5c16b3fe77c803, type: 3}
@@ -1163,6 +1152,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  _HUD: {fileID: 3953433283297581663}
+  _HUD: {fileID: 0}
   _actionText: {fileID: 7298582250027824623}
   _weaponWheel: {fileID: 0}

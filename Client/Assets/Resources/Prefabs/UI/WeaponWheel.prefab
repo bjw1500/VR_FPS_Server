@@ -975,13 +975,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8717178415732409092}
   - component: {fileID: 778015655}
+  - component: {fileID: 8230325287629257425}
   m_Layer: 5
   m_Name: WeaponWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8717178415732409092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -991,7 +992,7 @@ RectTransform:
   m_GameObject: {fileID: 8717178415732409091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
+  m_LocalScale: {x: 0.0005, y: 0.0005, z: 0.0005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8717178414618757389}
@@ -1021,6 +1022,11 @@ MonoBehaviour:
   selection: 0
   parent: {fileID: 8717178414618757388}
   wheelImage: []
+  selectSprite:
+  - {fileID: 2800000, guid: 9374cbb009f588e4cbfe28bea12a9ec9, type: 3}
+  - {fileID: 2800000, guid: 91ed2090f0f86d040a4ac8a1d923d3ae, type: 3}
+  - {fileID: 2800000, guid: a88718e913afa2d4cb76e8b0c16793c9, type: 3}
+  - {fileID: 2800000, guid: 49ef32322eb3f9c4daf4f42bc5c1eb59, type: 3}
   icons:
   - {fileID: 8717178414956622485}
   - {fileID: 8717178415479292599}
@@ -1032,6 +1038,27 @@ MonoBehaviour:
   - {fileID: 8717178414190352530}
   - {fileID: 8717178416233766459}
   joyStickDot: {fileID: 5149994647416752442}
+--- !u!223 &8230325287629257425
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717178415732409091}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &8717178416000829123
 GameObject:
   m_ObjectHideFlags: 0
