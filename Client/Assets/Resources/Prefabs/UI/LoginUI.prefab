@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC2F1\uAE08\uAC8C\uC784"
+  m_Text: "\uC2F1\uAE00\uAC8C\uC784"
 --- !u!1 &1058364426026770116
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 1058364426199512748}
   - component: {fileID: 1058364426199512723}
   - component: {fileID: 1058364426199512722}
+  - component: {fileID: 204235583}
   m_Layer: 5
   m_Name: ServerIPText
   m_TagString: Untagged
@@ -387,6 +388,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!65 &204235583
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364426199512720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364426216891917
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +695,7 @@ GameObject:
   - component: {fileID: 1058364426328038876}
   - component: {fileID: 1058364426328038851}
   - component: {fileID: 1058364426328038850}
+  - component: {fileID: 1282747998}
   m_Layer: 5
   m_Name: SignUpButton
   m_TagString: Untagged
@@ -791,6 +806,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &1282747998
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364426328038848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364426401068451
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +911,7 @@ GameObject:
   - component: {fileID: 1058364426531505883}
   - component: {fileID: 1058364426531505882}
   - component: {fileID: 1058364426531505881}
+  - component: {fileID: 814967317}
   m_Layer: 5
   m_Name: ConnectButton
   m_TagString: Untagged
@@ -993,6 +1022,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &814967317
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364426531505887}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364426618110632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1287,8 @@ GameObject:
   - component: {fileID: 1058364426899750398}
   - component: {fileID: 1058364426899750397}
   - component: {fileID: 1058364426899750396}
-  - component: {fileID: 1058364426899750392}
+  - component: {fileID: 337254732}
+  - component: {fileID: 337254733}
   m_Layer: 5
   m_Name: LoginUI
   m_TagString: Untagged
@@ -1262,7 +1305,7 @@ RectTransform:
   m_GameObject: {fileID: 1058364426899750371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1466245217170335206}
@@ -1294,7 +1337,7 @@ Canvas:
   m_GameObject: {fileID: 1058364426899750371}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1328,7 +1371,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1058364426899750396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,7 +1389,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1058364426899750392
+--- !u!95 &337254732
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364426899750371}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8774aa43d7fde2541b8c08245a86f750, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &337254733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1355,7 +1418,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058364426899750371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f254acc78177346aca23cd5498d5c8, type: 3}
+  m_Script: {fileID: 11500000, guid: f6dc0f348bdc83d45b6d4785fae55807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enterButton: {fileID: 0}
@@ -1367,7 +1430,7 @@ MonoBehaviour:
   _passwordText: {fileID: 0}
   _toggle: {fileID: 0}
   _informationText: {fileID: 0}
-  _signUP: {fileID: 1058364427120518837}
+  _signUP: {fileID: 1058364427504745166}
 --- !u!1 &1058364426933333347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,7 +1683,7 @@ GameObject:
   - component: {fileID: 1058364427120518843}
   - component: {fileID: 1058364427120518842}
   - component: {fileID: 1058364427120518841}
-  - component: {fileID: 1058364427120518837}
+  - component: {fileID: 1058364427504745166}
   m_Layer: 5
   m_Name: CreateAccountUI
   m_TagString: Untagged
@@ -1694,7 +1757,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1058364427120518841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,7 +1775,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1058364427120518837
+--- !u!114 &1058364427504745166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1721,7 +1784,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058364427120518840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487d827a76ba10b42973af253419370c, type: 3}
+  m_Script: {fileID: 11500000, guid: 83b5a7ee72b626949905908cd6d03c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _checkButton: {fileID: 0}
@@ -1740,6 +1803,8 @@ GameObject:
   - component: {fileID: 1058364427137852012}
   - component: {fileID: 1058364427137851987}
   - component: {fileID: 1058364427137851986}
+  - component: {fileID: 1160985153}
+  - component: {fileID: 1160985154}
   m_Layer: 5
   m_Name: EnterSingleGameButton
   m_TagString: Untagged
@@ -1850,6 +1915,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &1160985153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364427137851984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1160985154
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364427137851984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364427202966887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1953,7 @@ GameObject:
   - component: {fileID: 1058364427202966883}
   - component: {fileID: 1058364427202966882}
   - component: {fileID: 1058364427202966881}
+  - component: {fileID: 1721859137}
   m_Layer: 5
   m_Name: EnterButton
   m_TagString: Untagged
@@ -1972,6 +2064,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &1721859137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364427202966887}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364427244244487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +2089,7 @@ GameObject:
   - component: {fileID: 1058364427244244483}
   - component: {fileID: 1058364427244244482}
   - component: {fileID: 1058364427244244481}
+  - component: {fileID: 636771309}
   m_Layer: 5
   m_Name: PasswordText
   m_TagString: Untagged
@@ -2119,6 +2225,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!65 &636771309
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364427244244487}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364427398073438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,6 +2704,7 @@ GameObject:
   - component: {fileID: 1058364427705902310}
   - component: {fileID: 1058364427705902309}
   - component: {fileID: 1058364427705902308}
+  - component: {fileID: 1829866903}
   m_Layer: 5
   m_Name: IDText
   m_TagString: Untagged
@@ -2720,6 +2840,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!65 &1829866903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058364427705902314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 160, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1058364427753115353
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,7 +3012,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: '
+
+'
 --- !u!1 &1596249161449826190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3204,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 124, y: 74}
+  m_SizeDelta: {x: 127, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4148927065353017735
 CanvasRenderer:
@@ -3168,7 +3303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.27251863, b: 0.25157225, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3199,6 +3334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4953640823887131175}
   - component: {fileID: 2292638240254671071}
+  - component: {fileID: 2034278106}
   m_Layer: 5
   m_Name: VRTypeToggle
   m_TagString: Untagged
@@ -3275,7 +3411,20 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
+--- !u!65 &2034278106
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729865831762001004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 148.47, y: 25, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6059170888000623515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,4 +3504,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Toggle
+  m_Text: '
+
+'

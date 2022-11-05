@@ -15,9 +15,12 @@ public class Sniper : WeaponController
 
     float fireRateTime;
     float reloadRateTime;
-    int bulletcurCount;
+    public int bulletcurCount;
     bool isReload;
     Animator anim;
+
+    //Stat
+    const int _damage = 25;
 
     private void Awake()
     {
@@ -56,6 +59,8 @@ public class Sniper : WeaponController
             Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
             Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
+            shootingBullet._gun = this;
+            shootingBullet.dmg = _damage;
             fireRateTime = 0;
             bulletcurCount--;
         }

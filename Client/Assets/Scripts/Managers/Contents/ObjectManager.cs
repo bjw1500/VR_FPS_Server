@@ -100,6 +100,7 @@ public class ObjectManager
         MyPlayer = go.GetComponent<CharacterMainControllerVR>();
         MyPlayer.Info = info;
         MyPlayer.enabled = true;
+    
 
         StatInfo stat = null;
 

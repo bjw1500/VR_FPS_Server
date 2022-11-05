@@ -205,11 +205,11 @@
             },
             {
                "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/weaponwheel"
-                  },
                   "position" : {
                      "output" : "/actions/default/in/touchposition"
+                  },
+                  "touch" : {
+                     "output" : "/actions/default/in/weaponwheel"
                   }
                },
                "mode" : "trackpad",

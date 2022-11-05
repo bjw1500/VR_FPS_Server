@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using UnityEngine.EventSystems;
 
 public class Custom_LaserPointer : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Custom_LaserPointer : MonoBehaviour
     // public event PointerEventHandler PointerOut;
     // public event PointerEventHandler PointerClick;
     // public event PointerEventHandler PointerGrip;
+    // public System.Action<PointerEventData> OnClickHandler = null;
     [SerializeField] private float customdist = 100.0f;
     Transform previousContact = null;
     private Vector3 dotVec = new Vector3(9999.0f, 9999.0f, 9999.0f);        // <! 레이저 끝 점 미국보내기
@@ -32,6 +34,8 @@ public class Custom_LaserPointer : MonoBehaviour
         if (GameMng.I.input.interactWithUI == null)
             Debug.LogError("No ui interaction action has been set on this component.", this);
 
+        this.transform.localRotation = Quaternion.Euler(50f, 0f, 0f);
+        this.transform.localPosition = pose.inputSource == SteamVR_Input_Sources.LeftHand ? new Vector3(0.015f, -0.03f,-0.03f) : new Vector3(-0.015f, -0.03f,-0.03f);
         holder = GameObject.CreatePrimitive(PrimitiveType.Cube);
         holder.transform.parent = this.transform;
         holder.transform.localScale = new Vector3(thickness, thickness, 100f);
@@ -80,7 +84,7 @@ public class Custom_LaserPointer : MonoBehaviour
     //     if (PointerOut != null)
     //         PointerOut(this, e);
     // }
-    
+
     // public virtual void OnPointerGrip(PointerEventArgs e)
     // {
     //     if(PointerGrip != null)

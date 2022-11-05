@@ -68,6 +68,12 @@ public class UI_Login : UI_Base
         BindEvent(_enterSingleGameButton.gameObject, EnterSingleGame, Define.UIEvent.Click);
         BindEvent(_toggle.gameObject, ChangeVRType, Define.UIEvent.Click);
 
+        VrBindEvent(_enterButton.gameObject, TryLogin);
+        VrBindEvent(_connectButton.gameObject, ConnectToServer);
+        VrBindEvent(_signUpButton.gameObject, LoadSignUpPage);
+        VrBindEvent(_enterSingleGameButton.gameObject, EnterSingleGame);
+        VrBindEvent(_toggle.gameObject, ChangeVRType);
+
         _signUpButton.gameObject.SetActive(false);
         _enterButton.gameObject.SetActive(false);
         _idText.gameObject.SetActive(false);
@@ -154,5 +160,59 @@ public class UI_Login : UI_Base
     {
         Debug.Log("LoadLobby");
         Managers.Scene.LoadScene(Define.Scene.Lobby);
+    }
+
+    // vr 
+ public void ConnectToServer()
+    {
+        Debug.Log("Try Connect Server!");
+        Debug.Log(_serverIPText.text);
+        Managers.Network.Connect(_serverIPText.text);
+        //연결이 되면 서버에서 Connect 패킷을 보낸다.
+        //Connect 패킷을 받으면 아이디와 비번 입력 진행
+    }
+
+    public void TryLogin()
+    {
+        Debug.Log("로그인 시도");
+
+        //EnterLobyyPacket 보내기.
+        C_Login login = new C_Login();
+        login.LoginId = _idText.text;
+        login.LoginPassword = _passwordText.text;
+        Managers.Network.Send(login);
+
+        //실패시 다시 시도하게 하기.
+
+        //SeverSession OnConnected에서 성공시 LoadLobbyScene 실행됨.
+    }
+
+    public void LoadSignUpPage()
+    {
+        _signUP.gameObject.SetActive(true);
+    }
+
+    public void EnterSingleGame()
+    {
+        Debug.Log("싱글게임 시작");
+        GameMng.I.SingleGame = true;
+        Managers.Scene.LoadScene(Define.Scene.SingleGame);
+        //GameScene gs = Managers.Scene.CurrentScene as GameScene;
+        //gs.Play();
+    }
+
+    public void ChangeVRType()
+    {
+        _toggle.isOn = _toggle.isOn ? false : true;
+        if (_toggle.isOn == true)
+        {
+            GameMng.I.VR_Type = Define.VRType.Oculus;
+            Debug.Log("현재 설정 중인 VR은 Oculus입니다.");
+        }
+        else
+        {
+            GameMng.I.VR_Type = Define.VRType.Vive;
+            Debug.Log("현재 설정 중인 VR은 Vive입니다.");
+        }
     }
 }

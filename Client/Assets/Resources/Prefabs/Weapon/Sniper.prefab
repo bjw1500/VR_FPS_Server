@@ -14712,6 +14712,7 @@ GameObject:
   - component: {fileID: 5973182031020615421}
   - component: {fileID: 5411205890109242678}
   - component: {fileID: 8606224286993607555}
+  - component: {fileID: 7738864303203533460}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -14750,7 +14751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _master: {fileID: 0}
-  bullet: {fileID: 322505581762200169, guid: 74a16f81f05ad4741ae2918d94e77c2f, type: 3}
+  bullet: {fileID: 7301374540111607195, guid: bf921aa214554774cbfccbf3d539efd1, type: 3}
   bulletPos: {fileID: 5973182030314498449}
   gunPos: {fileID: 5973182030060709579}
   gunParticle: {fileID: 5973182030011707357}
@@ -14758,6 +14759,7 @@ MonoBehaviour:
   reloadRate: 2
   bulletCount: 4
   bulletCharge: 30
+  bulletcurCount: 0
 --- !u!95 &5973182031020615421
 Animator:
   serializedVersion: 4
@@ -14807,6 +14809,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 6.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7738864303203533460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973182031020615423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d72eb63bd97de4cb80d2b0ad59cbfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Sniper
 --- !u!1 &5973182031228686012
 GameObject:
   m_ObjectHideFlags: 0
@@ -19940,7 +19955,7 @@ MonoBehaviour:
   - {fileID: 5973182030620653559}
   - {fileID: 5973182031056071716}
   - {fileID: 5973182030327641926}
-  gun: {fileID: 0}
+  gun: {fileID: 5973182031020615418}
 --- !u!1001 &5973182030620501573
 PrefabInstance:
   m_ObjectHideFlags: 0

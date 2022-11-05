@@ -5,11 +5,11 @@ using UnityEngine;
 public class SniperAnmo : MonoBehaviour
 {
     public GameObject[] bulletReady;
-    public Gun gun;
+    public Sniper gun;
 
     private void Update()
     {
-        if (gun.curBulletCount == gun.ammoBulletCount)
+        if (gun.bulletcurCount == gun.bulletCount)
         {
             for (int i = 0; i < bulletReady.Length; i++)
             {
@@ -18,7 +18,7 @@ public class SniperAnmo : MonoBehaviour
         }
 
         else {
-            for (int i = gun.ammoBulletCount - 1; i>=gun.curBulletCount; i--) {
+            for (int i = gun.bulletCount - 1; i>=gun.bulletcurCount; i--) {
                 bulletReady[i].SetActive(false);
             }
         }

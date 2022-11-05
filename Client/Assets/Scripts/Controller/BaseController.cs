@@ -63,7 +63,7 @@ public class BaseController : MonoBehaviour
         {
             //싱글모드일때 데미지 판정
             Info.StatInfo.Hp -= damage;
-            Debug.Log($"{attacker.Player.Name}에게서 {damage} 데미지를 받았다.");
+            Debug.Log($"{attacker.Name}에게서 {damage} 데미지를 받았다.");
             if (Info.StatInfo.Hp <= 0)
                 OnDead(attacker);
 
