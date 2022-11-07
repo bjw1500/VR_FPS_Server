@@ -8,9 +8,13 @@ using static Define;
 public class ObjectManager
 {
     public CharacterMainControllerVR MyPlayer { get; set; }
+
+    public Dictionary<int, ObjectInfo> _players = new Dictionary<int, ObjectInfo>();
     public Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 
     public Dictionary<int, Item> _items = new Dictionary<int, Item>();
+    public UI_PlayerList PlayerList { get; set; }
+
     private int ItemIdCount = 0;
 
     //나중에 시작옵션에서 타입 바꿀 수 있도록 수정하기.
@@ -48,6 +52,12 @@ public class ObjectManager
             go.transform.position = new Vector3(info.MovementInfo.PlayerPosInfo.PosX, info.MovementInfo.PlayerPosInfo.PosY, info.MovementInfo.PlayerPosInfo.PosZ);
             Debug.Log($"{info.Player.Name} - {info.ObjectId}가 생성되었습니다.");
         }
+
+        _players.Add(info.ObjectId, info);
+        PlayerList.SetList();
+
+
+
     }
 
     public void AddItem(ItemInfo info)

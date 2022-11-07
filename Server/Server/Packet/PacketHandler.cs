@@ -167,7 +167,7 @@ class PacketHandler
 			return;
 
 
-		room.StartGame();
+		room.StartGame(startPacket);
 	}
 
 	public static void C_EnterLobbyOkHandler(PacketSession session, IMessage packet)

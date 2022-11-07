@@ -73,8 +73,8 @@ public class UI_Lobby : UI_Base
                 //슬롯이 비어있다면 한칸씩 당겨준다.
                 newPlayer._slot = i;
                 _player[i].text = enterGamePacket.Info.Player.Name;
-                //if (enterGamePacket.MyPlayer == true)
-                //    mySlot = newPlayer;
+                if (enterGamePacket.MyPlayer == true)
+                    mySlot = newPlayer;
                 break;
             }
         }
@@ -102,7 +102,7 @@ public class UI_Lobby : UI_Base
         // Managers.SceneManager.LoadScene(Define.Scene.Game);
 
         C_StartGame start = new C_StartGame();
-        //start.Slot = mySlot._slot;
+        start.Slot = mySlot._slot;
         Managers.Network.Send(start);
 
         //Start 패킷을 보낸다.

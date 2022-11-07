@@ -48,6 +48,10 @@ namespace Server
                     //방안에 들어와있는 플레이어의 정보를 받는다.
                     S_EnterWaitingRoom enterPacket = new S_EnterWaitingRoom();
                     enterPacket.Info = enterPlayer.Info;
+
+                    if(player == enterPlayer)
+                        enterPacket.MyPlayer = true;
+
                     player.Session.Send(enterPacket);
                 }
 
@@ -82,7 +86,7 @@ namespace Server
             player.Session.Send(okPacket);
         }
 
-        public void StartGame()
+        public void StartGame(C_StartGame startPacket)
         {
             lock (_lock)
             {
@@ -98,8 +102,11 @@ namespace Server
                 foreach (Player player in _players.Values)
                 {
 
-
                     S_StartGame start = new S_StartGame();
+
+                    player.Info.TeamId = startPacket.Slot % 2;
+                    player.Info.Player.Kill = 0;
+                    player.Info.Player.Death = 0;
                     player.Session.Send(start);
                     player.LobbyRoom = null;
                 }

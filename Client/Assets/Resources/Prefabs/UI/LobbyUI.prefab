@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 5547483835065340195}
   - component: {fileID: 5547483835065340192}
   - component: {fileID: 5547483835065340193}
-  - component: {fileID: 5547483835065340197}
+  - component: {fileID: -2596227921576873087}
   m_Layer: 5
   m_Name: LobbyUI
   m_TagString: Untagged
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5547483835065340197
+--- !u!114 &-2596227921576873087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5547483835065340206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e1ed0ef6793fb4d8411c76b023785b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ee78f99f3babb648a9383df742bb491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 4
