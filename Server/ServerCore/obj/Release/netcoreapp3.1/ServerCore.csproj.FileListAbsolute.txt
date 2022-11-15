@@ -15,3 +15,13 @@ C:\Rookiss\MMO_Game\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.Assem
 C:\Rookiss\MMO_Game\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.csproj.CoreCompileInputs.cache
 C:\Rookiss\MMO_Game\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.dll
 C:\Rookiss\MMO_Game\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.pdb
+D:\DesignProject\capstone\myProject\Server\ServerCore\bin\Release\netcoreapp3.1\ServerCore.deps.json
+D:\DesignProject\capstone\myProject\Server\ServerCore\bin\Release\netcoreapp3.1\ServerCore.dll
+D:\DesignProject\capstone\myProject\Server\ServerCore\bin\Release\netcoreapp3.1\ServerCore.pdb
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.csproj.AssemblyReference.cache
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.AssemblyInfoInputs.cache
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.AssemblyInfo.cs
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.csproj.CoreCompileInputs.cache
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.dll
+D:\DesignProject\capstone\myProject\Server\ServerCore\obj\Release\netcoreapp3.1\ServerCore.pdb

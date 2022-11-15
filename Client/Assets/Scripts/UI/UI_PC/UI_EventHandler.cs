@@ -39,6 +39,7 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
 
     protected virtual void PointerInside(object sender, PointerEventArgs e)
     {
+        // Debug.Log(e.target.gameObject.name);
         if (e.target.name == this.gameObject.name)
         {
             // Debug.Log("pointer in : " + e.target.name);

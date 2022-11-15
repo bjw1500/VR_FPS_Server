@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Management;
+using Valve.VR;
 
 public class GameScene : BaseScene
 {
@@ -46,6 +47,6 @@ public class GameScene : BaseScene
 
     public override void Clear()
     {
-        
+
     }
 }

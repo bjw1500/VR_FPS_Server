@@ -33,6 +33,16 @@ public class GameMng : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    #region Action
+    public CustomSnapTurn snapturn = null;
+    #endregion
+
+    #region UI
+    public Hpbar hpbar;
+    #endregion
+
+    #region Event
+    // ---- LaserEvent
     public event PointerEventHandler PointerIn;
     public event PointerEventHandler PointerOut;
     public event PointerEventHandler PointerClick;
@@ -54,4 +64,5 @@ public class GameMng : MonoBehaviour
         if (PointerOut != null)
             PointerOut(this, e);
     }
+    #endregion
 }

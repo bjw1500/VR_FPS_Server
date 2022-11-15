@@ -9,63 +9,130 @@ using static Define;
 
 public class ActionController : MonoBehaviour
 {
-
     //카메라에 부착되는 컨트롤러.
     //현재까지는 아이템 확인하는 기능이 추가됨.
-    [SerializeField]
-    private float range; //사정거리
-    [SerializeField]
-    private Vector3 height;
+    [SerializeField] private float range; //사정거리
+    [SerializeField] private Vector3 height;
 
     private bool pickupActivated = false;
     public CharacterMainControllerVR MyPlayer;
 
-
     private RaycastHit hitInfo; //충돌체 정보
-    [SerializeField]
-    private LayerMask layerMask; //아이템 레이어에만 반응하도록 설정
+    [SerializeField] private LayerMask layerMask; //아이템 레이어에만 반응하도록 설정
 
+    [SerializeField] private UI_HUD _HUD;
+    [SerializeField] private Text _actionText;     //UI에 띄울 텍스트.
 
-    [SerializeField]
-    private UI_HUD _HUD;
-    [SerializeField]
-    private Text _actionText;     //UI에 띄울 텍스트.
+    [SerializeField] GameObject rightLaserPointer;
+    [SerializeField] GameObject leftLaserPointer;
 
-    [SerializeField]
-    private WeaponWheel _weaponWheel;
+    [SerializeField] Transform rightPose;
+    [SerializeField] Transform leftPose;
 
-bool test = false;
+    [SerializeField] private GameObject _menu;
+    [SerializeField] private WeaponWheel _weaponWheel;
+
+    [SerializeField] bool activeUI = false;
+    bool wheelUI = false;
     private void Start()
     {
         MyPlayer = Managers.Object.MyPlayer;
 
         range = 3;
         height = new Vector3(0, -0.2f, 0);
+
+        rightLaserPointer.SetActive(false);
+        leftLaserPointer.SetActive(false);
     }
 
     void Update()
     {
-        if(GameMng.I.input.weaponWheel.GetChanged(GameMng.I.input.right_hand))
-        {
-            _weaponWheel.gameObject.SetActive(true);
-            test = true;
-        }
-        else if(test && !GameMng.I.input.wheelTouch.GetLastState(GameMng.I.input.right_hand))
-        {
-            _weaponWheel.Select();
-            _weaponWheel.gameObject.SetActive(false);test = false;
-        }
-
         CheckItem();
-        TryAction();
+        InputController();
     }
 
-    private void TryAction()
+    private void InputController()
     {
-        if (GameMng.I.input.fireTrigger.GetStateDown(GameMng.I.input.left_hand) == true)
+        if (GameMng.I.input.getStateFireTrigger)        // 총 줍기
         {
             CheckItem();
             CanPickUp();
+        }
+
+        if (!activeUI || !wheelUI)
+        {
+            SnapTurn();
+        }
+
+        if (GameMng.I.input.getStateWeaponWheel)    // 무기 선택창
+        {
+            _weaponWheel.gameObject.SetActive(true);
+            wheelUI = true;
+        }
+        else if (wheelUI && !GameMng.I.input.getStateWheelTouch)      // 무기 선택창 끄기
+        {
+            _weaponWheel.Select();
+            _weaponWheel.gameObject.SetActive(false);
+            wheelUI = false;
+        }
+
+        if (!activeUI && GameMng.I.input.getMenuBinding)    // 매뉴 창
+        {
+            if (GameMng.I.input.getStateRightMenuBtn)
+            {
+                leftLaserPointer.SetActive(true);
+                _menu.transform.parent = rightPose;
+                SetMenuParent();
+            }
+            else if (GameMng.I.input.getStateLeftMenuBtn)
+            {
+                rightLaserPointer.SetActive(true);
+                _menu.transform.parent = leftPose;
+                SetMenuParent();
+            }
+        }
+        else if (activeUI && GameMng.I.input.getStateAnyMenuBtn)      // 매뉴 끄기
+        {
+            _menu.transform.parent = this.transform;
+            _menu.gameObject.SetActive(false);
+            activeUI = false;
+            rightLaserPointer.SetActive(false);
+            leftLaserPointer.SetActive(false);
+        }
+    }
+
+    void SetMenuParent()
+    {
+        _menu.transform.localPosition = new Vector3(0f, 0f, 0.15f);
+        _menu.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+        _menu.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+
+        _menu.gameObject.SetActive(true);
+        activeUI = true;
+    }
+
+    // @brief 오른손 컨트롤러 카메라 회전
+    private void SnapTurn()
+    {
+        if (GameMng.I.snapturn.getCanRotate && GameMng.I.input.snapLeftAction != null && GameMng.I.input.snapRightAction != null
+        && GameMng.I.input.snapLeftAction.activeBinding && GameMng.I.input.snapRightAction.activeBinding)
+        {
+            //only allow snap turning after a quarter second after the last teleport
+            if (Time.time < (CustomSnapTurn.teleportLastActiveTime + GameMng.I.snapturn.canTurnEverySeconds))
+                return;
+
+            bool rightHandTurnLeft = GameMng.I.input.snapLeftAction.GetStateDown(SteamVR_Input_Sources.RightHand);
+
+            bool rightHandTurnRight = GameMng.I.input.snapRightAction.GetStateDown(SteamVR_Input_Sources.RightHand);
+
+            if (rightHandTurnLeft)
+            {
+                GameMng.I.snapturn.RotatePlayer(-GameMng.I.snapturn.snapAngle);
+            }
+            else if (rightHandTurnRight)
+            {
+                GameMng.I.snapturn.RotatePlayer(GameMng.I.snapturn.snapAngle);
+            }
         }
     }
 

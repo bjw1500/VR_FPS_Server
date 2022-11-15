@@ -113,14 +113,6 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Vector2 TouchPosition
-        {
-            get
-            {
-                return SteamVR_Actions.default_TouchPosition;
-            }
-        }
-        
         public virtual SteamVR_Action_Boolean WeaponWheel
         {
             get
@@ -134,6 +126,30 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_WheelTouch;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Jump
+        {
+            get
+            {
+                return SteamVR_Actions.default_Jump;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean State
+        {
+            get
+            {
+                return SteamVR_Actions.default_State;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Menu
+        {
+            get
+            {
+                return SteamVR_Actions.default_Menu;
             }
         }
         

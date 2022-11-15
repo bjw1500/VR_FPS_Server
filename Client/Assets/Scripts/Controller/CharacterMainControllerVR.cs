@@ -132,7 +132,7 @@ public class CharacterMainControllerVR : BaseController
 
     private void SetTriggerInput()
     {
-        if (GameMng.I.input.fireTrigger.GetStateDown(GameMng.I.input.right_hand) == true && Com.myGun != null)
+        if (GameMng.I.input.getStateFireTrigger && Com.myGun != null)
         {
             //쿨타임은 나중에 데이터 시트로 받아주게 만들어주기.
 
@@ -145,9 +145,8 @@ public class CharacterMainControllerVR : BaseController
         }
 
         // Jump
-        if (GameMng.I.input.jumpTrigger.GetStateDown(GameMng.I.input.left_hand) == true)
+        if (GameMng.I.input.getStateJumpBtn)
         {
-            Debug.Log("Jump");
             C_Skill c_Skill = new C_Skill();
             c_Skill.Info = Info;
             c_Skill.Skillid = 2;
@@ -164,14 +163,14 @@ public class CharacterMainControllerVR : BaseController
         if (Type == VRType.Oculus)
         {
             // Debug.Log(Com.touchPosition.GetAxis(Com.left_hand));
-            h = GameMng.I.input.move.GetAxis(GameMng.I.input.left_hand).x;
-            v = GameMng.I.input.move.GetAxis(GameMng.I.input.left_hand).y;
+            h = GameMng.I.input.getMoveAxis.x;
+            v = GameMng.I.input.getMoveAxis.y;
         }
         else if (Type == VRType.Vive)
         {
             //  Debug.Log(Com.touchPosition.GetAxis(Com.left_hand));
-            h = GameMng.I.input.touchPosition.GetAxis(GameMng.I.input.left_hand).x;
-            v = GameMng.I.input.touchPosition.GetAxis(GameMng.I.input.left_hand).y;
+            h = GameMng.I.input.getMoveAxis.x;
+            v = GameMng.I.input.getMoveAxis.y;
         }
 
         // Move, Rotate
@@ -236,8 +235,6 @@ public class CharacterMainControllerVR : BaseController
         {
             // 애니메이션 점프 트리거
             Com.anim.SetTrigger(GameMng.I.input.paramJump);
-
-            Debug.Log("JUMP");
         }
     }
 

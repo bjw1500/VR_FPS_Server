@@ -25,6 +25,7 @@ public class CustomSnapTurn : MonoBehaviour
     public static float teleportLastActiveTime;
 
     private bool canRotate = true;
+    public bool getCanRotate { get { return canRotate;} }
 
     public float canTurnEverySeconds = 0.4f;
 
@@ -34,6 +35,10 @@ public class CustomSnapTurn : MonoBehaviour
     private void Start()
     {
         AllOff();
+        if(GameMng.I.snapturn == null)
+        {
+            GameMng.I.snapturn = this;
+        }
     }
 
     private void AllOff()
@@ -43,30 +48,6 @@ public class CustomSnapTurn : MonoBehaviour
 
         if (rotateRightFX != null)
             rotateRightFX.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (canRotate && GameMng.I.input.snapLeftAction != null && GameMng.I.input.snapRightAction != null 
-        && GameMng.I.input.snapLeftAction.activeBinding && GameMng.I.input.snapRightAction.activeBinding)
-        {
-            //only allow snap turning after a quarter second after the last teleport
-            if (Time.time < (teleportLastActiveTime + canTurnEverySeconds))
-                return;
-
-            bool rightHandTurnLeft = GameMng.I.input.snapLeftAction.GetStateDown(SteamVR_Input_Sources.RightHand);
-
-            bool rightHandTurnRight = GameMng.I.input.snapRightAction.GetStateDown(SteamVR_Input_Sources.RightHand);
-
-            if (rightHandTurnLeft)
-            {
-                RotatePlayer(-snapAngle);
-            }
-            else if (rightHandTurnRight)
-            {
-                RotatePlayer(snapAngle);
-            }
-        }
     }
 
     private Coroutine rotateCoroutine;
@@ -84,7 +65,6 @@ public class CustomSnapTurn : MonoBehaviour
     //-----------------------------------------------------
     private IEnumerator DoRotatePlayer(float angle)
     {
-
         canRotate = false;
 
         snapTurnSource.panStereo = angle / 90;

@@ -42,9 +42,9 @@ public class WeaponWheel : MonoBehaviour
     void CalcAngle()
     {
         if (GameMng.I.VR_Type == Define.VRType.Oculus)
-            joystickPos = GameMng.I.input.move.GetAxis(GameMng.I.input.right_hand);
+            joystickPos = GameMng.I.input.getMoveAxis;
         else
-            joystickPos = GameMng.I.input.touchPosition.GetAxis(GameMng.I.input.right_hand);
+            joystickPos = GameMng.I.input.getMoveAxis;
 
         /*
          * 40도 일때 x y의 위치.

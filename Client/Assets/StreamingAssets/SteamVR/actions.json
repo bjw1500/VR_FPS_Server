@@ -54,15 +54,23 @@
       "type": "vector2"
     },
     {
-      "name": "/actions/default/in/TouchPosition",
-      "type": "vector2"
-    },
-    {
       "name": "/actions/default/in/WeaponWheel",
       "type": "boolean"
     },
     {
       "name": "/actions/default/in/WheelTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Jump",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/State",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Menu",
       "type": "boolean"
     },
     {

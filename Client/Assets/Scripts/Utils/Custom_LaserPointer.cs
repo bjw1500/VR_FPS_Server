@@ -36,6 +36,7 @@ public class Custom_LaserPointer : MonoBehaviour
 
         this.transform.localRotation = Quaternion.Euler(50f, 0f, 0f);
         this.transform.localPosition = pose.inputSource == SteamVR_Input_Sources.LeftHand ? new Vector3(0.015f, -0.03f,-0.03f) : new Vector3(-0.015f, -0.03f,-0.03f);
+       
         holder = GameObject.CreatePrimitive(PrimitiveType.Cube);
         holder.transform.parent = this.transform;
         holder.transform.localScale = new Vector3(thickness, thickness, 100f);
@@ -103,7 +104,8 @@ public class Custom_LaserPointer : MonoBehaviour
 
         Ray raycast = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-        bool bHit = Physics.Raycast(raycast, out hit);
+        int layerMask = 1 << LayerMask.NameToLayer("UI");
+        bool bHit = Physics.Raycast(ray: raycast, hitInfo: out hit, maxDistance: customdist, layerMask: layerMask);
 
         if (previousContact && previousContact != hit.transform)
         {
