@@ -19,6 +19,7 @@ public class CharacterMainControllerVR : BaseController
         public GameObject LeftController;
         public GameObject RightController;
         public IMovement3D movement3D;
+        public Hpbar hpbar;
     }
 
     [Serializable]
@@ -65,6 +66,23 @@ public class CharacterMainControllerVR : BaseController
         }
     }
 
+    //캐릭터 스탯
+
+    public override int Hp
+    {
+        get { return Info.StatInfo.Hp; }
+        set 
+        { 
+            Info.StatInfo.Hp = value;
+
+            if (Com.hpbar != null)
+                Com.hpbar.changeHp = Info.StatInfo.Hp;
+        }
+
+    }
+
+
+
 
     //무기 관련 필드
     public int _weaponSlotSize = 4;
@@ -107,6 +125,10 @@ public class CharacterMainControllerVR : BaseController
         TryGetComponent(out Com.movement3D);
         if (Com.movement3D == null)
             Com.movement3D = gameObject.AddComponent<PhysicsBasedMovement>();
+
+
+        Com.hpbar = gameObject.GetComponentInChildren<Hpbar>();
+
     }
 
     private void InitSettings()
@@ -366,6 +388,18 @@ public class CharacterMainControllerVR : BaseController
 
     }
 
+    public override void OnDead(ObjectInfo attacker)
+    {
+        base.OnDead(attacker);
+
+        //죽으면 리스폰 하게 만들기.
+        //무기는 처음부터 다시.
+        //TODO
+        //RC에도 죽음 판정 만들어주기
+        Debug.Log($"{attacker.Name}에 의해 {Info.Name}이 파괴됩니다.");
+        Managers.Resource.Destroy(this.transform.gameObject);
+    }
+
     #endregion
 
     /***********************************************************************
@@ -436,4 +470,6 @@ public class CharacterMainControllerVR : BaseController
         #endregion
         UpdateServerPosition();
     }
+
+
 }

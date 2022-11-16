@@ -72,16 +72,29 @@ public class ObjectManager
         if (info.ItemType == ItemType.Weapon)
         {
             item = go.GetComponent<Weapon>();
+
+
         }
         else if (info.ItemType == ItemType.Armor)
         {
             item = go.GetComponent<Armor>();
+
+
         }
         else if (info.ItemType == ItemType.Consumable)
         {
             item = go.GetComponent<Consumable>();
+
+
         }
+
+        item.ItemData = data;
         item.Info = info;
+        item.IconImage = Managers.Resource.Load<Sprite>(data.imagePath);
+
+        //무기 정보 연동해주기.
+        
+
         _items.Add(info.ObjectId, item);
 
         Debug.Log($"{info.Name} - {info.ObjectId}가 생성되었습니다.");

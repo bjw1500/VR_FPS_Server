@@ -49,6 +49,8 @@ namespace Server
             ObjectType = GameObjectType.Player;
             Info = new ObjectInfo();
             Info.Player = new PlayerInfo();
+            Info.Player.Death = 0;
+            Info.Player.Kill = 0;
             Info.MovementInfo = new MovementInfo();
 
 
@@ -75,7 +77,7 @@ namespace Server
             if (totalDamage < 0)
                 totalDamage = 0;
 
-            Console.WriteLine($"{attacker.Info.Name}가 {Info.Name}을 공격했습니다 {totalDamage}!");
+            Console.WriteLine($"{attacker.Info.Name}가 {totalDamage}만큼 {Info.Name}을 공격했습니다 {totalDamage}!");
 
             Info.StatInfo.Hp = Math.Max(Info.StatInfo.Hp - totalDamage, 0);
 
@@ -99,15 +101,17 @@ namespace Server
 
             Console.WriteLine($"{attacker.Info.Name}가 {Info.Name}를 죽였습니다!");
             State = PlayerState.Dead;
-
-
+            Info.Player.Death++;
 
             S_Die diePacket = new S_Die();
             diePacket.Attacker = attacker.Info;
             diePacket.ObjectId = Info.ObjectId;
             Room.BroadCast(diePacket);
-          
 
+
+            //죽고 나서 다시 스폰?
+            //템도 모두 지워준다?
+            Room.Push(Room.EnterGame, this);
         }
 
     }

@@ -67,6 +67,7 @@ namespace Server
                 DataManager.StatDict.TryGetValue("Player", out stat);
                 newPlayer.Info.StatInfo = stat;
                 newPlayer.Info.Name = newPlayer.Info.Player.Name;
+                newPlayer.State = PlayerState.Living;
 
                 //게임룸 안의 플레이어 목록에 추가.
                 _players.Add(newPlayer.Info.ObjectId, newPlayer);

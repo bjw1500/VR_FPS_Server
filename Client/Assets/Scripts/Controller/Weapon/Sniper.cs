@@ -8,10 +8,15 @@ public class Sniper : WeaponController
     public Transform bulletPos;
     public Transform gunPos;
     public GameObject gunParticle;
-    public float fireRate;
-    public float reloadRate;
-    public int bulletCount;
-    public int bulletCharge;
+
+    //무기 스탯
+
+    //public int damage;
+    //public int ammoBulletCount;
+    //public int ammouCount;
+    //public float fireRate;
+    //public float reloadTime;
+    //public float fireDistance;
 
     float fireRateTime;
     float reloadRateTime;
@@ -20,14 +25,14 @@ public class Sniper : WeaponController
     Animator anim;
 
     //Stat
-    const int _damage = 25;
+
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        fireRateTime = fireRate;
+        fireRateTime = _weaponData.fireRate;
         reloadRateTime = 0;
-        bulletcurCount = bulletCount;
+        bulletcurCount = _weaponData.ammoBulletCount;
     }
 
     void Update()
@@ -41,7 +46,7 @@ public class Sniper : WeaponController
         if (isReload) {
             reloadRateTime += Time.deltaTime;
             Debug.Log("Time: " + reloadRateTime);
-            if (reloadRateTime >= reloadRate) {
+            if (reloadRateTime >= _weaponData.reloadTime) {
                 isReload = false;
                 reloadRateTime = 0;
             }
@@ -51,7 +56,7 @@ public class Sniper : WeaponController
 
     public override void Fire() {
         
-        if (fireRateTime >= fireRate && !isReload && bulletcurCount > 0)
+        if (fireRateTime >= _weaponData.fireRate && !isReload && bulletcurCount > 0)
         {
             anim.SetBool("Shoot", true);
             gunParticle.SetActive(true);
@@ -60,7 +65,7 @@ public class Sniper : WeaponController
             Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
             shootingBullet._gun = this;
-            shootingBullet.dmg = _damage;
+            shootingBullet.dmg = _weaponData.damage;
             fireRateTime = 0;
             bulletcurCount--;
         }
@@ -75,12 +80,12 @@ public class Sniper : WeaponController
     }
 
     void Reload() {
-        if (!isReload && bulletCharge > 0)
+        if (!isReload && _weaponData.ammoCount > 0)
         {
             isReload = true;
             anim.SetTrigger("DoReload");
-            bulletCharge--;
-            bulletcurCount = bulletCount;
+            _weaponData.ammoCount--;
+            bulletcurCount = _weaponData.ammoBulletCount;
         }
     }
 }

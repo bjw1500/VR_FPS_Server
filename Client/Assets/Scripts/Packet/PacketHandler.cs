@@ -115,7 +115,8 @@ class PacketHandler
         BaseController bc = go.GetComponent<BaseController>();
         if (bc == null)
             return;
-        bc.Info.StatInfo.Hp = changeHpPacket.Hp;
+
+        bc.Hp = changeHpPacket.Hp;
 
     }
 

@@ -31,12 +31,12 @@ public class Gun : WeaponController
     public Text _ammoText;                  //남은 탄환수
 
     //Stat 나중에 데이터 시트로 정리할 예정.
-    public int ammoBulletCount = 13; //탄창 당 총알의 개수
-    public int ammoCount = 10; //보유한 탄창의 수
-    public float fireRate = 0.3f; //발사 간격
-    public int _damage = 25; //데미지
-    public float reloadTime = 2.0f; //재장전 시간
-    public float _fireDistance = 100f;
+    //public int damage = 25; //데미지
+    //public int ammoBulletCount = 13; //탄창 당 총알의 개수
+    //public int ammoCount = 10; //보유한 탄창의 수
+    //public float fireRate = 0.3f; //발사 간격
+    //public float reloadTime = 2.0f; //재장전 시간
+    //public float fireDistance = 100f;
 
     //
     private float _lastFireTime; //총을 마지막으로 발사한 시점.
@@ -63,10 +63,6 @@ public class Gun : WeaponController
         anim = GetComponent<Animator>();
         _currentState = GunState.Empty;
         _lastFireTime = 0;
-        //bullet = Managers.Resource.Load<GameObject>("Prefabs/Weapon/Bullet");
-        //_bulletLineRenderer.positionCount = 2;
-        //_bulletLineRenderer.enabled = false;
-
         UpdateUI();
 
     }
@@ -76,7 +72,7 @@ public class Gun : WeaponController
 
         Debug.Log("Fire!");
         //총이 준비된 상태인가? 마지막 발사 시점에서 연사 간격을 넘어갔는가?
-        if(_currentState == GunState.Ready && Time.time >= _lastFireTime + fireRate)
+        if(_currentState == GunState.Ready && Time.time >= _lastFireTime + _weaponData.fireRate)
         {
             _lastFireTime = Time.time;
             Shot();
@@ -100,7 +96,7 @@ public class Gun : WeaponController
         Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
         shootingBullet._gun = this;
-        shootingBullet.dmg = _damage;
+        shootingBullet.dmg = _weaponData.damage;
 
         //충돌 판정은 Bullet으로 옮김.
         //발사 -> 총의 데이터를 지닌 채 총알이 날아감 -> 충돌 판정 후 쏜 총의 데미지만큼 상대에게 데미지를 준다.
@@ -142,7 +138,7 @@ public class Gun : WeaponController
 
         _audioSource.Play();
 
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(_weaponData.fireRate);
         
         anim.SetBool("Shoot", false);
         //_bulletLineRenderer.enabled = false;
@@ -172,7 +168,7 @@ public class Gun : WeaponController
 
     public void Reload()
     {
-        if (_currentState == GunState.Reloading  || ammoCount == 0)
+        if (_currentState == GunState.Reloading  || _weaponData.ammoCount == 0)
             return;
 
         StartCoroutine(ReloadRoutine());
@@ -190,10 +186,10 @@ public class Gun : WeaponController
 
         UpdateUI();
 
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(_weaponData.reloadTime);
 
-        curBulletCount = ammoBulletCount;
-        ammoCount--;
+        curBulletCount = _weaponData.ammoBulletCount;
+        _weaponData.ammoCount--;
         _currentState = GunState.Ready;
         UpdateUI();
 

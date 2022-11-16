@@ -63,6 +63,12 @@ public class ItemData
 public class WeaponData : ItemData
 {
     public int damage;
+    public int ammoBulletCount = 13; //탄창 당 총알의 개수
+    public int ammoCount = 10; //보유한 탄창의 수
+    public float fireRate = 0.3f; //발사 간격
+    public float reloadTime = 2.0f; //재장전 시간
+    public float fireDistance = 100f;
+
     public WeaponType weaponType;   //TODO 권총. 기관총. 저격총 분류하기.
 }
 

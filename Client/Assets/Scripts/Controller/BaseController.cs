@@ -21,7 +21,7 @@ public class BaseController : MonoBehaviour
         set { _info = value; }
     }
 
-    public int Hp
+    public virtual int Hp
     {
         get { return Info.StatInfo.Hp; }
         set { Info.StatInfo.Hp = value; }
@@ -62,9 +62,9 @@ public class BaseController : MonoBehaviour
         if (GameMng.I.SingleGame == true)
         {
             //싱글모드일때 데미지 판정
-            Info.StatInfo.Hp -= damage;
+            Hp -= damage;
             Debug.Log($"{attacker.Name}에게서 {damage} 데미지를 받았다.");
-            if (Info.StatInfo.Hp <= 0)
+            if (Hp <= 0)
                 OnDead(attacker);
 
             return;

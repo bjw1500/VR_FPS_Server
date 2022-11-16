@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Google.Protobuf.Protocol;
 
 public class UI_Player : UI_Base
 {
@@ -45,5 +46,11 @@ public class UI_Player : UI_Base
     public void GotoLogin()
     {
         SceneManager.LoadScene(scene);
+
+        //TODO
+        //서버에서 목록 비워주게 해주기.
+        C_Despawn despawn = new C_Despawn();
+        despawn.Info.Add(Managers.Object.MyPlayer.Info);
+       
     }
 }

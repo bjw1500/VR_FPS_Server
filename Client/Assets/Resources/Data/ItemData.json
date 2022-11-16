@@ -6,7 +6,12 @@
       "imagePath": "Image/UI/WeaponWheel/Gun",
       "prefabPath": "Weapon/Gun",
       "weaponType": "Pistol",
-      "damage": "25"
+      "damage": "25",
+      "ammoBulletCount": "13",
+      "ammoCount": "10",
+      "fireRate": "0.3",
+      "reloadTime": 2.0,
+      "fireDeistance": 100
     },
     {
       "id": "2",
@@ -14,7 +19,12 @@
       "imagePath": "Image/UI/WeaponWheel/MachineGun",
       "prefabPath": "Weapon/MachineGun",
       "weaponType": "Rifle",
-      "damage": "25"
+      "damage": "25",
+      "ammoBulletCount": "13",
+      "ammoCount": "10",
+      "fireRate": "0.3",
+      "reloadTime": 2.0,
+      "fireDeistance": 100
     },
     {
       "id": "3",
@@ -22,7 +32,12 @@
       "imagePath": "Image/UI/WeaponWheel/MachineGun",
       "prefabPath": "Weapon/Sniper",
       "weaponType": "Sniper",
-      "damage": "25"
+      "damage": "25",
+      "ammoBulletCount": "13",
+      "ammoCount": "10",
+      "fireRate": "0.3",
+      "reloadTime": 2.0,
+      "fireDeistance": 100
     }
   ]
 } 

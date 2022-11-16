@@ -273,4 +273,12 @@ public class CharacterRemoteControllerVR : BaseController
     {
         base.OnDamage(damage, attacker);
     }
+
+    public override void OnDead(ObjectInfo attacker)
+    {
+        base.OnDead(attacker);
+
+        Debug.Log($"{attacker.Name}에 의해 {Info.Name}이 파괴됩니다.");
+        Managers.Resource.Destroy(this.transform.gameObject);
+    }
 }

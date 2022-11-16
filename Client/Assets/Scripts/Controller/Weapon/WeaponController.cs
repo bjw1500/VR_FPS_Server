@@ -16,6 +16,7 @@ public class WeaponController : MonoBehaviour
 
     
     public BaseController _master; //총을 들고 있는 무기의 주인
+    public WeaponData _weaponData;
 
     void Start()
     {
