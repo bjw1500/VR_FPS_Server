@@ -20,7 +20,8 @@ public class Vr_Input : ScriptableObject
     [Header("[ 트리거 ]")]
     // LaserPoint
     [SerializeField] public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.GetBooleanAction("InteractUI");
-    public bool getStateFireTrigger { get { return interactWithUI.GetStateDown(left_hand); }}
+    public bool getStateFireTrigger { get { return interactWithUI.GetStateDown(right_hand); }}
+    public bool getStatePickUpTrigger { get { return interactWithUI.GetStateDown(left_hand); } }
 
     [Header("[ 스넵턴 조이스틱 ]")]
     public SteamVR_Action_Boolean snapLeftAction = SteamVR_Input.GetBooleanAction("SnapTurnLeft");

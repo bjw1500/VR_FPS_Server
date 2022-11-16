@@ -22,6 +22,7 @@ public class UI_PlayerList : UI_Base
         blueTeam = blueTeamList.GetComponent<GridLayoutGroup>();
 
         Managers.Object.PlayerList = this;
+        SetList();
     }
     
     public void SetList()
@@ -51,14 +52,14 @@ public class UI_PlayerList : UI_Base
                 //플레이어가 레드팀이라면, 레드팀 리스트에 텍스트 생성 후 이어준다.
                 GameObject go = Managers.Resource.Instantiate("UI/PlayerList/PlayerSlot", redTeam.transform);
                 slot = go.GetComponent<UI_PlayerSlot>();
-                slot.info = player;
+                slot.OjbectId = player.ObjectId;
             }
             else
             {
                 //플레이어가 블루팀이라면,
                 GameObject go = Managers.Resource.Instantiate("UI/PlayerList/PlayerSlot", blueTeam.transform);
                 slot = go.GetComponent<UI_PlayerSlot>();
-                slot.info = player;
+                slot.OjbectId = player.ObjectId;
             }
 
             playerSlots.Add(slot);
@@ -76,42 +77,3 @@ public class UI_PlayerList : UI_Base
         }
     }
 }
-
-/*
-//플레이어 닉네임 가져오기
-public class userName : MonoBehaviourPunCallbacks, IPunObservable {
-    //TMP
-    public TextMeshProUGUI nickName;
- 
-    void Start () {
-        //입력해서 저장된 userid지우는 코드 
-        PlayerPrefs.DeleteAll();
-
-        //플레이어의 닉네임 저장
-        nickName.text = photonView.Owner.NickName;
-    }
-
-  //플레이어 닉네임 출력-> player수 만큼 버튼 배정(동적할당?)
-  public override void OnJoinedRoom()
-    {
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-   //플레이어 수 만큼 button 배정
-            return p.Nickname;
-        }
-    }
-
-    //방에 들어왔을 때 목록에 업데이트하는 함수 ->해당 플레이어 담을 버튼 생성
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        // Add a button for the new player.
-        // You can access the new player's nick name by using newPlayer.NickName.
-    }
-    //방에서 나갔을때 해당플레이어 버튼 삭제되게 하기
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        // Remove a button that is related to the player who just left the room.
-    }
-
-}
- */

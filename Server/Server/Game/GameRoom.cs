@@ -67,6 +67,8 @@ namespace Server
                 DataManager.StatDict.TryGetValue("Player", out stat);
                 newPlayer.Info.StatInfo = stat;
                 newPlayer.Info.Name = newPlayer.Info.Player.Name;
+                newPlayer.Info.StatInfo.Hp = newPlayer.Info.StatInfo.MaxHp;
+
                 newPlayer.State = PlayerState.Living;
 
                 //게임룸 안의 플레이어 목록에 추가.
@@ -357,7 +359,7 @@ namespace Server
             //player 모록에 없으면 종료되었거나 죽은거니, 혹시 스킬 사용 도중에 죽었다면 return. 
             if (_players.TryGetValue(skillPacket.Info.ObjectId, out serverInfo) == false)
                 return;
-            serverInfo.Info = skillPacket.Info;
+            Console.WriteLine($"[스킬] 현재 {serverInfo.Info.Player.Name}이 {serverInfo.Info.Player.Kill}킬 기록 중입니다.");
 
             //패킷 배포
             S_Skill skill = new S_Skill();

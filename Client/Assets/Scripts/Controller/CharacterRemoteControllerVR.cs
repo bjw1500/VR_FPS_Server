@@ -279,6 +279,6 @@ public class CharacterRemoteControllerVR : BaseController
         base.OnDead(attacker);
 
         Debug.Log($"{attacker.Name}에 의해 {Info.Name}이 파괴됩니다.");
-        Managers.Resource.Destroy(this.transform.gameObject);
+        Managers.Object.Remove(Info.ObjectId);
     }
 }

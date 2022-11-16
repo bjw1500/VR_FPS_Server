@@ -10,6 +10,8 @@ namespace Server
     {
 
         public GameObjectType ObjectType;
+        public virtual int ObjectId { get; set; }
+ 
         public GameRoom Room { get; set; }
        
         public GameObject()

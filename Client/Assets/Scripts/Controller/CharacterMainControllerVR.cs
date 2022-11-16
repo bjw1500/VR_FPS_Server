@@ -397,7 +397,7 @@ public class CharacterMainControllerVR : BaseController
         //TODO
         //RC에도 죽음 판정 만들어주기
         Debug.Log($"{attacker.Name}에 의해 {Info.Name}이 파괴됩니다.");
-        Managers.Resource.Destroy(this.transform.gameObject);
+        Managers.Object.RemoveMyPlayer();
     }
 
     #endregion

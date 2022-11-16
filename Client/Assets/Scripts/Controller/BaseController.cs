@@ -87,5 +87,6 @@ public class BaseController : MonoBehaviour
     public virtual void OnDead(ObjectInfo attacker)
     {
         Debug.Log($"{transform.name}이 {attacker.Name}한테 죽었습니다.");
+
     }
 }

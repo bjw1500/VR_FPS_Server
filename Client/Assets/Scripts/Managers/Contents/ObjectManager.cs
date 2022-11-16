@@ -54,9 +54,12 @@ public class ObjectManager
         }
 
         _players.Add(info.ObjectId, info);
+
+
+        if (PlayerList == null)
+            return;
+
         PlayerList.SetList();
-
-
 
     }
 
@@ -133,13 +136,17 @@ public class ObjectManager
         go.transform.position = new Vector3(info.MovementInfo.PlayerPosInfo.PosX, info.MovementInfo.PlayerPosInfo.PosZ, info.MovementInfo.PlayerPosInfo.PosY);
     }
 
-    //public void AddItem(Item item)
-    //   {
-    //	item.id = ItemIdCount;
-    //	_items.Add(ItemIdCount, item);
-    //	ItemIdCount++;
-    //   }
-
+    public void UpdatePlayerInfo(ObjectInfo info)
+    {
+        ObjectInfo player = null;
+        if(_players.TryGetValue(info.ObjectId, out player) == false)
+        {
+            Debug.Log("UpdatePlayerInfo 에러");
+            return;
+        }
+        player.Player = info.Player;
+        PlayerList.RefreshUI();
+    }
 
 
     public void Remove(int Id)
@@ -148,6 +155,12 @@ public class ObjectManager
         if (_objects.TryGetValue(Id, out go) == false)
             return;
 
+        if(_players.ContainsKey(Id) == true)
+        {
+            _players.Remove(Id);
+        }
+
+
         _objects.Remove(Id);
         Managers.Resource.Destroy(go);
     }
@@ -155,7 +168,7 @@ public class ObjectManager
     public void RemoveMyPlayer()
     {
         _objects.Remove(MyPlayer.Info.ObjectId);
-        MyPlayer = null;
+        _players.Remove(MyPlayer.Info.ObjectId);
         Managers.Resource.Destroy(MyPlayer.gameObject);
     }
 

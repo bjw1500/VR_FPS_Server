@@ -64,7 +64,9 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.SGetWeapon, MakePacket<S_GetWeapon>);
 		_handler.Add((ushort)MsgId.SGetWeapon, PacketHandler.S_GetWeaponHandler);		
 		_onRecv.Add((ushort)MsgId.SObjectSpawn, MakePacket<S_ObjectSpawn>);
-		_handler.Add((ushort)MsgId.SObjectSpawn, PacketHandler.S_ObjectSpawnHandler);
+		_handler.Add((ushort)MsgId.SObjectSpawn, PacketHandler.S_ObjectSpawnHandler);		
+		_onRecv.Add((ushort)MsgId.SUpdatePlayerInfo, MakePacket<S_UpdatePlayerInfo>);
+		_handler.Add((ushort)MsgId.SUpdatePlayerInfo, PacketHandler.S_UpdatePlayerInfoHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

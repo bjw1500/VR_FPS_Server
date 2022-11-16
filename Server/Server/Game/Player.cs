@@ -32,12 +32,6 @@ namespace Server
 
         public PlayerState State { get; set; }
 
-        public int ObjectId
-        {
-            get { return Info.ObjectId; }
-            set { Info.ObjectId = value; }
-
-        }
         public StatInfo Stat
         {
             get { return Info.StatInfo; }
@@ -66,16 +60,24 @@ namespace Server
 
         public override void OnDamaged(GameObject Attacker, int damage)
         {
-            
-            Player attacker = Attacker as Player;
+
+            Player attacker = null;
+            Room._players.TryGetValue(Attacker.ObjectId, out attacker);
 
             if (State != PlayerState.Living)
                 return;
+            if (attacker == this && (attacker.Info.TeamId == Info.TeamId))
+            {
+                //자기 자신에 대한 공격은 무효화 해준다.
+                Console.WriteLine($"{attacker.Info.Name}가 자기 자신을 공격했습니다!");
+                return;
+            }
 
 
             int totalDamage = damage + attacker.Info.StatInfo.Damage;
             if (totalDamage < 0)
                 totalDamage = 0;
+            attacker.Info.Player.TotalDamage += totalDamage;
 
             Console.WriteLine($"{attacker.Info.Name}가 {totalDamage}만큼 {Info.Name}을 공격했습니다 {totalDamage}!");
 
@@ -94,15 +96,24 @@ namespace Server
         public override void OnDead(GameObject Attacker)
         {
 
-            Player attacker = Attacker as Player;
+            Player attacker = null;
+
+            Room._players.TryGetValue(Attacker.ObjectId , out attacker);
 
             if (State != PlayerState.Living)
                 return;
 
             Console.WriteLine($"{attacker.Info.Name}가 {Info.Name}를 죽였습니다!");
             State = PlayerState.Dead;
+
+            //PlayerList 정보 수정.
+            attacker.Info.Player.Kill++;
             Info.Player.Death++;
 
+
+
+            Console.WriteLine($"현재 {attacker.Info.Player.Name}이 {attacker.Info.Player.Kill}킬 기록 중입니다.");
+             
             S_Die diePacket = new S_Die();
             diePacket.Attacker = attacker.Info;
             diePacket.ObjectId = Info.ObjectId;
@@ -111,7 +122,15 @@ namespace Server
 
             //죽고 나서 다시 스폰?
             //템도 모두 지워준다?
+            Room._players.Remove(Info.ObjectId);
             Room.Push(Room.EnterGame, this);
+
+            S_UpdatePlayerInfo playerinfo = new S_UpdatePlayerInfo();
+            playerinfo.Infos.Add(attacker.Info);
+            playerinfo.Infos.Add(Info);
+
+            Room.BroadCast(playerinfo);
+
         }
 
     }

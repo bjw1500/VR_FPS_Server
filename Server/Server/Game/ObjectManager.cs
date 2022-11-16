@@ -28,13 +28,16 @@ namespace Server
                     Player player = gameObject as Player;
                     player.ObjectId = GenerateId(gameObject.ObjectType);
                     player.Info.ObjectType = GameObjectType.Player;
+                    player.Info.ObjectId = player.ObjectId;
                     
                     _players.Add(_counter, gameObject as Player);
                 }
                 else if(gameObject.ObjectType == GameObjectType.Item)
                 {
                     Item item = gameObject as Item;
+                    
                     item.Info.ObjectId = GenerateId(gameObject.ObjectType);
+                    item.ObjectId = item.Info.ObjectId;
               
                     _players.Add(_counter, gameObject as Player);
 
@@ -42,6 +45,7 @@ namespace Server
                 {
                     Monster monster = gameObject as Monster;
                     monster.Info.ObjectId = GenerateId(gameObject.ObjectType);
+                    monster.ObjectId = monster.Info.ObjectId;
                     monster.Info.ObjectType = GameObjectType.Monster;
 
 

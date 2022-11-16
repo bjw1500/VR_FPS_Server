@@ -19,7 +19,7 @@ public class UI_PlayerSlot : UI_Base
     public TextMeshProUGUI deathCountText;
 
     //슬롯에 연동된 플레이어의 정보
-    public ObjectInfo info;
+    public int OjbectId;
 
     public override void Init()
     {
@@ -38,6 +38,11 @@ public class UI_PlayerSlot : UI_Base
     public void Refresh()
     {
         //name 왜 넓값인지 확인하기.
+
+        ObjectInfo info = null;
+        if (Managers.Object._players.TryGetValue(OjbectId, out info) == false)
+            return;
+
         playerNameText.text = info.Player.Name;
         killCountText.text = info.Player.Kill.ToString();
         deathCountText.text = info.Player.Death.ToString();

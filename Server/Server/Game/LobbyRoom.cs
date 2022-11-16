@@ -41,6 +41,7 @@ namespace Server
             {
                 //방 안에 들어오면 로비룸의 플레이어 목록에 추가
                 _players.Add(player.Info.ObjectId, player);
+                player.Info.TeamId = _players.Count;
                 player.LobbyRoom = this;
 
                 foreach (Player enterPlayer in _players.Values)
@@ -104,7 +105,7 @@ namespace Server
 
                     S_StartGame start = new S_StartGame();
 
-                    player.Info.TeamId = startPacket.Slot % 2;
+                    player.Info.TeamId = player.Info.TeamId % 2;
                     player.Info.Player.Kill = 0;
                     player.Info.Player.Death = 0;
                     player.Session.Send(start);

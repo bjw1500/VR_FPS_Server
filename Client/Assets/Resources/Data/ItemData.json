@@ -33,7 +33,7 @@
       "prefabPath": "Weapon/Sniper",
       "weaponType": "Sniper",
       "damage": "25",
-      "ammoBulletCount": "13",
+      "ammoBulletCount": "4",
       "ammoCount": "10",
       "fireRate": "0.3",
       "reloadTime": 2.0,

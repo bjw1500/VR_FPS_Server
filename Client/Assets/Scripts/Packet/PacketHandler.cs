@@ -134,7 +134,7 @@ class PacketHandler
         BaseController bc = go.GetComponent<BaseController>();
         if (bc == null)
             return;
-        bc.OnDead(diePacket.Attacker);
+        bc.OnDead(diePacket.Attacker); 
     }
 
     public static void S_ChangeWeaponHandler(PacketSession session, IMessage packet)
@@ -173,6 +173,18 @@ class PacketHandler
             return;
 
         cc.GetWeapon(item);
+
+    }
+
+    public static void S_UpdatePlayerInfoHandler(PacketSession session, IMessage packet)
+    {
+        S_UpdatePlayerInfo UpdatePacket = packet as S_UpdatePlayerInfo;
+        ServerSession serverSession = session as ServerSession;
+
+        foreach(ObjectInfo info in UpdatePacket.Infos)
+        {
+            Managers.Object.UpdatePlayerInfo(info);
+        }
 
     }
 

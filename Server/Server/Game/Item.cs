@@ -27,6 +27,7 @@ namespace Server
             get { return Data.itemType; }
         }
 
+
         public Item()
         {
             ObjectType = GameObjectType.Item;
