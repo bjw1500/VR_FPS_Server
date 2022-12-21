@@ -66,6 +66,7 @@ namespace Server
         {
             //OK 패킷을 보내자..
             player.LobbyRoom = this;
+            Console.WriteLine($"{player.Info.Player.Name}이 로비에 입장했습니다.");
             S_EnterLobbyOk okPacket = new S_EnterLobbyOk();
             player.Session.Send(okPacket);
         }
@@ -130,7 +131,8 @@ namespace Server
                 gameRoom.Push(gameRoom.EnterGame, player);
                 gameRoom.Push(gameRoom.SpawnItem, player);
                 gameRoom.Push(gameRoom.SpawnObject, player);
-                player.LobbyRoom = null;
+                //player.LobbyRoom = null;
+                Console.WriteLine($"{player.Info.Player.Name}의 로딩이 끝났습니다.");
 
             }
 
@@ -144,7 +146,7 @@ namespace Server
             
 
             //Lobby에서 전부 퇴장시킨다.
-            _players.Clear();
+           // _players.Remove(playerId);
         }
 
         public void LeaveGame(int playerId)

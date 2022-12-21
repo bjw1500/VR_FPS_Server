@@ -22,6 +22,8 @@ public class Define
         Game,
         SingleGame,
         LoadingScene,
+        Map000,
+        Map001,
     }
 
     public enum Sound

@@ -238,6 +238,7 @@ namespace Server
                 spawnItem.Info.Name = data.name;
                 spawnItem.Info.TemplateId = data.id;
                 spawnItem.Info.ItemType = data.itemType;
+                spawnItem.Room = this;
 
 
                 items[i] = spawnItem;
@@ -294,6 +295,7 @@ namespace Server
                 };
                 spawnObject.Info.StatInfo = data;
                 spawnObject.Info.Name = data.Name + "_" + i;
+                spawnObject.Room = this;
                 objects[i] = spawnObject;
             }
 
