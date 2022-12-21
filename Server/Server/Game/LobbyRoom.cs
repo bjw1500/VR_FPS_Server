@@ -12,27 +12,10 @@ namespace Server
         object _lock = new object();
         bool _startFlag = true;
         public int RoomId { get; set; }
+        public int GameRoomId { get; set; }
         public Dictionary<int, Player> _players = new Dictionary<int, Player>();
+        
 
-        public List<bool> _checkSlot = new List<bool>();
-        //플레이어의 슬롯 카운트를 센다?
-
-        public void CheckSlotCount(Player player)
-        {
-            //처음에는 1로 시작한다.
-            //1~4까지. 슬롯을 확인했을 때 비어 있으면 슬롯을 부여한다?
-            foreach(bool emptySlot in _checkSlot)
-            {
-                if(emptySlot == false)
-                {
-                    //플레이어의 슬롯 넣어주기.
-
-
-
-
-                }
-            }
-        }
 
         public void EnterLobbyRoom(Player player)
         {
@@ -87,6 +70,9 @@ namespace Server
             player.Session.Send(okPacket);
         }
 
+
+
+
         public void StartGame(C_StartGame startPacket)
         {
             lock (_lock)
@@ -96,39 +82,69 @@ namespace Server
 
                 _startFlag = true;
 
+                //TODO
+                //나중에 플레이어들이 로비창에서 캐릭터 선택할 수 있도록 해주기.
 
-                //플레이어들을 게임 룸에 입장시킨다.
-                GameRoom gameRoom = RoomManager.Instance.Find(1);
+
+                //플레이어들이 고른 맵을 생성한 후, 입장시킨다.
+                GameRoom gameRoom = RoomManager.Instance.Add(startPacket.MapId);
+                GameRoomId = gameRoom.RoomId;
+                Program.TickRoom(gameRoom, 50);
+                gameRoom.Push(gameRoom.CreateItem);
+                gameRoom.Push(gameRoom.CreateObject);
+
 
                 foreach (Player player in _players.Values)
                 {
 
                     S_StartGame start = new S_StartGame();
 
+
                     player.Info.TeamId = player.Info.TeamId % 2;
                     player.Info.Player.Kill = 0;
                     player.Info.Player.Death = 0;
+
+                    //나중에 캐릭터 픽이 생기면 여기다가 뭘 픽했는지 담아서 보내주자.
+                    start.MapId = startPacket.MapId;
+
                     player.Session.Send(start);
-                    player.LobbyRoom = null;
+                   
                 }
 
+                ////여기까지 플레이어들 씬 전환.
+                ///
+            }
+        }
 
+        public void LoadingFinish(int playerId)
+        {
 
-                foreach (Player player in _players.Values)
-                {
-                    //EnterGame에서 플레이어 스폰 패킷을 뿌린다.
-                    gameRoom.Push(gameRoom.EnterGame, player);
-                    
-                }
+            GameRoom gameRoom = RoomManager.Instance.Find(GameRoomId);
+            foreach (Player player in _players.Values)
+            {
+                //EnterGame에서 플레이어 스폰 패킷을 뿌린다.
 
-                gameRoom.Push(gameRoom.SpawnItem);
-                gameRoom.Push(gameRoom.SpawnObject);
+                if (player.ObjectId != playerId)
+                    return;
 
-                //Lobby에서 전부 퇴장시킨다.
-                _players.Clear();
+                gameRoom.Push(gameRoom.EnterGame, player);
+                gameRoom.Push(gameRoom.SpawnItem, player);
+                gameRoom.Push(gameRoom.SpawnObject, player);
+                player.LobbyRoom = null;
 
             }
+
+            //이렇게 하면 플레이어가 로딩을 끝날 때마다 템이 생겨난다.
+            //이걸 어떻게 해결하지?
+            //1.맵에서 미리 아이템을 생성한다.
+            //2.플레이어 개인은 로딩이 끝나면 그런 맵의 정보를 받는다.
+
+            //gameRoom.Push(gameRoom.SpawnItem);
+            //gameRoom.Push(gameRoom.SpawnObject);
             
+
+            //Lobby에서 전부 퇴장시킨다.
+            _players.Clear();
         }
 
         public void LeaveGame(int playerId)

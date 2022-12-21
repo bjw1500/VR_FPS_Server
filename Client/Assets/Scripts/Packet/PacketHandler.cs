@@ -220,7 +220,7 @@ class PacketHandler
 
     public static void S_StartGameHandler(PacketSession session, IMessage packet)
     {
-        S_StartGame diePacket = packet as S_StartGame;
+        S_StartGame startPacket = packet as S_StartGame;
         ServerSession serverSession = session as ServerSession;
 
         GameObject go = GameObject.Find("LobbyUI");
@@ -233,7 +233,7 @@ class PacketHandler
         if (ui == null)
             return;
 
-        ui.LoadScene();
+        ui.LoadScene(startPacket.MapId);
         //Managers.Object.slotNumber = startGamePacket.Slot;
 
         Debug.Log("게임을 시작합니다!");

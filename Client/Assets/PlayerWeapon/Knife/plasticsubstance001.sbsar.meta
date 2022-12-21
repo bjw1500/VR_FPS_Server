@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b4b61e84a5f72c34c880a7bc613a2c25
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 9db9ae4b70157a841bd89ccb9b40efc5, type: 2}
+  _fileAsset: {instanceID: 0}
+  _assetPath: Assets/PlayerWeapon/Knife/plasticsubstance001.sbsar

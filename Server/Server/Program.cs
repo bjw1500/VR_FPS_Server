@@ -21,7 +21,7 @@ namespace Server
 		static Listener _listener = new Listener();
 		static List<System.Timers.Timer> _timers = new List<System.Timers.Timer>();
 
-		static void TickRoom(GameRoom room, int tick = 100)
+		static public void TickRoom(GameRoom room, int tick = 100)
         {
 			var timer = new System.Timers.Timer();
 			timer.Interval = tick;
@@ -40,8 +40,7 @@ namespace Server
 
 
 
-			GameRoom room = RoomManager.Instance.Add(2);
-			TickRoom(room, 50);
+
 
 			LobbyRoom waitRoom = RoomManager.Instance.WaitRoomAdd();
 		
@@ -52,7 +51,7 @@ namespace Server
 			//IPAddress ipAddr = IPAddress.Parse("121.168.117.240");
 
 			Console.WriteLine($"내부 Server Ip Address :{ipHost.AddressList[1]} : {ipHost.AddressList[0]} \n");
-			CheckIpAddress();
+			//CheckIpAddress();
 
 			IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 

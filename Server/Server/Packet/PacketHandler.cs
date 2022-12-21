@@ -170,6 +170,23 @@ class PacketHandler
 		room.StartGame(startPacket);
 	}
 
+	public static void C_MapLoadingFinishHandler(PacketSession session, IMessage packet)
+    {
+		C_MapLoadingFinish finishPacket = packet as C_MapLoadingFinish;
+		ClientSession clientSession = session as ClientSession;
+
+		Player player = clientSession.MyPlayer;
+		if (player == null)
+			return;
+
+		LobbyRoom room = player.LobbyRoom;
+		if (room == null)
+			return;
+
+		room.LoadingFinish(player.ObjectId);
+
+	}
+
 	public static void C_EnterLobbyOkHandler(PacketSession session, IMessage packet)
 	{
 		C_EnterLobbyOk startPacket = packet as C_EnterLobbyOk;

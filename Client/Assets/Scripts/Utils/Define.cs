@@ -21,6 +21,7 @@ public class Define
         Lobby,
         Game,
         SingleGame,
+        LoadingScene,
     }
 
     public enum Sound

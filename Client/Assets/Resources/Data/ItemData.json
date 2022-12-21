@@ -29,13 +29,26 @@
     {
       "id": "3",
       "name": "Sniper",
-      "imagePath": "Image/UI/WeaponWheel/MachineGun",
+      "imagePath": "Image/UI/WeaponWheel/Sniper",
       "prefabPath": "Weapon/Sniper",
       "weaponType": "Sniper",
       "damage": "25",
       "ammoBulletCount": "4",
       "ammoCount": "10",
       "fireRate": "0.3",
+      "reloadTime": 2.0,
+      "fireDeistance": 100
+    },
+    {
+      "id": "4",
+      "name": "Granade",
+      "imagePath": "Image/UI/WeaponWheel/Granade",
+      "prefabPath": "Weapon/Granade",
+      "weaponType": "Granade",
+      "damage": "100",
+      "ammoBulletCount": "0",
+      "ammoCount": "0",
+      "fireRate": "0",
       "reloadTime": 2.0,
       "fireDeistance": 100
     }

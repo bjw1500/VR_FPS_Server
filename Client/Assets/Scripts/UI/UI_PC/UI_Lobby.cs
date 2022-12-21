@@ -3,114 +3,161 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerSlot
-{
-    public int _slot;
-    public PlayerInfo _playerInfo;
 
-    //플레이어 입장.
-    //슬롯 변경
-    //만약 플레이어가 나가면, 슬롯 비우고 플레이어 위치 변경?
-}
+//플레이어 슬롯은 캐릭터 모델링과 플레이어 정보를 담는다.
+//Lobby는 그런 플레이어 슬롯을 관리한다.
+//플레이어가 입장할 떄마다 슬롯 리스트에 추가한다.
+//추가후에는 슬롯 설정을 해준다. 게임 캐릭터 생성 및 플레이어 정보
 
 public class UI_Lobby : UI_Base
 {
-    public int playerCount = 4;
-    public Dictionary<int, PlayerSlot> _players = new Dictionary<int, PlayerSlot>();
-    public PlayerSlot mySlot;
 
-    enum Texts
-    {
-        PlayerText1,
-        PlayerText2,
-        PlayerText3,
-        PlayerText4,
-    }
+    public int MapId { get; set; } = 0;
+
+    public Dictionary<int, UI_PlayerLobbySlot> _players = new Dictionary<int, UI_PlayerLobbySlot>();
+    public UI_PlayerLobbySlot mySlot;
+    public GridLayoutGroup lobbySlots;
+
+    //버튼
+    //텍스트 연결
+   
 
     enum Buttons
     {
-        GameStart
+        GameStart,
+        NextMapButton,
+        PreviousMapButton,
     }
 
-    List<Text> _player = new List<Text>();
-    Text _player1;
-    Text _player2;
-    Text _player3;
-    Text _player4;
+    enum Images
+    {
+        MapImage,
+    }
 
     Button _gameStart;
+    Button _nextMapButton;
+    Button _previousMapButton;
+
+    const int _mapCount = 2;
+    Image _mapImage;
+    public Sprite[] _imageSlot = new Sprite[_mapCount];
 
     public override void Init()
     {
-        Bind<Text>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
-
-        for (int i = 0; i < playerCount; i++)
-        {
-            _player.Add(Get<Text>(i));
-            _player[i].text = "NULL";
-        }
+        Bind<Image>(typeof(Images));
 
         _gameStart = Get<Button>((int)Buttons.GameStart);
+        _nextMapButton = Get<Button>((int)Buttons.NextMapButton);
+        _previousMapButton = Get<Button>((int)Buttons.PreviousMapButton);
+        _mapImage = Get<Image>((int)Images.MapImage);
 
         BindEvent(_gameStart.gameObject, GameStart, Define.UIEvent.Click);
+        BindEvent(_nextMapButton.gameObject, NextMap, Define.UIEvent.Click);
+        BindEvent(_previousMapButton.gameObject, PreviousMap, Define.UIEvent.Click);
+
+        GameObject go = transform.Find("Grid").gameObject;
+        lobbySlots = go.GetComponent<GridLayoutGroup>();
+        foreach (Transform child in lobbySlots.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+
+        _mapImage.sprite = _imageSlot[MapId];
     }
+
+
+    public void NextMap(PointerEventData eventData)
+    {
+
+        //누르면 다음 맵으로 이동. 
+        MapId++;
+        if(MapId > _mapCount - 1)
+        {
+            MapId = 0;
+        }
+        _mapImage.sprite = _imageSlot[MapId];
+
+
+        //맵 이름을 바꿔줘야 할까? 
+    }
+
+    public void PreviousMap(PointerEventData eventData)
+    {
+        MapId--;
+        if (MapId < 0)
+        {
+            MapId = _mapCount - 1;
+        }
+        _mapImage.sprite = _imageSlot[MapId];
+    }
+
+
 
     public void UpdateRoom(S_EnterWaitingRoom enterGamePacket)
     {
-        PlayerSlot newPlayer = new PlayerSlot();
-        newPlayer._playerInfo = enterGamePacket.Info.Player;
 
-        for (int i = 0; i < playerCount; i++)
-        {
-            //NULL이 아니면 이미 플레이어 슬롯이 존재한다는 소리니 스킵.
-            if (_player[i].text != "NULL")
-                continue;
-            else
-            {
-                //슬롯이 비어있다면 한칸씩 당겨준다.
-                newPlayer._slot = i;
-                _player[i].text = enterGamePacket.Info.Player.Name;
-                if (enterGamePacket.MyPlayer == true)
-                    mySlot = newPlayer;
-                break;
-            }
-        }
+        GameObject go = Managers.Resource.Instantiate("UI/PlayerLobbySlot", lobbySlots.transform);
+
+        UI_PlayerLobbySlot newPlayer = go.GetComponent<UI_PlayerLobbySlot>();
+        newPlayer._playerInfo = enterGamePacket.Info.Player;
+        newPlayer._slot = lobbySlots.transform.childCount;
+
+        //지금은 디폴트값을 플레이어로 하고 있지만,
+        //나중에는 플레이어가 직접 선택할 수 있도록 수정해주자.
+        newPlayer._player = Managers.Resource.Instantiate("Player/LobbyPlayer", go.transform);
+        if(enterGamePacket.MyPlayer == true)
+            mySlot = newPlayer;
+        newPlayer._player.transform.localScale *= 100;
+        //Rigidbody rb = newPlayer._player.GetComponent<Rigidbody>();
+        //rb.isKinematic = true;
+
+        newPlayer.Refresh();
+
+
         _players.Add(enterGamePacket.Info.ObjectId, newPlayer);
     }
 
     public void LeaveGame(S_LeaveWaitingRoom leaveGamePacket)
     {
-        _players.Remove(leaveGamePacket.Info.ObjectId);
 
-        //플레이어 이름 찾아서 제거하기?
-        for (int i = 0; i < playerCount; i++)
+        UI_PlayerLobbySlot leavePlayer = null;
+        if(_players.TryGetValue(leaveGamePacket.Info.ObjectId, out leavePlayer) == false)
         {
-            //순회하고, 이름 비교
-            if (_player[i].text == leaveGamePacket.Info.Player.Name)
-            {
-                //슬롯에 채워진 이름이 방을 나가는 플레이어의 이름과 같다면,
-                _player[i].text = "NULL";
-            }
+            Debug.Log("Lobby의 LeaveGame에 잘못된 ObjectId가 전달되었습니다.");
+            return;
         }
+
+        _players.Remove(leaveGamePacket.Info.ObjectId);
+        Managers.Resource.Destroy(leavePlayer.gameObject);
+
     }
 
     public void GameStart(PointerEventData eventData)
     {
-        // Managers.SceneManager.LoadScene(Define.Scene.Game);
-
         C_StartGame start = new C_StartGame();
-        start.Slot = mySlot._slot;
+
+        
+        //나중에 캐릭터 선택이 가능해질때를 위한 코드.
+        foreach(UI_PlayerLobbySlot player in _players.Values)
+        {
+            start.Players.Add(player._playerInfo);
+        }
+        //나중에는 로비창에서 MapId 직접 고르게 하자.
+        start.MapId = MapId;
         Managers.Network.Send(start);
-
-        //Start 패킷을 보낸다.
-        //슬롯값을 같이 딸려보낸다.
     }
 
-    public void LoadScene()
+    public void LoadScene(int mapId)
     {
-        Managers.Scene.LoadScene(Define.Scene.Game);
+        //Managers.Scene.LoadScene(Define.Scene.Game);
+        Managers.Scene.LoadMap(mapId);
+
     }
+
+
 }

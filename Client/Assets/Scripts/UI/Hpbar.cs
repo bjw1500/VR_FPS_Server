@@ -17,7 +17,7 @@ public class Hpbar : MonoBehaviour
         get { return currentHp; }
         set
         {
-            currentHp -= value;
+            currentHp = value;
             CalcBar();
         }
     }

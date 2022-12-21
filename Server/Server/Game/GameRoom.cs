@@ -29,7 +29,7 @@ namespace Server
         public void Init(int mapId)
         {
             Map = new Map();
-            Map.LoadMap(1);
+            Map.LoadMap(mapId);
         }
 
         public void Update()
@@ -190,11 +190,19 @@ namespace Server
 
         }
 
-        public void SpawnItem()
+        public void SpawnItem(Player player)
         {
-            //총기 아이디는 랜덤으로 부여.
-            //아이템도 Object로 관여해야 하나?
-            //그냥 새로 스폰 패킷을 파는게 낫지 않을까.
+            S_ItemSpawn itemSpawnPacket = new S_ItemSpawn();
+            foreach(Item item in _items.Values)
+            {
+                itemSpawnPacket.Infos.Add(item.Info);
+            }
+            player.Session.Send(itemSpawnPacket);
+
+        }
+
+        public void CreateItem()
+        {
 
 
             GameObject[] items = new GameObject[Map.ItemSpawnPointCount];
@@ -204,17 +212,17 @@ namespace Server
             //아이템 랜덤 생성은 어떻게 해줄까?
             //모든 데이터를 읽는다.
             List<ItemData> allData = new List<ItemData>();
-            foreach(ItemData itemdata in DataManager.ItemDict.Values)
+            foreach (ItemData itemdata in DataManager.ItemDict.Values)
             {
                 allData.Add(itemdata);
             }
             Random random = new Random();
 
-   
+
             //아이템 값을 랜덤으로 넣고, Map의 설정에 따라 위치값 부여.
             for (int i = 0; i < Map.ItemSpawnPointCount; i++)
             {
-             
+
 
                 Item spawnItem = ObjectManager.Instance.Add<Item>();
                 spawnItem.Info.Position = new PositionInfo()
@@ -230,15 +238,29 @@ namespace Server
                 spawnItem.Info.Name = data.name;
                 spawnItem.Info.TemplateId = data.id;
                 spawnItem.Info.ItemType = data.itemType;
-               
+
 
                 items[i] = spawnItem;
             }
 
-            EnterGame(items);
+            //생성된 아이템을 게임룸의 아이템 리스트에 넣기.
+            foreach( Item item in items )
+            {
+                _items.Add(item.ObjectId, item);
+            }
         }
 
-        public void SpawnObject()
+        public void SpawnObject(Player player)
+        {
+            S_ObjectSpawn objectSpawn = new S_ObjectSpawn();
+            foreach (Monster gameObject in _monsters.Values)
+            {
+                objectSpawn.Infos.Add(gameObject.Info);
+            }
+            player.Session.Send(objectSpawn);
+        }
+
+        public void CreateObject()
         {
 
             //스폰 패킷 보내고, 클라에서 패킷 핸들러 수정해주기
@@ -247,7 +269,7 @@ namespace Server
             GameObject[] objects = new GameObject[Map.ObjectSpawnPointCount];
 
             StatInfo data = null;
-            if(DataManager.StatDict.TryGetValue("HitBox", out data) == false)
+            if (DataManager.StatDict.TryGetValue("HitBox", out data) == false)
             {
                 Console.WriteLine("Data값이 없습니다.");
                 return;
@@ -271,11 +293,16 @@ namespace Server
 
                 };
                 spawnObject.Info.StatInfo = data;
-                spawnObject.Info.Name = data.Name +"_"+ i;
+                spawnObject.Info.Name = data.Name + "_" + i;
                 objects[i] = spawnObject;
             }
 
-            EnterGame(objects);
+            foreach(Monster monster in objects)
+            {
+                _monsters.Add(monster.ObjectId, monster);
+            }
+
+
         }
 
 

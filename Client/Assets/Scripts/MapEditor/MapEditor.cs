@@ -22,7 +22,7 @@ public class MapEditor
     private static void GenerateByPath(string pathPrefix)
     {
         //맵 폴더에 있는 프리팹을 읽는다.
-        GameObject[] gameObjects = Resources.LoadAll<GameObject>("Prefabs/Map");
+        GameObject[] gameObjects = Resources.LoadAll<GameObject>("Map/");
 
         foreach (GameObject go in gameObjects)
         {

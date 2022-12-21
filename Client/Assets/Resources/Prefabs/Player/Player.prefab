@@ -934,6 +934,7 @@ MonoBehaviour:
     CameraRig: {fileID: 0}
     LeftController: {fileID: 0}
     RightController: {fileID: 0}
+    hpbar: {fileID: 0}
   _state:
     isCurrentFp: 0
     isMoving: 0
@@ -970,7 +971,7 @@ MonoBehaviour:
   _moveOptions:
     speed: 3
     runningCoef: 1.5
-    jumpForce: 4.2
+    jumpForce: 5
     jumpCooldown: 0.6
     maxJumpCount: 1
     maxSlopeAngle: 50

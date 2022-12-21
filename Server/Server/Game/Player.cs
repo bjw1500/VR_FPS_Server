@@ -66,12 +66,12 @@ namespace Server
 
             if (State != PlayerState.Living)
                 return;
-            if (attacker == this && (attacker.Info.TeamId == Info.TeamId))
-            {
-                //자기 자신에 대한 공격은 무효화 해준다.
-                Console.WriteLine($"{attacker.Info.Name}가 자기 자신을 공격했습니다!");
-                return;
-            }
+            //if (attacker == this && (attacker.Info.TeamId == Info.TeamId))
+            //{
+            //    //자기 자신에 대한 공격은 무효화 해준다.
+            //    Console.WriteLine($"{attacker.Info.Name}가 자기 자신을 공격했습니다!");
+            //    return;
+            //}
 
 
             int totalDamage = damage + attacker.Info.StatInfo.Damage;
