@@ -27,7 +27,8 @@ public class ObjectManager
 
         if (myPlayer == true)
         {
-            GameObject go = Managers.Resource.Instantiate("Player/asdf/Player");
+            int SelectedCharacter = info.Player.ChracterId;
+            GameObject go = Managers.Resource.Instantiate($"Player/Player_{SelectedCharacter}");
 
             if (go == null)
                 Debug.Log("캐릭터가 존재하지 않습니다.");

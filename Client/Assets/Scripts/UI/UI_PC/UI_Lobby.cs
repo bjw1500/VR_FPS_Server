@@ -148,6 +148,7 @@ public class UI_Lobby : UI_Base
             return;
         }
         slot.transform.GetComponent<Image>().sprite = characterImg[packet.PlayerInfo.ChracterId];
+        slot._playerInfo.ChracterId = packet.PlayerInfo.ChracterId;
     }
 
     public void LeaveGame(S_LeaveWaitingRoom leaveGamePacket)

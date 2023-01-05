@@ -25,7 +25,7 @@ public class Vr_Input : ScriptableObject
     // public bool getStateFireTrigger { get { return interactWithUI.GetStateDown(right_hand); }}
     // public bool getStatePickUpTrigger { get { return interactWithUI.GetStateDown(left_hand); } }
     
-    public bool getStateFireTrigger { get { return interactWithUI.GetStateDown(left_hand); }}
+    public bool getStateFireTrigger { get { return interactWithUI.GetStateDown(right_hand); }}
 
     [Header("[ 스넵턴 조이스틱 ]")]
     public SteamVR_Action_Boolean snapLeftAction = SteamVR_Input.GetBooleanAction("SnapTurnLeft");

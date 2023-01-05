@@ -218,8 +218,6 @@ class PacketHandler
 		if (room == null)
 			return;
 
-		Console.WriteLine($"{player.Info.Name}이 선택한 캐릭터를 바꾸었습니다. 선택했습니다.");
-
 		//player.Info.Slot = startPacket.Slot;
 
 		room.SelectCharacter(selectInfo);
@@ -294,78 +292,102 @@ class PacketHandler
 
 		Console.WriteLine($"Login id{loginPacket.LoginId}");
 
-		//보안 체크를 만들어야 할까?
 
 
-		//아이디와 비밀번호를 확인하게한 이후,
 
-		//로비창으로 이동시킨다.
 
-		using(AppDbContext db = new AppDbContext())
-        {
-			AccountDb findAccount = db.Accounts.
-				Where(a => a.AccountName == loginPacket.LoginId).FirstOrDefault();
+		//로그인 성공 패킷
+		Console.WriteLine($"{loginPacket.LoginId}가 로그인했습니다.");
+		S_Login loginOk = new S_Login();
+		clientSession.Send(loginOk);
+
+		//성공했으니 로비로 입장시키자.
+		clientSession.MyPlayer = ObjectManager.Instance.Add<Player>();
+		{
+			clientSession.MyPlayer.Info.Player.Name = $"Player_{loginPacket.LoginId}";
+			clientSession.MyPlayer.Session = clientSession;
+
+		}
+
+		//로비에 넣는다.
+		LobbyRoom lobby = RoomManager.Instance.WaitRoomFind(1);
+		lobby.EnterLobbyScene(clientSession.MyPlayer);
+
+
+
+
+		////보안 체크를 만들어야 할까?
+
+
+		////아이디와 비밀번호를 확인하게한 이후,
+
+		////로비창으로 이동시킨다.
+
+		//using (AppDbContext db = new AppDbContext())
+  //      {
+		//	AccountDb findAccount = db.Accounts.
+		//		Where(a => a.AccountName == loginPacket.LoginId).FirstOrDefault();
 		
-			//아이디 맞을시 진입.
-			if(findAccount != null)
-            {
-				//비번이 틀리다면.
-				if (findAccount.AccountPassword != loginPacket.LoginPassword)
-				{
-					Console.WriteLine($"{loginPacket.LoginId}의 비번이 틀렸습니다.");
-					//TODO로그인 실패 패킷 만들기
+		//	//아이디 맞을시 진입.
+		//	if(findAccount != null)
+  //          {
+		//		//비번이 틀리다면.
+		//		if (findAccount.AccountPassword != loginPacket.LoginPassword)
+		//		{
+		//			Console.WriteLine($"{loginPacket.LoginId}의 비번이 틀렸습니다.");
+		//			//TODO로그인 실패 패킷 만들기
 
-					S_LoginFailed failed = new S_LoginFailed();
-					failed.Information = "비번이 틀립니다.";
-					clientSession.Send(failed);
+		//			S_LoginFailed failed = new S_LoginFailed();
+		//			failed.Information = "비번이 틀립니다.";
+		//			clientSession.Send(failed);
 
-					return;
-				}
-				//로그인 성공 패킷
-				Console.WriteLine($"{loginPacket.LoginId}가 로그인했습니다.");
-				S_Login loginOk = new S_Login();
-				clientSession.Send(loginOk);
+		//			return;
+		//		}
+		//		//로그인 성공 패킷
+		//		Console.WriteLine($"{loginPacket.LoginId}가 로그인했습니다.");
+		//		S_Login loginOk = new S_Login();
+		//		clientSession.Send(loginOk);
 
-				//성공했으니 로비로 입장시키자.
-				clientSession.MyPlayer = ObjectManager.Instance.Add<Player>();
-                {
-					clientSession.MyPlayer.Info.Player.Name = $"Player_{loginPacket.LoginId}";
-					clientSession.MyPlayer.Session = clientSession;
+		//		//성공했으니 로비로 입장시키자.
+		//		clientSession.MyPlayer = ObjectManager.Instance.Add<Player>();
+  //              {
+		//			clientSession.MyPlayer.Info.Player.Name = $"Player_{loginPacket.LoginId}";
+		//			clientSession.MyPlayer.Session = clientSession;
 					
-				}
+		//		}
 
-                //로비에 넣는다.
-                LobbyRoom lobby = RoomManager.Instance.WaitRoomFind(1);
-                lobby.EnterLobbyScene(clientSession.MyPlayer);
-
-
-
-
-            }
-			else
-            {
-				//입력된 아이디가 DB에 없는 상황.
-				//로그인 실패 패킷 보내기.
-				S_LoginFailed failed = new S_LoginFailed();
-				failed.Information = "아이디가 틀립니다.";
-				clientSession.Send(failed);
-
-				//AccountDb newAccount = new AccountDb()
-				//{
-				//	AccountName = loginPacket.LoginId,
-				//};
-				//db.Accounts.Add(newAccount);
-				//db.SaveChanges();
-
-				//S_Login loginOk = new S_Login() { LoginOk = 1};
-				//clientSession.Send(loginOk);
+  //              //로비에 넣는다.
+  //              LobbyRoom lobby = RoomManager.Instance.WaitRoomFind(1);
+  //              lobby.EnterLobbyScene(clientSession.MyPlayer);
 
 
 
-			}
+
+  //          }
+		//	else
+  //          {
+		//		//입력된 아이디가 DB에 없는 상황.
+		//		//로그인 실패 패킷 보내기.
+		//		S_LoginFailed failed = new S_LoginFailed();
+		//		failed.Information = "아이디가 틀립니다.";
+		//		clientSession.Send(failed);
+
+		//		//AccountDb newAccount = new AccountDb()
+		//		//{
+		//		//	AccountName = loginPacket.LoginId,
+		//		//};
+		//		//db.Accounts.Add(newAccount);
+		//		//db.SaveChanges();
+
+		//		//S_Login loginOk = new S_Login() { LoginOk = 1};
+		//		//clientSession.Send(loginOk);
 
 
-        }
+
+		//	}
+
+
+  //      }
 
 	}
 

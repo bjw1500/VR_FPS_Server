@@ -71,6 +71,8 @@ namespace Server
 
                 newPlayer.State = PlayerState.Living;
 
+                //선택된 캐릭터은 Client 구역에서 PlayerInfo의 Character 값을 보고 판단.
+
                 //게임룸 안의 플레이어 목록에 추가.
                 _players.Add(newPlayer.Info.ObjectId, newPlayer);
                 newPlayer.Room = this;

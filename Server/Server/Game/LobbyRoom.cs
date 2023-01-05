@@ -81,7 +81,7 @@ namespace Server
 
             }
 
-            Console.WriteLine($"{player.Info.Name}이 {packet.CharacterNumber} 선택했습니다.");
+            Console.WriteLine($"{player.Info.Player.Name}이 {packet.CharacterNumber} 선택했습니다.");
 
             player.Info.Player.ChracterId = packet.CharacterNumber;
 
@@ -105,6 +105,9 @@ namespace Server
                 //TODO
                 //나중에 플레이어들이 로비창에서 캐릭터 선택할 수 있도록 해주기.
 
+                //TODO
+                //Client에서 플레이어 캐릭터 생성할 프리팹 번호로 나누어주기.
+
 
                 //플레이어들이 고른 맵을 생성한 후, 입장시킨다.
                 GameRoom gameRoom = RoomManager.Instance.Add(startPacket.MapId);
@@ -113,26 +116,27 @@ namespace Server
                 gameRoom.Push(gameRoom.CreateItem);
                 gameRoom.Push(gameRoom.CreateObject);
 
-
-                foreach (Player player in _players.Values)
+                foreach(PlayerInfo info in startPacket.Players)
                 {
 
-                    S_StartGame start = new S_StartGame();
-
-
+                    Player player = null;
+                    _players.TryGetValue(info.ObjectId, out player);
+                    if(player == null)
+                    {
+                        Console.WriteLine("Error StartGame - player null");
+                        break;
+                    }
                     player.Info.TeamId = player.Info.TeamId % 2;
                     player.Info.Player.Kill = 0;
                     player.Info.Player.Death = 0;
+                    player.Info.Player.ChracterId = info.ChracterId;
 
-                    //나중에 캐릭터 픽이 생기면 여기다가 뭘 픽했는지 담아서 보내주자.
-                    start.MapId = startPacket.MapId;
 
-                    player.Session.Send(start);
-                   
                 }
 
-                ////여기까지 플레이어들 씬 전환.
-                ///
+                S_StartGame start = new S_StartGame();
+                start.MapId = startPacket.MapId;
+                BroadCast(start);
             }
         }
 
