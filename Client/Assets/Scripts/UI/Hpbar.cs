@@ -6,11 +6,9 @@ public class Hpbar : MonoBehaviour
 {
     const float maxHp = 100;
     const float maxAmount = 0.4f;
-
+    
     private float currentHp;
     [SerializeField] float amountResult;
-
-    
 
     public float changeHp
     {

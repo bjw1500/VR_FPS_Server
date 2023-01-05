@@ -45,6 +45,7 @@ namespace Server
             Info.Player = new PlayerInfo();
             Info.Player.Death = 0;
             Info.Player.Kill = 0;
+            Info.Player.ChracterId = 0;
             Info.MovementInfo = new MovementInfo();
 
 

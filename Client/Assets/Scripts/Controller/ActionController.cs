@@ -53,7 +53,9 @@ public class ActionController : MonoBehaviour
 
     private void InputController()
     {
-        if (GameMng.I.input.getStatePickUpTrigger)        // 총 줍기
+        // if (GameMng.I.input.getStatePickUpTrigger)        // 총 줍기
+        // master
+        if (GameMng.I.input.getStateFireTrigger)        // 총 줍기
         {
             CheckItem();
             CanPickUp();

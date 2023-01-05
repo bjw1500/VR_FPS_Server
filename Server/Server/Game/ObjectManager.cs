@@ -29,6 +29,7 @@ namespace Server
                     player.ObjectId = GenerateId(gameObject.ObjectType);
                     player.Info.ObjectType = GameObjectType.Player;
                     player.Info.ObjectId = player.ObjectId;
+                    player.Info.Player.ObjectId = player.ObjectId;
                     
                     _players.Add(_counter, gameObject as Player);
                 }

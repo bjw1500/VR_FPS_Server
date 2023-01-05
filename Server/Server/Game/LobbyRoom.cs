@@ -62,7 +62,7 @@ namespace Server
 
         }
 
-        internal void EnterLoobyScene(Player player)
+        public void EnterLobbyScene(Player player)
         {
             //OK 패킷을 보내자..
             player.LobbyRoom = this;
@@ -71,6 +71,25 @@ namespace Server
             player.Session.Send(okPacket);
         }
 
+        public void SelectCharacter(C_SelectCharacter packet)
+        {
+            Player player = null;
+            _players.TryGetValue(packet.PlayerId, out player);
+            if (player == null)
+            {
+                Console.WriteLine("Error SelecterCharacter. Player Try Get Value.");
+
+            }
+
+            Console.WriteLine($"{player.Info.Name}이 {packet.CharacterNumber} 선택했습니다.");
+
+            player.Info.Player.ChracterId = packet.CharacterNumber;
+
+            S_SelectCharacter select = new S_SelectCharacter();
+            select.PlayerId = player.ObjectId;
+            select.PlayerInfo = player.Info.Player;
+            BroadCast(select);
+        }
 
 
 

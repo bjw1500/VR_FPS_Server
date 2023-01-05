@@ -259,6 +259,24 @@ class PacketHandler
         //로비에 입장했다면?
     }
 
+    public static void S_SelectCharacterHandler(PacketSession session, IMessage packet)
+    {
+        S_SelectCharacter SelectPacket = packet as S_SelectCharacter;
+        ServerSession serverSession = session as ServerSession;
+
+        GameObject go = GameObject.Find("LobbyUI");
+
+        if (go == null)
+            return;
+
+        UI_Lobby ui = go.GetComponent<UI_Lobby>();
+
+        if (ui == null)
+            return;
+
+        ui.UpdateSlot(SelectPacket);
+    }
+
     public static void S_ConnectedHandler(PacketSession session, IMessage packet)
     {
         S_Connected connectedPacket = packet as S_Connected;

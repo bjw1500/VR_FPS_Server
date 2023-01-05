@@ -81,9 +81,6 @@ public class CharacterMainControllerVR : BaseController
 
     }
 
-
-
-
     //무기 관련 필드
     public int _weaponSlotSize = 4;
     [SerializeField]

@@ -8,8 +8,13 @@ public class UI_PlayerLobbySlot : UI_Base
 {
 
     public int _slot;
+
+    //플레이어 정보
     public PlayerInfo _playerInfo;
-    public GameObject _player;
+    //플레이어가 픽한 캐릭터 번호
+    public int _characterSelectNumber;
+
+    //플레이어의 이름.
     public TextMeshProUGUI _playerNameText;
 
 
@@ -23,6 +28,7 @@ public class UI_PlayerLobbySlot : UI_Base
     public void Refresh()
     {
         _playerNameText.text = _playerInfo.Name;
+        
     }
 
 

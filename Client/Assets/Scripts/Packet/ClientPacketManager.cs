@@ -66,7 +66,9 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.SObjectSpawn, MakePacket<S_ObjectSpawn>);
 		_handler.Add((ushort)MsgId.SObjectSpawn, PacketHandler.S_ObjectSpawnHandler);		
 		_onRecv.Add((ushort)MsgId.SUpdatePlayerInfo, MakePacket<S_UpdatePlayerInfo>);
-		_handler.Add((ushort)MsgId.SUpdatePlayerInfo, PacketHandler.S_UpdatePlayerInfoHandler);
+		_handler.Add((ushort)MsgId.SUpdatePlayerInfo, PacketHandler.S_UpdatePlayerInfoHandler);		
+		_onRecv.Add((ushort)MsgId.SSelectCharacter, MakePacket<S_SelectCharacter>);
+		_handler.Add((ushort)MsgId.SSelectCharacter, PacketHandler.S_SelectCharacterHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

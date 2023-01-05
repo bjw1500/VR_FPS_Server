@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadingSceneController : MonoBehaviour {
-
+public class LoadingSceneController : MonoBehaviour
+{
     public static string nextScene;
     [SerializeField] GameObject loadingBar;
 
@@ -13,22 +13,19 @@ public class LoadingSceneController : MonoBehaviour {
 
     private void Start()
     {
-        if(flag == false)
+        if (flag == false)
             StartCoroutine(LoadingScene());
         else
         {
             StartCoroutine(MapLoading());
             flag = false;
         }
-
     }
 
     public static void LoadScene(string sceneName)
     {
-
         nextScene = sceneName;
         SceneManager.LoadScene("LoadingScene");
-
     }
 
     public static void LoadMap(int mapId)
@@ -39,7 +36,6 @@ public class LoadingSceneController : MonoBehaviour {
         SceneManager.LoadScene("LoadingScene");
     }
 
-  
     IEnumerator LoadingScene()
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
@@ -64,7 +60,6 @@ public class LoadingSceneController : MonoBehaviour {
 
     IEnumerator MapLoading()
     {
-
         AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
         async.allowSceneActivation = false;
 
@@ -78,6 +73,7 @@ public class LoadingSceneController : MonoBehaviour {
             }
             else
             {
+                yield return new WaitForSeconds(2.0f);
                 async.allowSceneActivation = true;
                 Debug.Log($"{nextScene}이 생성되었습니다.");
                 //맵 로딩이 끝났다는 패킷 보내기

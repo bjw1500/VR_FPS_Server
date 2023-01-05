@@ -53,6 +53,7 @@ public class UI_PlayerList : UI_Base
                 GameObject go = Managers.Resource.Instantiate("UI/PlayerList/PlayerSlot", redTeam.transform);
                 slot = go.GetComponent<UI_PlayerSlot>();
                 slot.OjbectId = player.ObjectId;
+
             }
             else
             {

@@ -199,12 +199,30 @@ class PacketHandler
 		LobbyRoom room = player.LobbyRoom;
 		if (room == null)
 			return;
-
-		Console.WriteLine($"{player.Info.Name}이 Lobby에 입장했습니다.");
-
 		//player.Info.Slot = startPacket.Slot;
 
 		room.EnterLobbyRoom(player);
+
+	}
+
+	public static void C_SelectCharacterHandler(PacketSession session, IMessage packet)
+	{
+		C_SelectCharacter selectInfo = packet as C_SelectCharacter;
+		ClientSession clientSession = session as ClientSession;
+
+		Player player = clientSession.MyPlayer;
+		if (player == null)
+			return;
+
+		LobbyRoom room = player.LobbyRoom;
+		if (room == null)
+			return;
+
+		Console.WriteLine($"{player.Info.Name}이 선택한 캐릭터를 바꾸었습니다. 선택했습니다.");
+
+		//player.Info.Slot = startPacket.Slot;
+
+		room.SelectCharacter(selectInfo);
 
 	}
 
@@ -318,7 +336,7 @@ class PacketHandler
 
                 //로비에 넣는다.
                 LobbyRoom lobby = RoomManager.Instance.WaitRoomFind(1);
-                lobby.EnterLoobyScene(clientSession.MyPlayer);
+                lobby.EnterLobbyScene(clientSession.MyPlayer);
 
 
 
