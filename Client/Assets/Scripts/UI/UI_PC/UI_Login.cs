@@ -117,7 +117,7 @@ public class UI_Login : UI_Base
     {
         Debug.Log("싱글게임 시작");
         GameMng.I.SingleGame = true;
-        Managers.Scene.LoadScene(Define.Scene.SingleGame);
+        Managers.Scene.LoadScene(Define.Scene.SingleLobby);
         //GameScene gs = Managers.Scene.CurrentScene as GameScene;
         //gs.Play();
     }
@@ -196,7 +196,7 @@ public class UI_Login : UI_Base
     {
         Debug.Log("싱글게임 시작");
         GameMng.I.SingleGame = true;
-        Managers.Scene.LoadScene(Define.Scene.SingleGame);
+        Managers.Scene.LoadScene(Define.Scene.SingleLobby);
         //GameScene gs = Managers.Scene.CurrentScene as GameScene;
         //gs.Play();
     }

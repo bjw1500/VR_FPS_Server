@@ -76,6 +76,13 @@ public class LoadingSceneController : MonoBehaviour
                 yield return new WaitForSeconds(2.0f);
                 async.allowSceneActivation = true;
                 Debug.Log($"{nextScene}이 생성되었습니다.");
+
+                //싱글 게임이라면 패킷 보내지 않고 스킵.
+                if(GameMng.I.SingleGame == true)
+                {
+                    yield break;
+                }
+
                 //맵 로딩이 끝났다는 패킷 보내기
                 C_MapLoadingFinish finish = new C_MapLoadingFinish();
                 Managers.Network.Send(finish);

@@ -21,6 +21,7 @@ public class Define
         Lobby,
         Game,
         SingleGame,
+        SingleLobby,
         LoadingScene,
         Map000,
         Map001,

@@ -20,6 +20,9 @@ public class ObjectManager
     //나중에 시작옵션에서 타입 바꿀 수 있도록 수정하기.
     public VRType VR_Type = VRType.Vive;
 
+    public int _mapId = 0;
+    public PlayerInfo _singlePlayer;
+
     public void Add(ObjectInfo info, bool myPlayer = false)
     {
         if (info == null)
@@ -43,7 +46,8 @@ public class ObjectManager
         }
         else
         {
-            GameObject go = Managers.Resource.Instantiate("Player/RemotePlayer");
+            int SelectedCharacter = info.Player.ChracterId;
+            GameObject go = Managers.Resource.Instantiate($"Player/RemotePlayer_{SelectedCharacter}");
             go.name = info.Player.Name;
             _objects.Add(info.ObjectId, go);
             CharacterRemoteControllerVR controller = go.GetOrAddComponent<CharacterRemoteControllerVR>();
@@ -121,7 +125,7 @@ public class ObjectManager
 
     public void AddSingleGame(ObjectInfo info, bool isVR = false)
     {
-        GameObject go = Managers.Resource.Instantiate("Player/Player");
+        GameObject go = Managers.Resource.Instantiate($"Player/Player_{_singlePlayer.ChracterId}");
         go.name = info.Name;
         _objects.Add(info.ObjectId, go);
         MyPlayer = go.GetComponent<CharacterMainControllerVR>();

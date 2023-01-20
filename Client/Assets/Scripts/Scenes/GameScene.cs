@@ -31,6 +31,9 @@ public class GameScene : BaseScene
             Info.MovementInfo.PlayerPosInfo.PosZ = 0;
             Info.MovementInfo.Ground = true;
             Info.MovementInfo.Running = false;
+            Info.Player = Managers.Object._singlePlayer;
+
+
 
             Managers.Object.AddSingleGame(Info, GameMng.I._isVR);
 

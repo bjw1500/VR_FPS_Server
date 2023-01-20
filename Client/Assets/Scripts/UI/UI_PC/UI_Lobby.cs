@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 public class UI_Lobby : UI_Base
 {
-    public int MapId { get; set; } = 0;
+    public int MapId { get; set; } = 1;
 
     public Dictionary<int, UI_PlayerLobbySlot> _players = new Dictionary<int, UI_PlayerLobbySlot>();
     public UI_PlayerLobbySlot mySlot;
@@ -42,7 +42,7 @@ public class UI_Lobby : UI_Base
     Button _previousMapButton;
     [SerializeField] List<Button> _characterIcon;
 
-    const int _mapCount = 2;
+    [SerializeField] public const int _mapCount = 4;
     Image _mapImage;
     [Header("맵")]
     public Sprite[] _imageSlot = new Sprite[_mapCount];
@@ -86,7 +86,7 @@ public class UI_Lobby : UI_Base
         MapId++;
         if (MapId > _mapCount - 1)
         {
-            MapId = 0;
+            MapId = 1;
         }
         _mapImage.sprite = _imageSlot[MapId];
 
@@ -96,9 +96,9 @@ public class UI_Lobby : UI_Base
     public void PreviousMap(PointerEventData eventData)
     {
         MapId--;
-        if (MapId < 0)
+        if (MapId < 1)
         {
-            MapId = _mapCount - 1;
+            MapId = _mapCount;
         }
         _mapImage.sprite = _imageSlot[MapId];
     }
