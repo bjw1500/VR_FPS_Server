@@ -149,6 +149,15 @@ public class CharacterMainControllerVR : BaseController
             Com.myGun.Fire();
         }
 
+        if(GameMng.I.input.getStategrabGrip && Com.myGun._weaponData.IsThrowable == true)
+        {
+            Debug.Log("투척무기를 던집니다.");
+            C_Skill c_Skill = new C_Skill();
+            c_Skill.Info = Info;
+            c_Skill.Skillid = 3;
+            Managers.Network.Send(c_Skill);
+        }
+
         // Jump
         if (GameMng.I.input.getStateJumpBtn)
         {

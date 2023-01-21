@@ -153,6 +153,10 @@ public class CharacterRemoteControllerVR : BaseController
                 Jump();
                 break;
 
+            case 3:
+                Com.RightController.GetComponent<PickUp>().Drop();
+                break;
+
             default:
                 break;
         }

@@ -38,9 +38,13 @@ public class Vr_Input : ScriptableObject
     [SerializeField] SteamVR_Action_Boolean wheelTouch = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("WheelTouch");
     public bool getStateWheelTouch { get { return wheelTouch.GetLastState(right_hand); } }
 
+    //움직이는 기능이 왼쪽 컨트롤러에 있어서 점프버튼을 Righthand -> LeftHand로 바꿈. 
     [Header("[ 버튼 ]")]
     [SerializeField] SteamVR_Action_Boolean jumpBtn = SteamVR_Input.GetBooleanAction("Jump"); 
-    public bool getStateJumpBtn { get { return jumpBtn.GetStateDown(right_hand); }}
+    public bool getStateJumpBtn { get { return jumpBtn.GetStateDown(left_hand); }}
+
+    public SteamVR_Action_Boolean grabGripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
+    public bool getStategrabGrip { get { return grabGripAction.GetStateUp(right_hand); } }
 
     [SerializeField] SteamVR_Action_Boolean menuBtn = SteamVR_Input.GetBooleanAction("Menu");
     public bool getMenuBinding { get { return menuBtn.activeBinding; }}

@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 public class PickUp : MonoBehaviour
 {
     public SteamVR_Behaviour_Pose pose = null;
-    public SteamVR_Action_Boolean grabGripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
+    //public SteamVR_Action_Boolean grabGripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
 
     [SerializeField] FixedJoint joint = null;
     [SerializeField] public Custom_Interactable currectInteractable;
@@ -27,7 +27,12 @@ public class PickUp : MonoBehaviour
         //    Pickup();
         //}
 
-        if (grabGripAction.GetStateUp(pose.inputSource))
+        //if (grabGripAction.GetStateUp(pose.inputSource))
+        //{
+        //    Drop();
+        //}
+
+        if (GameMng.I.input.getStategrabGrip)
         {
             Drop();
         }
