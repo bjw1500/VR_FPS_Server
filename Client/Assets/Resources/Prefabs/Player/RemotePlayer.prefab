@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &382505274134063856
 Transform:
   m_ObjectHideFlags: 0
@@ -1154,4 +1154,10 @@ MonoBehaviour:
     m_Bits: 64
   _HUD: {fileID: 0}
   _actionText: {fileID: 7298582250027824623}
+  rightLaserPointer: {fileID: 0}
+  leftLaserPointer: {fileID: 0}
+  rightPose: {fileID: 0}
+  leftPose: {fileID: 0}
+  _menu: {fileID: 0}
   _weaponWheel: {fileID: 0}
+  activeUI: 0

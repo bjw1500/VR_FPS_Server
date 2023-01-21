@@ -50,7 +50,8 @@
       "ammoCount": "0",
       "fireRate": "0",
       "reloadTime": 2.0,
-      "fireDeistance": 100
+      "fireDeistance": 100,
+      "IsThrowable": "True"
     }
   ]
 } 

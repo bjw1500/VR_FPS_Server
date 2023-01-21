@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 170803431}
   - component: {fileID: 170803433}
   - component: {fileID: 170803432}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4868,7 +4868,7 @@ GameObject:
   - component: {fileID: 1956254823}
   - component: {fileID: 1956254825}
   - component: {fileID: 1956254824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LugCrash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9680,7 +9680,7 @@ GameObject:
   - component: {fileID: 1684558002003270006}
   - component: {fileID: 9086685013794605977}
   - component: {fileID: 7814626326900864194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SafetyPin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9761,7 +9761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3606074638647576977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9796,7 +9796,7 @@ GameObject:
   - component: {fileID: 5692576859425271433}
   - component: {fileID: 3760002095611801438}
   - component: {fileID: 9156375110724198644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SafetyHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9879,7 +9879,7 @@ GameObject:
   - component: {fileID: 5080463618646328141}
   - component: {fileID: 7913811860920316376}
   - component: {fileID: 5344676696849083764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9966,9 +9966,9 @@ GameObject:
   - component: {fileID: -8906831194806901240}
   - component: {fileID: -7673107935209686697}
   - component: {fileID: 2515540678243415250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: granade
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9981,7 +9981,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3697450473329196801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.651, z: 0.82}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10023,8 +10023,8 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: b78890cf708558847986747d15808a9d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 14
-  m_Height: 50
+  m_Radius: 20
+  m_Height: 70
   m_Direction: 1
   m_Center: {x: 3, y: 4, z: 0}
 --- !u!114 &393807444
@@ -10053,7 +10053,7 @@ MonoBehaviour:
     reloadTime: 2
     fireDistance: 100
     weaponType: 0
-  damage: 100
+    IsThrowable: 0
 --- !u!54 &-8906831194806901240
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10107,7 +10107,7 @@ GameObject:
   - component: {fileID: 2235260636100352177}
   - component: {fileID: 7449235268195225305}
   - component: {fileID: 7265359576346659342}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SafetyClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10190,7 +10190,7 @@ GameObject:
   - component: {fileID: 1403724303881835354}
   - component: {fileID: 2823889833493717126}
   - component: {fileID: 3357857436309958560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10270,20 +10270,52 @@ PrefabInstance:
     m_TransformParent: {fileID: 1658140587}
     m_Modifications:
     - target: {fileID: 1000010336741610, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010336741610, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011298463270, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1000011298463270, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011796581256, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
       propertyPath: m_Name
       value: BigExplosionEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012348499044, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013371323466, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1000013371323466, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014207458990, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1108256732129644, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1108256732129644, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
       propertyPath: m_IsActive
@@ -10423,9 +10455,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1658140587}
     m_Modifications:
+    - target: {fileID: 1000010972190198, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011277865272, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011445404004, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
       propertyPath: m_Name
       value: SmallExplosionEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000011428506136, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
       propertyPath: m_RootOrder

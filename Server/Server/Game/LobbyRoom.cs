@@ -149,7 +149,7 @@ namespace Server
                 //EnterGame에서 플레이어 스폰 패킷을 뿌린다.
 
                 if (player.ObjectId != playerId)
-                    return;
+                    continue;
 
                 gameRoom.Push(gameRoom.EnterGame, player);
                 gameRoom.Push(gameRoom.SpawnItem, player);

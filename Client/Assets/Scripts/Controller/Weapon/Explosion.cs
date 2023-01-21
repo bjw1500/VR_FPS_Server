@@ -8,7 +8,7 @@ public class Explosion : MonoBehaviour
 
     private void OnEnable()
     {
-        Destroy(superGranage, 2.1f);
+        Destroy(superGranage, 0.1f);
     }
     private void OnTriggerEnter(Collider other)
     {

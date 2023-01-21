@@ -38,7 +38,20 @@ public class BaseController : MonoBehaviour
         set { _info.StatInfo = value; }
     }
 
-
+    public class Components
+    {
+        public Camera cam;
+        public GameObject[] weaponSlot;
+        public WeaponController myGun;
+        public Animator anim;
+        public GameObject CameraRig;
+        public GameObject LeftController;
+        public GameObject RightController;
+        public IMovement3D movement3D;
+        public Hpbar hpbar;
+    }
+    public Components Com => _components;
+    [Space, SerializeField] private Components _components = new Components();
     void Start()
     {
         Init();

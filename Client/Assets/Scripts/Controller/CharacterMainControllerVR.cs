@@ -9,20 +9,6 @@ using static Define;
 public class CharacterMainControllerVR : BaseController
 {
     [Serializable]
-    public class Components
-    {
-        public Camera cam;
-        public GameObject[] weaponSlot;
-        public WeaponController myGun;
-        public Animator anim;
-        public GameObject CameraRig;
-        public GameObject LeftController;
-        public GameObject RightController;
-        public IMovement3D movement3D;
-        public Hpbar hpbar;
-    }
-
-    [Serializable]
     public class CharacterState
     {
         public bool isCurrentFp;
@@ -32,13 +18,13 @@ public class CharacterMainControllerVR : BaseController
         public bool isCursorActive;
     }
 
-    public Components Com => _components;
+
     public CharacterState State => _state;
 
     [SerializeField]
     VRType Type = VRType.Vive;
 
-    [Space, SerializeField] private Components _components = new Components();
+
     [Space, SerializeField] private CharacterState _state = new CharacterState();
 
     private float _deltaTime;
@@ -260,13 +246,21 @@ public class CharacterMainControllerVR : BaseController
     public void GetWeapon(Item item)
     {
 
+        Weapon weapon = item as Weapon;
         Debug.Log($"{Info.Name}이 {item.Name}를 획득 했습니다.");
 
 
         Rigidbody body = item.transform.gameObject.GetComponent<Rigidbody>();
-        BoxCollider col = item.transform.GetComponent<BoxCollider>();
-        Destroy(col);
-        Destroy(body);
+        Collider col = item.transform.GetComponent<Collider>();
+
+        //수류탄을 던지기 위해서는 RigidBody가 활성화 되어 있어야 한다.
+
+        body.useGravity = false;
+        col.enabled = false;
+ 
+
+        //Destroy(col);
+        //Destroy(body);
 
         //슬롯을 채워주는 동시에 현재 플레이어의 무기를 바꿔준다.
         for (int i = 0; i < _weaponSlotSize; i++)

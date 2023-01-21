@@ -10,7 +10,7 @@ public class PickUp : MonoBehaviour
     public SteamVR_Action_Boolean grabGripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
 
     [SerializeField] FixedJoint joint = null;
-    [SerializeField] Custom_Interactable currectInteractable;
+    [SerializeField] public Custom_Interactable currectInteractable;
     [SerializeField] List<Custom_Interactable> currectInteractables = new List<Custom_Interactable>();
 
     private void Awake()
@@ -21,11 +21,11 @@ public class PickUp : MonoBehaviour
 
     private void Update()
     {
-        if (grabGripAction.GetStateDown(pose.inputSource))
-        {
-            Debug.Log(pose.inputSource + " down");
-            Pickup();
-        }
+        //if (grabGripAction.GetStateDown(pose.inputSource))
+        //{
+        //    Debug.Log(pose.inputSource + " down");
+        //    Pickup();
+        //}
 
         if (grabGripAction.GetStateUp(pose.inputSource))
         {
@@ -35,7 +35,7 @@ public class PickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Ganade"))
+        if (!other.CompareTag("Item"))
             return;
 
         currectInteractables.Add(other.gameObject.GetComponent<Custom_Interactable>());
@@ -64,12 +64,36 @@ public class PickUp : MonoBehaviour
             currectInteractable.activeHand = this;
     }
 
+    public void Pickup(Custom_Interactable target)
+    {
+        currectInteractable = target;
+
+        if (!currectInteractable)
+            return;
+
+        if (currectInteractable.activeHand)
+            currectInteractable.activeHand.Drop();
+
+        currectInteractable.transform.position = transform.position;
+
+        Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
+        joint.connectedBody = targetBody;
+
+        currectInteractable.activeHand = this;
+    }
+
     public void Drop()
     {
         if(!currectInteractable)
             return;
 
+        Debug.Log("수류탄을 던집니다.");
+
+
+        Collider col = currectInteractable.GetComponent<Collider>();
+        col.enabled = true;
         Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
+        targetBody.useGravity = true;
         targetBody.velocity = pose.GetVelocity();
         targetBody.angularVelocity = pose.GetAngularVelocity();
 

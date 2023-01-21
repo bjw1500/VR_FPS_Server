@@ -10,7 +10,7 @@ using UnityEngine;
 public class Weapon : Item
 {
 	//아이템 스탯
-	WeaponData WeaponData { get; set; }
+	public WeaponData WeaponData { get; set; }
 
 	public override void Init()
 	{

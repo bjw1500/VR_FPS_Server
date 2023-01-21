@@ -70,6 +70,7 @@ public class WeaponData : ItemData
     public float fireDistance = 100f;
 
     public WeaponType weaponType;   //TODO 권총. 기관총. 저격총 분류하기.
+    public bool IsThrowable;
 }
 
 [Serializable]
