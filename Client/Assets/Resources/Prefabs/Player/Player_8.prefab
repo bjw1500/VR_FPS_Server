@@ -785,6 +785,7 @@ GameObject:
   - component: {fileID: 3869747361600075393}
   - component: {fileID: 3490405464326346992}
   - component: {fileID: 9194294414989541397}
+  - component: {fileID: 8887142912840822881}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -872,6 +873,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &8887142912840822881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107965168962589034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bf094476f2ac74d9d97f59a5009860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  weaponController: {fileID: 0}
+  countText: {fileID: 5290479293766670838}
 --- !u!1 &8846128889307859729
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,18 +1001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  _components:
-    cam: {fileID: 0}
-    weaponSlot:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    myGun: {fileID: 0}
-    anim: {fileID: 0}
-    CameraRig: {fileID: 0}
-    LeftController: {fileID: 0}
-    RightController: {fileID: 0}
-    hpbar: {fileID: 0}
   _state:
     isCurrentFp: 0
     isMoving: 0
@@ -1967,12 +1971,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pose: {fileID: 0}
-  grabGripAction:
-    actionPath: /actions/default/in/GrabGrip
-    needsReinit: 0
   joint: {fileID: 0}
   currectInteractable: {fileID: 0}
   currectInteractables: []
+  power: 3
 --- !u!1 &5983146461031553596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 124034, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
@@ -2035,12 +2037,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pose: {fileID: 0}
-  grabGripAction:
-    actionPath: /actions/default/in/GrabGrip
-    needsReinit: 0
   joint: {fileID: 0}
   currectInteractable: {fileID: 0}
   currectInteractables: []
+  power: 3
 --- !u!4 &5983146461031570108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 402434, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}

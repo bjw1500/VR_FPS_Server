@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class Sniper : WeaponController
+public class MachineGun : WeaponController
 {
     public GameObject bullet;
     public Transform bulletPos;
@@ -41,23 +41,27 @@ public class Sniper : WeaponController
         TimeCount();
     }
 
-    void TimeCount() {
- 
+    void TimeCount()
+    {
+
         fireRateTime += Time.deltaTime;
-        if (isReload) {
+        if (isReload)
+        {
             reloadRateTime += Time.deltaTime;
             Debug.Log("Time: " + reloadRateTime);
-            if (reloadRateTime >= _weaponData.reloadTime) {
-                _currentState = GunState.Ready;
+            if (reloadRateTime >= _weaponData.reloadTime)
+            {
                 isReload = false;
+                _currentState = GunState.Ready;
                 reloadRateTime = 0;
             }
         }
 
     }
 
-    public override void Fire() {
-        
+    public override void Fire()
+    {
+
         if (fireRateTime >= _weaponData.fireRate && !isReload && curBulletCount > 0)
         {
             anim.SetBool("Shoot", true);
@@ -82,7 +86,8 @@ public class Sniper : WeaponController
 
     }
 
-    void Reload() {
+    void Reload()
+    {
         if (!isReload && _weaponData.ammoCount > 0)
         {
             _currentState = GunState.Reloading;

@@ -49,6 +49,7 @@ public class BaseController : MonoBehaviour
         public GameObject RightController;
         public IMovement3D movement3D;
         public Hpbar hpbar;
+        public BulletCount bulletcount;
     }
     public Components Com => _components;
     [Space, SerializeField] private Components _components = new Components();

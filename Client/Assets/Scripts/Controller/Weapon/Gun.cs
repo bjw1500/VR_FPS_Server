@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class Gun : WeaponController
 
@@ -40,20 +41,6 @@ public class Gun : WeaponController
 
     //
     private float _lastFireTime; //총을 마지막으로 발사한 시점.
-    public int curBulletCount = 0; //현재 보유한 총알의 수
-
-    //State
-    public enum GunState { Ready, Empty, Reloading }
-    public GunState State
-    {
-        get { return _currentState; }
-        set { _currentState = value; }
-
-    }
-    GunState _currentState = GunState.Empty;
-
-    
-
     Animator anim;
 
 
@@ -63,7 +50,7 @@ public class Gun : WeaponController
         anim = GetComponent<Animator>();
         _currentState = GunState.Empty;
         _lastFireTime = 0;
-        UpdateUI();
+        //UpdateUI();
 
     }
 

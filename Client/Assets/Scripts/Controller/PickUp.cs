@@ -12,6 +12,7 @@ public class PickUp : MonoBehaviour
     [SerializeField] FixedJoint joint = null;
     [SerializeField] public Custom_Interactable currectInteractable;
     [SerializeField] List<Custom_Interactable> currectInteractables = new List<Custom_Interactable>();
+    [SerializeField] int power = 3;
 
     private void Awake()
     {
@@ -99,8 +100,8 @@ public class PickUp : MonoBehaviour
         col.enabled = true;
         Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
         targetBody.useGravity = true;
-        targetBody.velocity = pose.GetVelocity();
-        targetBody.angularVelocity = pose.GetAngularVelocity();
+        targetBody.velocity = power * pose.GetVelocity();
+        targetBody.angularVelocity = power * pose.GetAngularVelocity();
 
         joint.connectedBody = null;
 

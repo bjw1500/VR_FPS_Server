@@ -9,7 +9,7 @@ public class SniperAnmo : MonoBehaviour
 
     private void Update()
     {
-        if (gun.bulletcurCount == gun._weaponData.ammoBulletCount)
+        if (gun.curBulletCount == gun._weaponData.ammoBulletCount)
         {
             for (int i = 0; i < bulletReady.Length; i++)
             {
@@ -18,7 +18,7 @@ public class SniperAnmo : MonoBehaviour
         }
 
         else {
-            for (int i = gun._weaponData.ammoBulletCount - 1; i>=gun.bulletcurCount; i--) {
+            for (int i = gun._weaponData.ammoBulletCount - 1; i>=gun.curBulletCount; i--) {
                 bulletReady[i].SetActive(false);
             }
         }

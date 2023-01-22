@@ -45,6 +45,6 @@ public class Define
         Oculus,
         Vive,
     }
-
+    public enum GunState { Ready, Empty, Reloading }
 
 }

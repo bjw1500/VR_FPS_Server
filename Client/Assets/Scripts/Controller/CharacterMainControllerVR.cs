@@ -57,8 +57,8 @@ public class CharacterMainControllerVR : BaseController
     public override int Hp
     {
         get { return Info.StatInfo.Hp; }
-        set 
-        { 
+        set
+        {
             Info.StatInfo.Hp = value;
 
             if (Com.hpbar != null)
@@ -71,6 +71,8 @@ public class CharacterMainControllerVR : BaseController
     public int _weaponSlotSize = 4;
     [SerializeField]
     public int _currentWeaponSlot = 0;
+
+    bool _autoFire = false;
 
     private void Update()
     {
@@ -111,6 +113,8 @@ public class CharacterMainControllerVR : BaseController
 
 
         Com.hpbar = gameObject.GetComponentInChildren<Hpbar>();
+        Com.bulletcount = gameObject.GetComponentInChildren<BulletCount>();
+        Com.bulletcount.controller = this;
 
     }
 
@@ -137,10 +141,16 @@ public class CharacterMainControllerVR : BaseController
 
     private void SetTriggerInput()
     {
-        if (GameMng.I.input.getStateFireTrigger && Com.myGun != null)
-        {
-            //쿨타임은 나중에 데이터 시트로 받아주게 만들어주기.
 
+        if (GameMng.I.input.getStateUpFireTrigger)
+        {
+            _autoFire = false;
+        }
+
+        if (_autoFire == true || (GameMng.I.input.getStateFireTrigger && Com.myGun != null))
+        {
+
+            _autoFire = true;
             Debug.Log("Fire");
             C_Skill c_Skill = new C_Skill();
             c_Skill.Info = Info;
@@ -291,6 +301,7 @@ public class CharacterMainControllerVR : BaseController
 
                 Com.myGun = item.transform.GetComponent<WeaponController>();
                 Com.myGun._master = this;
+                Com.bulletcount.weaponController = Com.myGun;
                 break;
 
             }
@@ -372,6 +383,7 @@ public class CharacterMainControllerVR : BaseController
         wc.gameObject.SetActive(true);
         wc._master = this;
         Com.myGun = wc;
+        Com.bulletcount.weaponController = wc;
 
 
         //서버 부분

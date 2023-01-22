@@ -349,6 +349,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _master: {fileID: 0}
+  _weaponData:
+    id: 0
+    name: 
+    prefabPath: 
+    imagePath: 
+    itemType: 0
+    damage: 0
+    ammoBulletCount: 13
+    ammoCount: 10
+    fireRate: 0.3
+    reloadTime: 2
+    fireDistance: 100
+    weaponType: 0
+    IsThrowable: 0
+  curBulletCount: 0
+  _currentState: 1
   bullet: {fileID: 7301374540111607195, guid: bf921aa214554774cbfccbf3d539efd1, type: 3}
   bulletPos: {fileID: 3358179205349004026}
   gunPos: {fileID: 4742515426290815234}
@@ -358,12 +374,6 @@ MonoBehaviour:
   _reloadClip: {fileID: 8300000, guid: e5198250a6a57408bb36e14bc4a322c4, type: 3}
   _impactPrefab: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   _ammoText: {fileID: 7455782831627614114}
-  ammoBulletCount: 13
-  ammoCount: 100
-  fireRate: 0.3
-  _damage: 25
-  reloadTime: 2
-  _fireDistance: 100
 --- !u!65 &6153081396572910374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -424,7 +434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &740983612398092545
 RectTransform:
   m_ObjectHideFlags: 0
