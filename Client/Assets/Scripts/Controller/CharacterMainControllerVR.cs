@@ -146,11 +146,28 @@ public class CharacterMainControllerVR : BaseController
         {
             _autoFire = false;
         }
+        else if (GameMng.I.input.getStateFireTrigger)
+        {
+            _autoFire = true;
 
-        if (_autoFire == true || (GameMng.I.input.getStateFireTrigger && Com.myGun != null))
+            if (Com.myGun._weaponData.IsThrowable != true)
+                return;
+
+            Debug.Log("Fire");
+            C_Skill c_Skill = new C_Skill();
+            c_Skill.Info = Info;
+            c_Skill.Skillid = 1;
+            Managers.Network.Send(c_Skill);
+            Com.myGun.Fire();
+
+        }
+
+        if (_autoFire == true && Com.myGun != null)
         {
 
-            _autoFire = true;
+            if (Com.myGun._weaponData.IsThrowable == true)
+                return;
+
             Debug.Log("Fire");
             C_Skill c_Skill = new C_Skill();
             c_Skill.Info = Info;
@@ -177,6 +194,9 @@ public class CharacterMainControllerVR : BaseController
             Managers.Network.Send(c_Skill);
             Jump();
         }
+
+
+
     }
 
     private void SetValuesByInput()
@@ -274,8 +294,19 @@ public class CharacterMainControllerVR : BaseController
 
         //수류탄을 던지기 위해서는 RigidBody가 활성화 되어 있어야 한다.
 
-        body.useGravity = false;
-        col.enabled = false;
+        if(weapon.WeaponData.IsThrowable == true)
+        {
+            body.useGravity = false;
+            col.enabled = false;
+
+        }else
+        {
+            body.isKinematic = true;
+            body.useGravity = false;
+            col.enabled = false;
+        }
+
+
  
 
         //Destroy(col);

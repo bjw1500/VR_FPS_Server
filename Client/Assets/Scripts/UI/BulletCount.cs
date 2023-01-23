@@ -12,7 +12,10 @@ public class BulletCount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (weaponController == null || weaponController._weaponData.IsThrowable == true)
+            return;
         
+
         UpdateUI();
 
     }

@@ -23,6 +23,7 @@ public class MachineGun : WeaponController
     float reloadRateTime;
     bool isReload;
     Animator anim;
+    Coroutine coroutine;
 
     //Stat
 
@@ -64,9 +65,11 @@ public class MachineGun : WeaponController
 
         if (fireRateTime >= _weaponData.fireRate && !isReload && curBulletCount > 0)
         {
-            anim.SetBool("Shoot", true);
-            gunParticle.SetActive(true);
 
+            if(coroutine == null)
+                coroutine = StartCoroutine(Particle());
+
+            anim.SetTrigger("Shoot");
             Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
             Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
@@ -80,7 +83,6 @@ public class MachineGun : WeaponController
         {
             _currentState = GunState.Empty;
             gunParticle.SetActive(false);
-            anim.SetBool("Shoot", false);
             Reload();
         }
 
@@ -96,5 +98,16 @@ public class MachineGun : WeaponController
             _weaponData.ammoCount--;
             curBulletCount = _weaponData.ammoBulletCount;
         }
+    }
+
+    IEnumerator Particle()
+    {
+        gunParticle.SetActive(true);
+
+        yield return new WaitForSeconds(_weaponData.fireRate);
+
+        gunParticle.SetActive(false);
+        coroutine = null;
+
     }
 }
