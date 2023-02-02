@@ -84,6 +84,7 @@ public class PickUp : MonoBehaviour
         currectInteractable.transform.position = transform.position;
 
         Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
+        targetBody.isKinematic = false;
         joint.connectedBody = targetBody;
 
         currectInteractable.activeHand = this;
