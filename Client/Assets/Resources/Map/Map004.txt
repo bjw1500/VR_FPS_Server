@@ -1,0 +1,2 @@
+countSpawnPoint:0
+ObjectCount:0

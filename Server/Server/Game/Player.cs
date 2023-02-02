@@ -89,7 +89,7 @@ namespace Server
             changeHp.Hp = Info.StatInfo.Hp;
             Room.BroadCast(changeHp);
 
-            if (Info.StatInfo.Hp <= 0)
+            if (Info.StatInfo.Hp <= 0 && State == PlayerState.Living)
                 OnDead(Attacker);
 
         }

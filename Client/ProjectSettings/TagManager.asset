@@ -7,8 +7,11 @@ TagManager:
   - Bullet
   - Item
   - IDamageable
-  - ItemSpawnPoint
   - Ganade
+  - Ground
+  - Undefined
+  - ItemSpawnPoint
+  - HitBoxSpawnPoint
   layers:
   - Default
   - TransparentFX

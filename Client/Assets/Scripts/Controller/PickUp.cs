@@ -102,8 +102,11 @@ public class PickUp : MonoBehaviour
         col.enabled = true;
         Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
         targetBody.useGravity = true;
-        targetBody.velocity = power * pose.GetVelocity();
-        targetBody.angularVelocity = power * pose.GetAngularVelocity();
+
+        Vector3 velocity = power * pose.GetVelocity();
+        Vector3 angularVelocity = power * pose.GetAngularVelocity();
+        targetBody.velocity = velocity;
+        targetBody.angularVelocity = angularVelocity;
 
         joint.connectedBody = null;
 
@@ -116,12 +119,13 @@ public class PickUp : MonoBehaviour
         C_Skill c_Skill = new C_Skill();
         c_Skill.Info = Managers.Object.MyPlayer.Info;
         c_Skill.Skillid = 3;
-        c_Skill.ThrowVelocity.PosX = targetBody.velocity.x;
-        c_Skill.ThrowVelocity.PosY = targetBody.velocity.y;
-        c_Skill.ThrowVelocity.PosZ = targetBody.velocity.z;
-        c_Skill.ThrowVelocity.RotateX = targetBody.angularVelocity.x;
-        c_Skill.ThrowVelocity.RotateY = targetBody.angularVelocity.y;
-        c_Skill.ThrowVelocity.RotateZ = targetBody.angularVelocity.z;
+        c_Skill.ThrowVelocity = new PositionInfo();
+        c_Skill.ThrowVelocity.PosX = velocity.x;
+        c_Skill.ThrowVelocity.PosY = velocity.y;
+        c_Skill.ThrowVelocity.PosZ = velocity.z;
+        c_Skill.ThrowVelocity.RotateX = angularVelocity.x;
+        c_Skill.ThrowVelocity.RotateY = angularVelocity.y;
+        c_Skill.ThrowVelocity.RotateZ =angularVelocity.z;
 
 
         Managers.Network.Send(c_Skill);
@@ -140,7 +144,7 @@ public class PickUp : MonoBehaviour
         col.enabled = true;
         Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
         targetBody.useGravity = true;
-
+        
         Vector3 velocity = new Vector3(skillPacket.ThrowVelocity.PosX, skillPacket.ThrowVelocity.PosY, skillPacket.ThrowVelocity.PosZ);
         Vector3 angularVelocity = new Vector3(skillPacket.ThrowVelocity.RotateX, skillPacket.ThrowVelocity.RotateY, skillPacket.ThrowVelocity.RotateZ);
         targetBody.velocity = velocity;
