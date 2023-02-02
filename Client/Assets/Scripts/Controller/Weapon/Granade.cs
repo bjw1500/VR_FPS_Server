@@ -6,6 +6,7 @@ public class Granade : WeaponController
 {
     Animator anim;
     Custom_Interactable interactable;
+    public bool pullPin = false;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class Granade : WeaponController
         {
             //수류탄 핀을 뽑는다.
             anim.SetBool("PullPin", true);
+            pullPin = true;
             Invoke("SetPullPin", 3f);
 
             //Vr 안의 물건 던지기 기능 활성화하기.

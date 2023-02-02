@@ -150,16 +150,6 @@ public class CharacterMainControllerVR : BaseController
         {
             _autoFire = true;
 
-            if (Com.myGun._weaponData.IsThrowable != true)
-                return;
-
-            Debug.Log("Fire");
-            C_Skill c_Skill = new C_Skill();
-            c_Skill.Info = Info;
-            c_Skill.Skillid = 1;
-            Managers.Network.Send(c_Skill);
-            Com.myGun.Fire();
-
         }
 
         if (_autoFire == true && Com.myGun != null)
@@ -178,15 +168,25 @@ public class CharacterMainControllerVR : BaseController
 
         if(GameMng.I.input.getStategrabGrip && Com.myGun != null && Com.myGun._weaponData.IsThrowable == true)
         {
-            //Debug.Log("투척무기를 던집니다.");
-            //C_Skill c_Skill = new C_Skill();
-            //c_Skill.Info = Info;
-            //c_Skill.Skillid = 3;
-            //Managers.Network.Send(c_Skill);
-            PickUp Granade = GetComponent<PickUp>();
-            if (Granade == null)
-                return;
-            Granade.Drop();
+            Granade granade = Com.myGun as Granade;
+
+            if (granade.pullPin == false)
+            {
+
+                Debug.Log("Fire");
+                C_Skill c_Skill = new C_Skill();
+                c_Skill.Info = Info;
+                c_Skill.Skillid = 1;
+                Managers.Network.Send(c_Skill);
+                Com.myGun.Fire();
+            }
+            else
+            {
+                PickUp Granade = Com.RightController.GetComponentInChildren<PickUp>();
+                if (Granade == null)
+                    return;
+                Granade.Drop();
+            }
         }
 
         // Jump
