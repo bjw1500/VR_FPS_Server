@@ -184,6 +184,67 @@ namespace Server
 
         }
 
+        public void Revive(GameObject gameObject)
+        {
+            if (gameObject == null)
+                return;
+
+            if (gameObject.ObjectType == GameObjectType.Player)
+            {
+                #region 플레이어 입장
+                Player newPlayer = gameObject as Player;
+
+                //게임에 입장했으니 플레이어의 시작 지점을 만들어줘야 한다.
+                newPlayer.Info.MovementInfo.PlayerPosInfo = new PositionInfo()
+                {
+                    PosX = 0,
+                    PosY = 0,
+                    PosZ = 0,
+                };
+                newPlayer.Info.MovementInfo.MoveDir = new MoveDirInfo();
+                newPlayer.Info.MovementInfo.CameraPosInfo = new PositionInfo();
+                newPlayer.Info.MovementInfo.RightHandPosInfo = new PositionInfo();
+                newPlayer.Info.MovementInfo.LeftHandPosInfo = new PositionInfo();
+
+                //스탯 추가
+                StatInfo stat = null;
+                DataManager.StatDict.TryGetValue("Player", out stat);
+                newPlayer.Info.StatInfo = stat;
+                newPlayer.Info.Name = newPlayer.Info.Player.Name;
+                newPlayer.Info.StatInfo.Hp = newPlayer.Info.StatInfo.MaxHp;
+
+                newPlayer.State = PlayerState.Living;
+
+                //선택된 캐릭터은 Client 구역에서 PlayerInfo의 Character 값을 보고 판단.
+
+                //게임룸 안의 플레이어 목록에 추가.
+                _players.Add(newPlayer.Info.ObjectId, newPlayer);
+                newPlayer.Room = this;
+
+                {
+                    //자신에게 보낼 정보
+                    S_EnterGame enterPacket = new S_EnterGame();
+                    enterPacket.Player = newPlayer.Info;
+                    newPlayer.Session.Send(enterPacket);
+                }
+
+
+                //다른 플레이어들에게 보낼 정보.
+                {
+                    S_Spawn spawnPacket = new S_Spawn();
+                    spawnPacket.Info.Add(newPlayer.Info);
+                    foreach (Player player in _players.Values)
+                    {
+                        if (player == newPlayer)
+                            continue;
+
+                        player.Session.Send(spawnPacket);
+                    }
+                }
+                #endregion
+            }
+        }
+
 
         public void SpawnMonster()
         {

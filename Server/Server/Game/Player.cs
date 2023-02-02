@@ -124,8 +124,10 @@ namespace Server
             //죽고 나서 다시 스폰?
             //템도 모두 지워준다?
             Room._players.Remove(Info.ObjectId);
-            Room.Push(Room.EnterGame, this);
+            Room.Push(Room.Revive, this);
 
+
+            //플레이어 킬로그 업데이트
             S_UpdatePlayerInfo playerinfo = new S_UpdatePlayerInfo();
             playerinfo.Infos.Add(attacker.Info);
             playerinfo.Infos.Add(Info);

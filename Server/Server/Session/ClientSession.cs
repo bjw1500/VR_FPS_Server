@@ -57,19 +57,23 @@ namespace Server
 
 		public override void OnDisconnected(EndPoint endPoint)
 		{
-			if (MyPlayer.Room != null)
+
+			if (MyPlayer != null)
 			{
-				GameRoom gameRoom = MyPlayer.Room;
-				gameRoom.Push(gameRoom.LeaveGame, MyPlayer.Info.ObjectId);
+				if (MyPlayer.Room != null)
+				{
+					GameRoom gameRoom = MyPlayer.Room;
+					gameRoom.Push(gameRoom.LeaveGame, MyPlayer.Info.ObjectId);
+				}
+
+				if (MyPlayer.LobbyRoom != null)
+				{
+					LobbyRoom waitRoom = MyPlayer.LobbyRoom;
+					waitRoom.LeaveGame(MyPlayer.Info.ObjectId);
+				}
 			}
 
-			if (MyPlayer.LobbyRoom != null)
-			{
-				LobbyRoom waitRoom = MyPlayer.LobbyRoom;
-				waitRoom.LeaveGame(MyPlayer.Info.ObjectId);
-			}
-
-			SessionManager.Instance.Remove(this);
+            SessionManager.Instance.Remove(this);
 
 			Console.WriteLine($"OnDisconnected : {endPoint}");
 		}

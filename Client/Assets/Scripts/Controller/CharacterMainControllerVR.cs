@@ -176,13 +176,17 @@ public class CharacterMainControllerVR : BaseController
             Com.myGun.Fire();
         }
 
-        if(GameMng.I.input.getStategrabGrip && Com.myGun._weaponData.IsThrowable == true)
+        if(GameMng.I.input.getStategrabGrip && Com.myGun != null && Com.myGun._weaponData.IsThrowable == true)
         {
-            Debug.Log("투척무기를 던집니다.");
-            C_Skill c_Skill = new C_Skill();
-            c_Skill.Info = Info;
-            c_Skill.Skillid = 3;
-            Managers.Network.Send(c_Skill);
+            //Debug.Log("투척무기를 던집니다.");
+            //C_Skill c_Skill = new C_Skill();
+            //c_Skill.Info = Info;
+            //c_Skill.Skillid = 3;
+            //Managers.Network.Send(c_Skill);
+            PickUp Granade = GetComponent<PickUp>();
+            if (Granade == null)
+                return;
+            Granade.Drop();
         }
 
         // Jump
@@ -305,12 +309,6 @@ public class CharacterMainControllerVR : BaseController
             body.useGravity = false;
             col.enabled = false;
         }
-
-
- 
-
-        //Destroy(col);
-        //Destroy(body);
 
         //슬롯을 채워주는 동시에 현재 플레이어의 무기를 바꿔준다.
         for (int i = 0; i < _weaponSlotSize; i++)

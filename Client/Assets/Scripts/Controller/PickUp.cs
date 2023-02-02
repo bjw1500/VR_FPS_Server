@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,10 +34,10 @@ public class PickUp : MonoBehaviour
         //    Drop();
         //}
 
-        if (GameMng.I.input.getStategrabGrip)
-        {
-            Drop();
-        }
+        //if (GameMng.I.input.getStategrabGrip)
+        //{
+        //    Drop();
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,6 +103,47 @@ public class PickUp : MonoBehaviour
         targetBody.useGravity = true;
         targetBody.velocity = power * pose.GetVelocity();
         targetBody.angularVelocity = power * pose.GetAngularVelocity();
+
+        joint.connectedBody = null;
+
+        currectInteractable.activeHand = null;
+        currectInteractable = null;
+
+        if (GameMng.I.SingleGame == true)
+            return;
+
+        C_Skill c_Skill = new C_Skill();
+        c_Skill.Info = Managers.Object.MyPlayer.Info;
+        c_Skill.Skillid = 3;
+        c_Skill.ThrowVelocity.PosX = targetBody.velocity.x;
+        c_Skill.ThrowVelocity.PosY = targetBody.velocity.y;
+        c_Skill.ThrowVelocity.PosZ = targetBody.velocity.z;
+        c_Skill.ThrowVelocity.RotateX = targetBody.angularVelocity.x;
+        c_Skill.ThrowVelocity.RotateY = targetBody.angularVelocity.y;
+        c_Skill.ThrowVelocity.RotateZ = targetBody.angularVelocity.z;
+
+
+        Managers.Network.Send(c_Skill);
+
+    }
+
+    public void Drop(S_Skill skillPacket)
+    {
+        if (!currectInteractable)
+            return;
+
+        Debug.Log("수류탄을 던집니다.");
+
+
+        Collider col = currectInteractable.GetComponent<Collider>();
+        col.enabled = true;
+        Rigidbody targetBody = currectInteractable.GetComponent<Rigidbody>();
+        targetBody.useGravity = true;
+
+        Vector3 velocity = new Vector3(skillPacket.ThrowVelocity.PosX, skillPacket.ThrowVelocity.PosY, skillPacket.ThrowVelocity.PosZ);
+        Vector3 angularVelocity = new Vector3(skillPacket.ThrowVelocity.RotateX, skillPacket.ThrowVelocity.RotateY, skillPacket.ThrowVelocity.RotateZ);
+        targetBody.velocity = velocity;
+        targetBody.angularVelocity = angularVelocity;
 
         joint.connectedBody = null;
 

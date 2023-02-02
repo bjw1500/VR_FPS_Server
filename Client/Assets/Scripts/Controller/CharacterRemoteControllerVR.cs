@@ -140,9 +140,9 @@ public class CharacterRemoteControllerVR : BaseController
         Com.movement3D.SetMovement(WorldMoveDir, State.isRunning);
     }
 
-    public void UseSkill(int skillId)
+    public void UseSkill(S_Skill skillPacket)
     {
-        switch (skillId)
+        switch (skillPacket.SkilIid)
         {
             //나중에 데이터 시트로 정리하기.
             case 1:
@@ -154,7 +154,7 @@ public class CharacterRemoteControllerVR : BaseController
                 break;
 
             case 3:
-                Com.RightController.GetComponent<PickUp>().Drop();
+                Com.RightController.GetComponent<PickUp>().Drop(skillPacket);
                 break;
 
             default:
@@ -195,11 +195,20 @@ public class CharacterRemoteControllerVR : BaseController
 
         Rigidbody body = item.transform.gameObject.GetComponent<Rigidbody>();
         Collider col = item.transform.GetComponent<Collider>();
-
         //수류탄을 던지기 위해서는 RigidBody가 활성화 되어 있어야 한다.
 
-        body.useGravity = false;
-        col.enabled = false;
+        if (weapon.WeaponData.IsThrowable == true)
+        {
+            body.useGravity = false;
+            col.enabled = false;
+
+        }
+        else
+        {
+            body.isKinematic = true;
+            body.useGravity = false;
+            col.enabled = false;
+        }
 
         //슬롯을 채워주는 동시에 현재 플레이어의 무기를 바꿔준다.
         for (int i = 0; i < _weaponSlotSize; i++)

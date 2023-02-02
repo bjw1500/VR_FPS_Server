@@ -35,7 +35,7 @@
       "damage": "25",
       "ammoBulletCount": "4",
       "ammoCount": "10",
-      "fireRate": "0.3",
+      "fireRate": "3",
       "reloadTime": 2.0,
       "fireDeistance": 100
     },

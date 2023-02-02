@@ -100,7 +100,7 @@ class PacketHandler
         if (cc == null)
             return;
 
-        cc.UseSkill(skillPacket.SkilIid);
+        cc.UseSkill(skillPacket);
     }
 
     public static void S_ChangeHpHandler(PacketSession session, IMessage packet)
