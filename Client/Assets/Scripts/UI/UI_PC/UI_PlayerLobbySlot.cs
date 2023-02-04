@@ -31,5 +31,12 @@ public class UI_PlayerLobbySlot : UI_Base
         
     }
 
+    public void Reset()
+    {
+        _playerNameText.text = "나간 플레이어";
+        _playerInfo = null;
+        _characterSelectNumber = 0; 
+    }
+
 
 }

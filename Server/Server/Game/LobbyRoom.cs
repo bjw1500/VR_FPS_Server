@@ -25,6 +25,7 @@ namespace Server
                 //방 안에 들어오면 로비룸의 플레이어 목록에 추가
                 _players.Add(player.Info.ObjectId, player);
                 player.Info.TeamId = _players.Count;
+                player.Info.Player.ChracterId = 3;
                 player.LobbyRoom = this;
 
                 foreach (Player enterPlayer in _players.Values)

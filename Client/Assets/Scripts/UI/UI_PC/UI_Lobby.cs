@@ -122,7 +122,7 @@ public class UI_Lobby : UI_Base
             //여기까지 통과했으면 에러도 없고, 플레이어 정보도 없으니 업데이트 해주자.
             slot._playerInfo = enterGamePacket.Info.Player;
             slot._characterSelectNumber = enterGamePacket.Info.Player.ChracterId;
-            go.GetComponent<Image>().sprite = characterImg[enterGamePacket.Info.Player.ChracterId];
+            slot.transform.GetComponent<Image>().sprite = characterImg[enterGamePacket.Info.Player.ChracterId];
 
             //내 슬롯인지 아닌지 구별.
             if (enterGamePacket.MyPlayer == true)
@@ -161,7 +161,8 @@ public class UI_Lobby : UI_Base
         }
 
         _players.Remove(leaveGamePacket.Info.ObjectId);
-        Managers.Resource.Destroy(leavePlayer.gameObject);
+        leavePlayer.Reset();
+        
     }
 
     public void GameStart(PointerEventData eventData)
