@@ -1,0 +1,351 @@
+syntax = "proto3";
+
+package Protocol;
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+enum MsgId {
+  S_ENTER_GAME = 0;
+  S_LEAVE_GAME = 1;
+  S_SPAWN = 2;
+  C_SPAWN = 3;
+  S_DESPAWN =4;
+  C_DESPAWN = 5;
+  C_MOVE =6;
+  S_MOVE =7;
+  C_SKILL =8;
+  S_SKILL = 9;
+  S_CHANGE_HP = 10;
+  C_CHANGE_HP = 11;
+  S_DIE = 12;
+  S_ENTER_WAITING_ROOM = 13;
+  S_LEAVE_WAITING_ROOM = 14;
+  S_START_GAME = 15;
+  C_START_GAME = 16;
+  S_ENTER_LOBBY_OK = 17;
+  C_ENTER_LOBBY_OK = 18;
+  S_CONNECTED = 19;
+  C_LOGIN = 20;
+  S_LOGIN = 21;
+  S_LOGIN_FAILED = 22;
+  C_CREATE_ACCOUNT = 23;
+  S_FAILED_CREATE_ACCOUNT = 24;
+  S_SUCCESS_CREATE_ACCOUNT = 25;
+  S_ITEM_SPAWN = 26;
+  C_CHANGE_WEAPON = 27;
+  S_CHANGE_WEAPON = 28;
+  C_GET_WEAPON = 29;
+  S_GET_WEAPON = 30;
+  S_OBJECT_SPAWN = 31;
+  S_UPDATE_PLAYER_INFO = 32;
+  C_MAP_LOADING_FINISH = 33;
+  C_SELECT_CHARACTER = 34;
+  S_SELECT_CHARACTER = 35;
+
+}
+
+enum GameObjectType
+{
+	None = 0;
+    Player= 1;
+	NPC = 2;
+    Monster = 3;
+	Item = 4;
+}
+
+
+enum PlayerState
+{
+	IDLE =0;
+	MOVING = 1;
+	ATTACK = 2;
+	DEAD = 3;
+	LIVING = 4;
+}
+
+enum ItemType {
+  ITEM_TYPE_NONE = 0;
+  ITEM_TYPE_WEAPON = 1;
+  ITEM_TYPE_ARMOR = 2;
+  ITEM_TYPE_CONSUMABLE = 3;
+}
+
+enum WeaponType {
+  WEAPON_TYPE_NONE = 0;
+  WEAPON_TYPE_MELEE = 1;
+  WEAPON_TYPE_PISTOL = 2;
+  WEAPON_TYPE_RIFLE = 3;
+  WEAPON_TYPE_SNIPER = 4;
+  WEAPON_TYPE_GRANADE = 5;
+}
+
+enum ArmorType {
+  ARMOR_TYPE_NONE = 0;
+  ARMOR_TYPE_HELMET = 1;
+  ARMOR_TYPE_ARMOR = 2;
+}
+
+enum ConsumableType {
+   CONSUMABLE_TYPE_NONE = 0;
+   CONSUMABLE_TYPE_POTION = 1;
+}
+
+
+
+message S_EnterGame {
+  ObjectInfo player = 1;
+
+}
+
+message S_LeaveGame{
+	
+}
+
+message S_Spawn{
+	repeated ObjectInfo info = 1;
+}
+
+message C_Spawn{
+	repeated ObjectInfo info = 1;
+}
+
+message S_Despawn{
+	repeated int32 objectIds = 1;
+}
+
+message C_Despawn{
+	repeated ObjectInfo info = 1;
+}
+
+message C_Move{
+	MovementInfo movementInfo = 1;
+}
+
+message S_Move{
+	int32 playerId = 1;
+	MovementInfo movementInfo = 2;
+}
+
+message C_Skill{
+	ObjectInfo info = 1;
+	int32 skillid = 2;
+	PositionInfo throwVelocity = 3;
+}
+
+message S_Skill{
+	ObjectInfo info = 1;
+	int32 skilIid =2;
+	PositionInfo throwVelocity = 3;
+}
+
+message S_ChangeHp{
+	int32 objectId = 1;
+	int32 hp = 2;
+	ObjectInfo attacker = 3;
+}
+
+message C_ChangeHp{
+	int32 objectId = 1;
+	ObjectInfo attacker = 2;
+	int32 damage = 3;
+	SkillInfo attackSkill = 4;
+}
+
+message S_Die{
+	int32 objectId = 1;
+	ObjectInfo attacker = 2;
+
+}
+
+message S_EnterWaitingRoom {
+  ObjectInfo info = 1;
+  bool myPlayer = 2;
+}
+
+
+
+message S_LeaveWaitingRoom{
+ ObjectInfo info = 1;
+
+}
+
+message S_StartGame {
+	int32 slot = 1;
+	int32 mapId = 2;
+	repeated PlayerInfo players = 3; 
+}
+
+message C_StartGame {
+	int32 slot = 1;
+	int32 mapId = 2;
+	repeated PlayerInfo players = 3; 
+}
+
+message S_EnterLobbyOk{
+
+}
+
+message C_EnterLobbyOk{
+
+}
+
+message S_Connected{
+
+
+}
+
+message C_Login{
+	string loginId = 1;
+	string loginPassword = 2;
+}
+
+message S_Login{
+	int32 loginOk = 1;
+}
+
+message S_LoginFailed{
+	string information = 1;
+}
+
+message C_CreateAccount{
+	string id = 1;
+	string password = 2;
+	string information = 3;
+}
+
+message S_FailedCreateAccount{
+	string information = 1;
+
+}
+
+message S_SuccessCreateAccount{
+	string information =1;
+}
+
+message S_ItemSpawn{
+	repeated ItemInfo infos = 1;
+}
+
+message C_ChangeWeapon{
+	int32 playerId = 1;
+	int32 slot = 3;
+}
+
+message S_ChangeWeapon{
+	int32 playerId = 1;
+	int32 slot = 3;
+}
+
+message C_GetWeapon{
+	int32 playerId = 1;
+	ItemInfo info = 2;
+	int32 slot = 3;
+}
+
+message S_GetWeapon{
+	int32 playerId = 1;
+	ItemInfo info = 2;
+	int32 slot = 3;
+}
+
+message S_ObjectSpawn{
+	repeated ObjectInfo infos = 1;
+
+}
+
+message S_UpdatePlayerInfo{
+	repeated ObjectInfo infos = 1;
+}
+
+message S_MapLoadingFinish{
+
+}
+
+message C_MapLoadingFinish{
+
+}
+
+message C_SelectCharacter{
+	int32 playerId = 1;
+	int32 characterNumber = 2;
+}
+
+message S_SelectCharacter{
+	int32 playerId = 1;
+	PlayerInfo playerInfo = 2;
+}
+
+
+message PlayerInfo{
+	string name =1;
+	int32 kill= 2;
+	int32 death = 3;
+	int32 totalDamage = 4;
+	int32 chracterId = 5;
+	int32 objectId = 6;
+}
+
+message MovementInfo{
+  PositionInfo playerPosInfo = 1;
+  PositionInfo cameraPosInfo = 2;
+  PositionInfo rightHandPosInfo = 3;
+  PositionInfo leftHandPosInfo = 4;
+  MoveDirInfo moveDir = 5;
+  bool moving = 6;
+  bool running = 7;
+  bool ground = 8;
+}
+
+message MoveDirInfo{
+  float PosX = 1;
+  float PosY = 2;
+  float PosZ = 3;
+}
+
+message PositionInfo {
+  float PosX = 1;
+  float PosY = 2;
+  float PosZ = 3;
+  float RotateX =10;
+  float RotateY = 11;
+  float RotateZ = 12;
+}
+
+message StatInfo{
+	string name = 1;
+	int32 hp =2;
+	int32 maxHp=3;
+	int32 armor =4;
+	int32 damage = 5;
+	float speed =6;
+	float attackSpeed =7;
+	float skillRange=8;
+	float searchRange =9;
+}
+
+message SkillInfo{
+	int32 skillId = 1;
+}
+
+message ObjectInfo{
+	string name = 1;
+	int32 objectId = 2;
+	int32 teamId = 3;
+	GameObjectType ObjectType = 4;
+	int32 targetId = 5;
+	int32 attackerId = 6;
+	PlayerInfo player= 8;
+	MovementInfo movementInfo =9;
+	StatInfo statInfo = 10;
+}
+
+message ItemInfo{
+	string name = 1;
+	int32 templateId = 2;
+	int32 objectId = 3;
+	ItemType itemType = 4;
+	ObjectInfo master = 5;
+	PositionInfo position = 6;
+}
+
+
