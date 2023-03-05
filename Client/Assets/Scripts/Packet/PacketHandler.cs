@@ -188,6 +188,20 @@ class PacketHandler
 
     }
 
+    public static void S_EndGameHandler(PacketSession session, IMessage packet)
+    {
+        S_EndGame end = packet as S_EndGame;
+        ServerSession serverSession = session as ServerSession;
+
+        //플레이어 목록을 불러온 뒤 이긴 팀의 플레이어에게 승리 메시지 전송
+        if(Managers.Object.MyPlayer.Info.TeamId == end.Winner)
+        {
+            //승리 관련 이벤트 띄워주기.
+            Debug.Log($"{end.GameInfo}");
+            Debug.Log("승리하셨습니다.");
+        }
+
+    }
 
 
 
@@ -214,19 +228,8 @@ class PacketHandler
 
     public static void S_LeaveWaitingRoomHandler(PacketSession session, IMessage packet)
     {
-        S_LeaveWaitingRoom leavePacket = packet as S_LeaveWaitingRoom;
+        S_LeaveWaitingRoom diePacket = packet as S_LeaveWaitingRoom;
         ServerSession serverSession = session as ServerSession;
-
-        GameObject go = GameObject.Find("LobbyUI");
-        if (go == null)
-            return;
-
-        UI_Lobby ui = go.GetComponent<UI_Lobby>();
-        if (ui == null)
-            return;
-
-        ui.LeaveGame(leavePacket);
-
     }
 
     public static void S_StartGameHandler(PacketSession session, IMessage packet)

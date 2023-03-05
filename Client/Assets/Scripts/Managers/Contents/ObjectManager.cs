@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using Photon.Pun;
 
 public class ObjectManager
 {
@@ -48,6 +49,7 @@ public class ObjectManager
         {
             int SelectedCharacter = info.Player.ChracterId;
             GameObject go = Managers.Resource.Instantiate($"Player/RemotePlayer_{SelectedCharacter}");
+
             go.name = info.Player.Name;
             _objects.Add(info.ObjectId, go);
             CharacterRemoteControllerVR controller = go.GetOrAddComponent<CharacterRemoteControllerVR>();
@@ -101,7 +103,7 @@ public class ObjectManager
         item.IconImage = Managers.Resource.Load<Sprite>(data.imagePath);
 
         //무기 정보 연동해주기.
-        
+
 
         _items.Add(info.ObjectId, item);
 
@@ -126,12 +128,13 @@ public class ObjectManager
     public void AddSingleGame(ObjectInfo info, bool isVR = false)
     {
         GameObject go = Managers.Resource.Instantiate($"Player/Player_{_singlePlayer.ChracterId}");
+
         go.name = info.Name;
         _objects.Add(info.ObjectId, go);
         MyPlayer = go.GetComponent<CharacterMainControllerVR>();
         MyPlayer.Info = info;
         MyPlayer.enabled = true;
-    
+
 
         StatInfo stat = null;
 
@@ -144,7 +147,7 @@ public class ObjectManager
     public void UpdatePlayerInfo(ObjectInfo info)
     {
         ObjectInfo player = null;
-        if(_players.TryGetValue(info.ObjectId, out player) == false)
+        if (_players.TryGetValue(info.ObjectId, out player) == false)
         {
             Debug.Log("UpdatePlayerInfo 에러");
             return;
@@ -160,7 +163,7 @@ public class ObjectManager
         if (_objects.TryGetValue(Id, out go) == false)
             return;
 
-        if(_players.ContainsKey(Id) == true)
+        if (_players.ContainsKey(Id) == true)
         {
             _players.Remove(Id);
         }

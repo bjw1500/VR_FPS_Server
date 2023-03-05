@@ -41,7 +41,7 @@ enum MsgId {
   C_MAP_LOADING_FINISH = 33;
   C_SELECT_CHARACTER = 34;
   S_SELECT_CHARACTER = 35;
-
+  S_END_GAME = 36;
 }
 
 enum GameObjectType
@@ -273,6 +273,11 @@ message C_SelectCharacter{
 message S_SelectCharacter{
 	int32 playerId = 1;
 	PlayerInfo playerInfo = 2;
+}
+
+message S_EndGame{
+	string GameInfo = 1;
+	int32 winner = 2;
 }
 
 

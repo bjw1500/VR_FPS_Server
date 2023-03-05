@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7301374540111243707
 Transform:
   m_ObjectHideFlags: 0
@@ -261,4 +261,6 @@ MonoBehaviour:
   _impactPrefab: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   dmg: 0
   speed: 110
-  existTime: 5
+  rigid: {fileID: 7301374540043440580}
+  bulletPos: {x: 0, y: 0, z: 0}
+  gunPos: {x: 0, y: 0, z: 0}

@@ -6,10 +6,10 @@ using UnityEngine.XR.Management;
 
 public class PhotonMng : MonoBehaviourPunCallbacks
 {
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
+    // private void Awake()
+    // {
+    //     DontDestroyOnLoad(this);
+    // }
 
     public static void ConnectToServer()
     {
@@ -17,6 +17,10 @@ public class PhotonMng : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();   // 서버 연결
     }
 
+    void Start()
+    {
+        //ConnectToServer();
+    }
     /**
      * @brief 웹통신으로 로그인
      */
@@ -67,15 +71,16 @@ public class PhotonMng : MonoBehaviourPunCallbacks
      */
     public override void OnJoinedRoom()
     {
-        StartCoroutine(this.CreatePlayer());
-        //Debug.Log("Joined room");
+        StartCoroutine(this.CreateVoice());
+        // Debug.LogError("Joined room");
     }
     /**
      * @brief player 생성
      */
-    IEnumerator CreatePlayer()
+    IEnumerator CreateVoice()
     {
-        PhotonNetwork.Instantiate("User", Vector3.zero, Quaternion.identity, 0);
+        GameObject temp = PhotonNetwork.Instantiate("Prefabs/Voice", Vector3.zero, Quaternion.identity);
+        temp.transform.parent = this.transform;
 
         yield return null;
     }

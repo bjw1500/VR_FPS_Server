@@ -89,6 +89,7 @@ public class CharacterMainControllerVR : BaseController
     public override void Init()
     {
         base.Init();
+
         InitComponents();
         InitSettings();
     }

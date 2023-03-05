@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Text.RegularExpressions;
 
 public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
 {
@@ -17,7 +18,7 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
         GameMng.I.PointerOut += PointerOutside;
         GameMng.I.PointerClick += PointerClick;
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
         GameMng.I.PointerIn -= PointerInside;
         GameMng.I.PointerOut -= PointerOutside;
@@ -49,6 +50,7 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
         if (e.target.name == this.gameObject.name)
         {
+            GameMng.I.extractInt = 0;
             // Debug.Log("pointer out : " + e.target.name);
         }
     }
@@ -57,6 +59,15 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
         if (e.target.name == this.gameObject.name)
         {
+            try
+            {
+                GameMng.I.extractInt = int.Parse(Regex.Replace(e.target.name, @"[^0-9]", ""));
+            }
+            catch
+            {
+                GameMng.I.extractInt = 0;
+            }
+
             action();
             // Debug.Log("pointer click : " + e.target.name);
         }

@@ -52,6 +52,20 @@
       "reloadTime": 2.0,
       "fireDeistance": 100,
       "IsThrowable": "True"
+    },
+    {
+      "id": "5",
+      "name": "Knife",
+      "imagePath": "Image/UI/WeaponWheel/Knife",
+      "prefabPath": "Weapon/Knife",
+      "weaponType": "Melee",
+      "damage": "50",
+      "ammoBulletCount": "0",
+      "ammoCount": "0",
+      "fireRate": "0",
+      "reloadTime": 2.0,
+      "fireDeistance": 100,
+      "IsThrowable": "False"
     }
   ]
 } 

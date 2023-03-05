@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 4900405679369655416}
   - component: {fileID: 3628238885897042019}
   - component: {fileID: 7748065588339896518}
+  - component: {fileID: 1608318306824977148}
   m_Layer: 5
   m_Name: BackBtn
   m_TagString: Untagged
@@ -209,6 +210,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &1608318306824977148
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571337037350648000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 120, y: 90, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8074638270531501859
 GameObject:
   m_ObjectHideFlags: 0

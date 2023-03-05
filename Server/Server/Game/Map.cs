@@ -63,7 +63,7 @@ public class Map
 		string[] hitboxCounts = hitboxSpawnline.Split(':');
 		ObjectSpawnPointCount = int.Parse(hitboxCounts[1]);
 
-		ObjectSpawnPoints = new Vector3[ItemSpawnPointCount];
+		ObjectSpawnPoints = new Vector3[ObjectSpawnPointCount];
 
 		for (int i = 0; i < ObjectSpawnPointCount; i++)
 		{

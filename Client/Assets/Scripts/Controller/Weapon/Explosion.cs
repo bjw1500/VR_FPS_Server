@@ -12,7 +12,7 @@ public class Explosion : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "IDamageable")
+        if (other.gameObject.tag == "Idamageable")
         {
             BaseController target = other.GetComponent<BaseController>();
             if (target == null)

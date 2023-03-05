@@ -28,16 +28,15 @@ namespace Server
 			timer.Elapsed += ((s, e) => { room.Update(); });
 			timer.AutoReset = true;
 			timer.Enabled = true;
+			room.thisTimer = timer;
 			_timers.Add(timer);
         }
 
-
-
+		
 		static void Main(string[] args)
 		{
 			ConfigManager.LoadConfig();
 			DataManager.LoadData();
-
 
 
 

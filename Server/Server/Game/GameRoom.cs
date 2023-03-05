@@ -4,9 +4,11 @@ using Server.Data;
 using Server.Game;
 using ServerCore;
 using System;
+using System.Timers;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Diagnostics;
 
 namespace Server
 {
@@ -24,8 +26,14 @@ namespace Server
 
         public Player _monsterPlayer;
         public Map Map { get; set; }
-  
-      
+
+        public DateTime _gameStartTime;
+        public DateTime _currentTime;
+        public TimeSpan endLine = new TimeSpan(0, 0, 0, 20);
+        public bool _isStart = false;
+        public bool _isEnd = false;
+        public System.Timers.Timer thisTimer;
+
         public void Init(int mapId)
         {
             Map = new Map();
@@ -34,6 +42,19 @@ namespace Server
 
         public void Update()
         {
+            if (_isEnd == true)
+            {
+                thisTimer.Stop();
+                return;
+            }
+            
+            _currentTime = DateTime.Now;
+            if(_isStart == true &&  _currentTime - _gameStartTime >= endLine)
+            {
+                Console.WriteLine($"게임 시작 시간 {_gameStartTime}");
+                Console.WriteLine($"종료 시간 {_currentTime}");
+                EndGame();
+            }
             Flush();
         }
 
@@ -50,13 +71,14 @@ namespace Server
                 #region 플레이어 입장
                 Player newPlayer = gameObject as Player;
 
-                //게임에 입장했으니 플레이어의 시작 지점을 만들어줘야 한다.
-                newPlayer.Info.MovementInfo.PlayerPosInfo = new PositionInfo()
+                PositionInfo spawnPoint = new PositionInfo()
                 {
-                    PosX = 0,
-                    PosY = 0,
-                    PosZ = 0,
+                    PosX = Map.ObjectSpawnPoints[newPlayer.ObjectId % 4].x,
+                    PosY = Map.ObjectSpawnPoints[newPlayer.ObjectId % 4].y,
+                    PosZ = Map.ObjectSpawnPoints[newPlayer.ObjectId % 4].z
                 };
+                //게임에 입장했으니 플레이어의 시작 지점을 만들어줘야 한다.
+                newPlayer.Info.MovementInfo.PlayerPosInfo = spawnPoint;
                 newPlayer.Info.MovementInfo.MoveDir = new MoveDirInfo();
                 newPlayer.Info.MovementInfo.CameraPosInfo = new PositionInfo();
                 newPlayer.Info.MovementInfo.RightHandPosInfo = new PositionInfo();
@@ -195,12 +217,13 @@ namespace Server
                 Player newPlayer = gameObject as Player;
 
                 //게임에 입장했으니 플레이어의 시작 지점을 만들어줘야 한다.
-                newPlayer.Info.MovementInfo.PlayerPosInfo = new PositionInfo()
+                PositionInfo spawnPoint = new PositionInfo()
                 {
-                    PosX = 0,
-                    PosY = 0,
-                    PosZ = 0,
+                    PosX = Map.ObjectSpawnPoints[newPlayer.ObjectId % 4].x,
+                    PosY = Map.ObjectSpawnPoints[newPlayer.ObjectId % 4].y,
+                    PosZ = Map.ObjectSpawnPoints[newPlayer.ObjectId % 4].z
                 };
+                newPlayer.Info.MovementInfo.PlayerPosInfo = spawnPoint;
                 newPlayer.Info.MovementInfo.MoveDir = new MoveDirInfo();
                 newPlayer.Info.MovementInfo.CameraPosInfo = new PositionInfo();
                 newPlayer.Info.MovementInfo.RightHandPosInfo = new PositionInfo();
@@ -243,6 +266,44 @@ namespace Server
                 }
                 #endregion
             }
+        }
+
+        public void StartTime()
+        {
+            
+            Console.WriteLine($"게임 진행 시간은 총 {endLine} 입니다.");
+            _gameStartTime = DateTime.Now;
+            _isStart = true;
+
+        }
+
+        public void EndGame()
+        {
+            S_EndGame end = new S_EndGame();
+
+            Console.WriteLine("게임 종료");
+            end.GameInfo = "게임이 끝났습니다.";
+
+            int team1 = 0; int team2 = 0;
+            
+            foreach(Player player in _players.Values)
+            {
+                if(player.Info.TeamId == 0)
+                {
+                    team1 += player.Info.Player.Kill;
+                }else if(player.Info.TeamId == 1)
+                {
+                    team2 += player.Info.Player.Kill;
+                }
+            }
+            if (team1 > team2)
+            {
+                end.Winner = 0;
+            } else
+                end.Winner = 1;
+
+            BroadCast(end);
+            _isEnd = true;
         }
 
 

@@ -1,19 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
     public WeaponController _gun;       //총알을 쏜 총
     public GameObject _impactPrefab;    //피탄 효과
     public int dmg;
-    public float speed;
-    public float existTime;             //총알 생존 시간.
+    // public float speed;
+    private const float existTime = 10.0f;             //총알 생존 시간.
+    [SerializeField] Rigidbody rigid;
 
-    private void Awake()
+    IObjectPool<Bullet> pool;
+
+    public void setPool(IObjectPool<Bullet> pool)
     {
-        existTime = 10.0f;
-        Destroy(gameObject, existTime);
+        this.pool = pool;
+    }
+
+    public void Initialize(WeaponController gun, int dmg, Vector3 bulletPos, Quaternion rotation, Vector3 gunPos, float speed = 110.0f)
+    {
+        this.dmg = dmg;
+        this.transform.position = bulletPos;
+        this.transform.rotation = rotation;
+        _gun = gun;
+        rigid.velocity = (bulletPos - gunPos) * speed;
+        Invoke("DestroyBullet", existTime);
+    }
+
+    void DestroyBullet()
+    {
+        pool.Release(this);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,13 +53,12 @@ public class Bullet : MonoBehaviour
             GameObject decal = Instantiate(_impactPrefab, contact.point, Quaternion.LookRotation(contact.normal));
             decal.transform.SetParent(collision.transform);
 
-            Destroy(gameObject);
+            pool.Release(this);
         }
-
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDisable()
     {
-
+        rigid.velocity = Vector3.zero;
     }
 }

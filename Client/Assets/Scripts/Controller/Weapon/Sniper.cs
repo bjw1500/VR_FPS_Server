@@ -24,6 +24,17 @@ public class Sniper : WeaponController
     bool isReload;
     Animator anim;
 
+    // 총 소리 추가
+    public AudioClip fireSfx;
+    //AudioSource 컴포넌트 저장
+    private AudioSource source = null;
+
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+
     //Stat
 
 
@@ -63,11 +74,16 @@ public class Sniper : WeaponController
             anim.SetBool("Shoot", true);
             gunParticle.SetActive(true);
 
-            Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
-            Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
-            bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
-            shootingBullet._gun = this;
-            shootingBullet.dmg = _weaponData.damage;
+            //총 소리 발생
+            source.PlayOneShot(fireSfx, 0.9f);
+
+            GameMng.I.bulletPool.pool.Get().Initialize(this, _weaponData.damage, bulletPos.position, bulletPos.rotation, gunPos.position);
+
+            // Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
+            // Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
+            // bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
+            // shootingBullet._gun = this;
+            // shootingBullet.dmg = _weaponData.damage;
             fireRateTime = 0;
             curBulletCount--;
         }

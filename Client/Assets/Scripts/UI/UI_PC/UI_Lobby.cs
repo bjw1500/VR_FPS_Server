@@ -47,6 +47,8 @@ public class UI_Lobby : UI_Base
     [Header("맵")]
     public Sprite[] _imageSlot = new Sprite[_mapCount];
 
+    private int extractInt = 0;
+
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));
@@ -60,6 +62,10 @@ public class UI_Lobby : UI_Base
         BindEvent(_gameStart.gameObject, GameStart, Define.UIEvent.Click);
         BindEvent(_nextMapButton.gameObject, NextMap, Define.UIEvent.Click);
         BindEvent(_previousMapButton.gameObject, PreviousMap, Define.UIEvent.Click);
+
+        VrBindEvent(_gameStart.gameObject, GameStart);
+        VrBindEvent(_gameStart.gameObject, NextMap);
+        VrBindEvent(_gameStart.gameObject, PreviousMap);
 
         foreach (Transform child in characterSelectParent.transform)
             _characterIcon.Add(child.GetComponent<Button>());
@@ -80,38 +86,21 @@ public class UI_Lobby : UI_Base
         _mapImage.sprite = _imageSlot[MapId];
     }
 
-    public void NextMap(PointerEventData eventData)
-    {
-        //누르면 다음 맵으로 이동. 
-        MapId++;
-        if (MapId > _mapCount - 1)
-        {
-            MapId = 1;
-        }
-        _mapImage.sprite = _imageSlot[MapId];
+    public void NextMap(PointerEventData eventData) => NextMap();
 
-        //맵 이름을 바꿔줘야 할까? 
-    }
+    public void PreviousMap(PointerEventData eventData) => PreviousMap();
 
-    public void PreviousMap(PointerEventData eventData)
-    {
-        MapId--;
-        if (MapId < 1)
-        {
-            MapId = _mapCount;
-        }
-        _mapImage.sprite = _imageSlot[MapId];
-    }
+    public void GameStart(PointerEventData eventData) => GameStart();
 
     public void UpdateRoom(S_EnterWaitingRoom enterGamePacket)
     {
         //1.플레이어가 들어오면 슬롯 업데이트. 
-        foreach(GameObject go in charactersolots)
+        foreach (GameObject go in charactersolots)
         {
             //캐릭터 슬롯에는 PlayerLobbySlot 컴포넌트가 존재. 이곳에는 플레이어 정보가 담겨야 한다.
             //다만 플레이어 정보가 이미 담겨 있다면 다른 슬롯을 찾게 한다.
             UI_PlayerLobbySlot slot = go.GetComponent<UI_PlayerLobbySlot>();
-            if(slot == null)
+            if (slot == null)
             {
                 Debug.Log("UI_Lobby Error. UpdateRoom");
                 return;
@@ -122,7 +111,7 @@ public class UI_Lobby : UI_Base
             //여기까지 통과했으면 에러도 없고, 플레이어 정보도 없으니 업데이트 해주자.
             slot._playerInfo = enterGamePacket.Info.Player;
             slot._characterSelectNumber = enterGamePacket.Info.Player.ChracterId;
-            slot.transform.GetComponent<Image>().sprite = characterImg[enterGamePacket.Info.Player.ChracterId];
+            go.GetComponent<Image>().sprite = characterImg[enterGamePacket.Info.Player.ChracterId];
 
             //내 슬롯인지 아닌지 구별.
             if (enterGamePacket.MyPlayer == true)
@@ -142,7 +131,7 @@ public class UI_Lobby : UI_Base
     {
         UI_PlayerLobbySlot slot = null;
         _players.TryGetValue(packet.PlayerId, out slot);
-        if(slot == null)
+        if (slot == null)
         {
             Debug.Log("Error UpdateSlot");
             return;
@@ -161,11 +150,23 @@ public class UI_Lobby : UI_Base
         }
 
         _players.Remove(leaveGamePacket.Info.ObjectId);
-        leavePlayer.Reset();
-        
+        Managers.Resource.Destroy(leavePlayer.gameObject);
     }
 
-    public void GameStart(PointerEventData eventData)
+    public void LoadScene(int mapId)
+    {
+        //Managers.Scene.LoadScene(Define.Scene.Game);
+        Managers.Scene.LoadMap(mapId);
+    }
+
+    public void SelectedCharacter(PointerEventData eventData)
+    {
+        extractInt = int.Parse(Regex.Replace(eventData.pointerClick.name, @"[^0-9]", ""));
+        SelectedCharacter();
+    }
+
+    ///////////////////////////////////// VR /////////////////////////////////////
+    public void GameStart()
     {
         C_StartGame start = new C_StartGame();
 
@@ -179,18 +180,31 @@ public class UI_Lobby : UI_Base
         Managers.Network.Send(start);
     }
 
-    public void LoadScene(int mapId)
+    public void NextMap()
     {
-        //Managers.Scene.LoadScene(Define.Scene.Game);
-        Managers.Scene.LoadMap(mapId);
+        //누르면 다음 맵으로 이동. 
+        MapId++;
+        if (MapId > _mapCount - 1)
+        {
+            MapId = 1;
+        }
+        _mapImage.sprite = _imageSlot[MapId];
+
+        //맵 이름을 바꿔줘야 할까? 
     }
 
-    public void SelectedCharacter(PointerEventData eventData)
+    public void PreviousMap()
     {
-        string extractInt = Regex.Replace(eventData.pointerClick.name, @"[^0-9]", "");
+        MapId--;
+        if (MapId < 1)
+        {
+            MapId = _mapCount;
+        }
+        _mapImage.sprite = _imageSlot[MapId];
+    }
 
-        int number = int.Parse(extractInt);
-
+    public void SelectedCharacter()
+    {
         // slotInfo[0].GetComponent<Image>().sprite = characterImg[number]; // <! 테스트 용
 
         //캐릭터를 바꾸면 자신의 슬롯 이미지를 바꿔주자.
@@ -200,9 +214,9 @@ public class UI_Lobby : UI_Base
         //캐릭터를 선택했으면 정보를 뿌려줘야 한다.
         C_SelectCharacter select = new C_SelectCharacter();
         select.PlayerId = mySlot._playerInfo.ObjectId;
-        select.CharacterNumber = number;
+        /*캐릭터 선택할 때 0으로 강제 돼서 주석 처리후 수정*/
+        //select.CharacterNumber = GameMng.I.extractInt == 0 ? GameMng.I.extractInt : extractInt;
+        select.CharacterNumber = extractInt;
         Managers.Network.Send(select);
-
-
     }
 }

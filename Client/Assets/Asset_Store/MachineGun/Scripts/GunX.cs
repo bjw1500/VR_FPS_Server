@@ -53,10 +53,10 @@ public class GunX : MonoBehaviour
         {
             anim.SetBool("Shoot", true);
             gunParticle.SetActive(true);
-
-            Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
-            Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
-            bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
+            
+            // Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
+            // Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
+            // bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
             fireRateTime = 0;
             bulletcurCount--;
         }
@@ -65,6 +65,7 @@ public class GunX : MonoBehaviour
         {
             gunParticle.SetActive(false);
             anim.SetBool("Shoot", false);
+
         }
 
     }

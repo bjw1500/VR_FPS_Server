@@ -33,12 +33,21 @@ public class GameMng : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    void Start()
+    {
+        _isVR = XRGeneralSettings.Instance.Manager.activeLoader;
+        PhotonMng.ConnectToServer();
+    }
+
     #region Action
     public CustomSnapTurn snapturn = null;
+
+    public BulletPool bulletPool = null;
     #endregion
 
     #region UI
     public Hpbar hpbar;
+    public int extractInt = 0;       // 캐릭터 아이콘 클릭 했을때
     #endregion
 
     #region Event
@@ -46,7 +55,7 @@ public class GameMng : MonoBehaviour
     public event PointerEventHandler PointerIn;
     public event PointerEventHandler PointerOut;
     public event PointerEventHandler PointerClick;
-    
+
     public virtual void OnPointerIn(PointerEventArgs e)
     {
         if (PointerIn != null)

@@ -61,7 +61,7 @@ public class ActionController : MonoBehaviour
             CanPickUp();
         }
 
-        if (!activeUI || !wheelUI)
+        if (!activeUI && !wheelUI)
         {
             SnapTurn();
         }

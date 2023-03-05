@@ -155,6 +155,7 @@ namespace Server
                 gameRoom.Push(gameRoom.EnterGame, player);
                 gameRoom.Push(gameRoom.SpawnItem, player);
                 gameRoom.Push(gameRoom.SpawnObject, player);
+                gameRoom.Push(gameRoom.StartTime);
                 //player.LobbyRoom = null;
                 Console.WriteLine($"{player.Info.Player.Name}의 로딩이 끝났습니다.");
 

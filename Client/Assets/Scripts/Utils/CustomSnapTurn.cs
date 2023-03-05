@@ -25,6 +25,7 @@ public class CustomSnapTurn : MonoBehaviour
     public static float teleportLastActiveTime;
 
     private bool canRotate = true;
+
     public bool getCanRotate { get { return canRotate;} }
 
     public float canTurnEverySeconds = 0.4f;

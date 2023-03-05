@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
      * OnAttack은 데미지 판정을 주는 함수.
      */
 
-    
+
     public BaseController _master; //총을 들고 있는 무기의 주인
     public WeaponData _weaponData;
 
@@ -56,8 +56,8 @@ public class WeaponController : MonoBehaviour
     public virtual void OnAttack(BaseController target, int damage, BaseController master)
     {
         //데미지를 주는 함수
- 
-        if (target == null || master == null)
+
+        if (target == null || master == null || target == master)
             return;
 
         //무기의 주인이 서버에서 움직이는 캐릭터라면 데미지 판정을 줄 필요가 없다.

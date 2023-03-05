@@ -57,6 +57,7 @@ class PacketHandler
 
 	public static void C_ChangeHpHandler(PacketSession session, IMessage packet)
 	{
+
 		C_ChangeHp changeHpPacket = packet as C_ChangeHp;
 		ClientSession clientSession = session as ClientSession;
 

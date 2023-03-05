@@ -43,6 +43,16 @@ public class Gun : WeaponController
     private float _lastFireTime; //총을 마지막으로 발사한 시점.
     Animator anim;
 
+    // 총 소리 추가
+    public AudioClip fireSfx;
+    //AudioSource 컴포넌트 저장
+    private AudioSource source = null;
+
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
 
     //수정 사항: animator 변수의 이름을 anim으로 변경, public이 아닌 GetComponent로 변경, bulletLineRenderer의 사용을 취소함
     public override void Init()
@@ -51,7 +61,6 @@ public class Gun : WeaponController
         _currentState = GunState.Empty;
         _lastFireTime = 0;
         //UpdateUI();
-
     }
 
     public override void Fire()
@@ -69,21 +78,21 @@ public class Gun : WeaponController
             Reload();
 
         }
-
-
     }
 
 
     //수정 사항: 총알 생성 코드의 추가
     private void Shot()
     {
-
         //총알 생성 및 addforce를 이용하여 발사
-        Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
-        Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
-        bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
-        shootingBullet._gun = this;
-        shootingBullet.dmg = _weaponData.damage;
+        GameMng.I.bulletPool.pool.Get().Initialize(this, _weaponData.damage, bulletPos.position, bulletPos.rotation, gunPos.position);
+        // Bullet shootingBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation).GetComponent<Bullet>();
+        // Rigidbody bulletRigid = shootingBullet.GetComponent<Rigidbody>();
+        // bulletRigid.velocity = (bulletPos.position - gunPos.position) * shootingBullet.speed;
+        //총 소리 발생
+        source.PlayOneShot(fireSfx, 0.9f);
+        // shootingBullet._gun = this;
+        // shootingBullet.dmg = _weaponData.damage;
 
         //충돌 판정은 Bullet으로 옮김.
         //발사 -> 총의 데이터를 지닌 채 총알이 날아감 -> 충돌 판정 후 쏜 총의 데미지만큼 상대에게 데미지를 준다.
@@ -132,9 +141,6 @@ public class Gun : WeaponController
 
     }
 
-
-
-
     // 총의 탄약 UI에 남은 탄약수를 갱신해서 띄워줌.
     private void UpdateUI()
     {
@@ -150,7 +156,6 @@ public class Gun : WeaponController
         {
             _ammoText.text = curBulletCount.ToString();
         }
-
     }
 
     public void Reload()
@@ -179,9 +184,5 @@ public class Gun : WeaponController
         _weaponData.ammoCount--;
         _currentState = GunState.Ready;
         UpdateUI();
-
     }
-
-
-
 }

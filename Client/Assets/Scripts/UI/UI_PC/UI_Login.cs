@@ -51,7 +51,6 @@ public class UI_Login : UI_Base
         Bind<Text>(typeof(Texts));
         Bind<Toggle>(typeof(Toggles));
 
-
         _enterButton = Get<Button>((int)Buttons.EnterButton);
         _connectButton = Get<Button>((int)Buttons.ConnectButton);
         _signUpButton = Get<Button>((int)Buttons.SignUpButton);
@@ -79,48 +78,20 @@ public class UI_Login : UI_Base
         _idText.gameObject.SetActive(false);
         _passwordText.gameObject.SetActive(false);
 
+        Debug.Log(_toggle.isOn);
+
         //_serverIPText.placeholder.GetComponent<>().text = "127.0.0.1";
         //_serverIPText.text = "127.0.0.1";
         //_nameText.placeholder.GetComponent<TextMeshProUGUI>().text = "Name";
     }
 
-    public void ConnectToServer(PointerEventData data)
-    {
-        Debug.Log("Try Connect Server!");
-        Debug.Log(_serverIPText.text);
-        Managers.Network.Connect(_serverIPText.text);
-        //연결이 되면 서버에서 Connect 패킷을 보낸다.
-        //Connect 패킷을 받으면 아이디와 비번 입력 진행
-    }
+    public void ConnectToServer(PointerEventData data) => ConnectToServer();
 
-    public void TryLogin(PointerEventData data)
-    {
-        Debug.Log("로그인 시도");
+    public void TryLogin(PointerEventData data) => TryLogin();
 
-        //EnterLobyyPacket 보내기.
-        C_Login login = new C_Login();
-        login.LoginId = _idText.text;
-        login.LoginPassword = _passwordText.text;
-        Managers.Network.Send(login);
+    public void LoadSignUpPage(PointerEventData data) => LoadSignUpPage();
 
-        //실패시 다시 시도하게 하기.
-
-        //SeverSession OnConnected에서 성공시 LoadLobbyScene 실행됨.
-    }
-
-    public void LoadSignUpPage(PointerEventData data)
-    {
-        _signUP.gameObject.SetActive(true);
-    }
-
-    public void EnterSingleGame(PointerEventData data)
-    {
-        Debug.Log("싱글게임 시작");
-        GameMng.I.SingleGame = true;
-        Managers.Scene.LoadScene(Define.Scene.SingleLobby);
-        //GameScene gs = Managers.Scene.CurrentScene as GameScene;
-        //gs.Play();
-    }
+    public void EnterSingleGame(PointerEventData data) => EnterSingleGame();
 
     public void ChangeVRType(PointerEventData data)
     {
@@ -162,8 +133,8 @@ public class UI_Login : UI_Base
         Managers.Scene.LoadScene(Define.Scene.Lobby);
     }
 
-    // vr 
- public void ConnectToServer()
+    ///////////////////////////////////// VR /////////////////////////////////////
+    public void ConnectToServer()
     {
         Debug.Log("Try Connect Server!");
         Debug.Log(_serverIPText.text);
@@ -204,6 +175,7 @@ public class UI_Login : UI_Base
     public void ChangeVRType()
     {
         _toggle.isOn = _toggle.isOn ? false : true;
+        
         if (_toggle.isOn == true)
         {
             GameMng.I.VR_Type = Define.VRType.Oculus;

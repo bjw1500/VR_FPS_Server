@@ -14,6 +14,7 @@ public class GameScene : BaseScene
         Screen.SetResolution(1920, 1080, false);
         GameMng.I._isVR = XRGeneralSettings.Instance.Manager.activeLoader;
         Debug.Log($"VR :{GameMng.I._isVR} 입니다.");
+        GameMng.I.bulletPool = GameObject.Find("BulletPool").GetComponent<BulletPool>();
         Play();
     }
 
