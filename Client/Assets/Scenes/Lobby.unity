@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028377, g: 0.22571409, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -420,6 +420,7 @@ MonoBehaviour:
   SingleGame: 0
   VR_Type: 1
   snapturn: {fileID: 0}
+  bulletPool: {fileID: 0}
   hpbar: {fileID: 0}
   extractInt: 0
 --- !u!4 &1926555012
@@ -530,7 +531,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2609271978146790910, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
       propertyPath: _imageSlot.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2609271978146790910, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
       propertyPath: characterImg.Array.size
@@ -552,6 +553,10 @@ PrefabInstance:
       propertyPath: _imageSlot.Array.data[3]
       value: 
       objectReference: {fileID: 21300000, guid: aafc5dc1904a4b74a8b42ea7bf0d15c7, type: 3}
+    - target: {fileID: 2609271978146790910, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
+      propertyPath: _imageSlot.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 9f5f9ad70473f9d44a7fc53a7476544e, type: 3}
     - target: {fileID: 2609271978146790910, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
       propertyPath: _characterIcon.Array.size
       value: 0

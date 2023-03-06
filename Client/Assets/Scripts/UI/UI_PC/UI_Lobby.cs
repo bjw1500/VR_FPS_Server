@@ -42,7 +42,7 @@ public class UI_Lobby : UI_Base
     Button _previousMapButton;
     [SerializeField] List<Button> _characterIcon;
 
-    [SerializeField] public const int _mapCount = 4;
+    [SerializeField] public const int _mapCount = 5;
     Image _mapImage;
     [Header("맵")]
     public Sprite[] _imageSlot = new Sprite[_mapCount];
