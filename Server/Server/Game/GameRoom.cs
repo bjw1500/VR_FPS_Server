@@ -29,7 +29,7 @@ namespace Server
 
         public DateTime _gameStartTime;
         public DateTime _currentTime;
-        public TimeSpan endLine = new TimeSpan(0, 2, 0, 20);
+        public TimeSpan endLine = new TimeSpan(0, 2, 0, 0);
         public bool _isStart = false;
         public bool _isEnd = false;
         public System.Timers.Timer thisTimer;

@@ -61,7 +61,7 @@ public class MapEditor
 
 
 			//두 번째 줄에 히트박스의 갯수 적어준다.
-			writer.WriteLine("ObjectCount:" + countObject);
+			writer.WriteLine("PlayerCount:" + countObject);
 
 			foreach (GameObject spawnHitBox in objectPoints)
 			{

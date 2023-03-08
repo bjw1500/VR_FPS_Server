@@ -363,7 +363,9 @@ MonoBehaviour:
   SingleGame: 0
   VR_Type: 1
   snapturn: {fileID: 0}
+  bulletPool: {fileID: 0}
   hpbar: {fileID: 0}
+  extractInt: 0
 --- !u!4 &1926555012
 Transform:
   m_ObjectHideFlags: 0
@@ -757,6 +759,10 @@ PrefabInstance:
     - target: {fileID: 3688791521239821734, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3688791521300677218, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 331.0339
       objectReference: {fileID: 0}
     - target: {fileID: 3688791521438172780, guid: 23d11bc8dadd99a4a8773e57e6ebf4b1, type: 3}
       propertyPath: m_AnchorMax.y

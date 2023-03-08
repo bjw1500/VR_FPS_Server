@@ -48,16 +48,11 @@ public class Gun : WeaponController
     //AudioSource 컴포넌트 저장
     private AudioSource source = null;
 
-    private void Start()
-    {
-        source = GetComponent<AudioSource>();
-    }
-
-
     //수정 사항: animator 변수의 이름을 anim으로 변경, public이 아닌 GetComponent로 변경, bulletLineRenderer의 사용을 취소함
     public override void Init()
     {
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
         _currentState = GunState.Empty;
         _lastFireTime = 0;
         //UpdateUI();
