@@ -34,15 +34,13 @@ public class Knife : WeaponController
         if (other.gameObject.tag == "IDamageable") {
 
             BaseController target = other.transform.GetComponent<BaseController>();
-            if (target != null && _master != null)
+            if (target != null && _master != null && target != _master)
             {
                 OnAttack(target, _weaponData.damage, _master);
+                GameObject shotBlood = Instantiate(blood, bloodPos.position, bloodPos.rotation);
+                Destroy(shotBlood, 2f);
                 //데미지 판정 효과는 어떻게 할 것인가?
             }
-
-            GameObject shotBlood =  Instantiate(blood, bloodPos.position, bloodPos.rotation);
-            Destroy(shotBlood, 2f);
-
         }
     }
 

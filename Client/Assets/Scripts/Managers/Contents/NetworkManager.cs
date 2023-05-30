@@ -44,7 +44,7 @@ public class NetworkManager
 
         Debug.Log($"Connect to {IpAddress}");
         IPAddress ipAddr = IPAddress.Parse(IpAddress);
-        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, 17100);
         Connector connector = new Connector();
         connector.Connect(endPoint,
             () => { return _session; },

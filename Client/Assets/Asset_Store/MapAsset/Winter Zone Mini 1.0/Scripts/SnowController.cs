@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SnowController : MonoBehaviour
 {
-    public Transform playerOrCamera;
     public GameObject[] sg1;
     public GameObject[] sg2;
     public GameObject[] sg3;

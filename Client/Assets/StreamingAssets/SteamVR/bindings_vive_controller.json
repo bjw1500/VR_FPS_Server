@@ -206,11 +206,16 @@
             },
             {
                "inputs" : {
-                  "position" : {
-                     "output" : "/actions/default/in/move"
+                  "click" : {
+                     "output" : "/actions/default/in/jump"
                   }
                },
-               "mode" : "trackpad",
+               "mode" : "button",
+               "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {},
+               "mode" : "none",
                "path" : "/user/hand/right/input/trackpad"
             }
          ]

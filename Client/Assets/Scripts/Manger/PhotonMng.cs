@@ -19,7 +19,7 @@ public class PhotonMng : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //ConnectToServer();
+        ConnectToServer();
     }
     /**
      * @brief 웹통신으로 로그인

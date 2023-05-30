@@ -228,8 +228,19 @@ class PacketHandler
 
     public static void S_LeaveWaitingRoomHandler(PacketSession session, IMessage packet)
     {
-        S_LeaveWaitingRoom diePacket = packet as S_LeaveWaitingRoom;
+        S_LeaveWaitingRoom leavePacket = packet as S_LeaveWaitingRoom;
         ServerSession serverSession = session as ServerSession;
+
+        GameObject go = GameObject.Find("LobbyUI");
+        if (go == null)
+            return;
+
+        UI_Lobby ui = go.GetComponent<UI_Lobby>();
+        if (ui == null)
+            return;
+
+        ui.LeaveGame(leavePacket);
+
     }
 
     public static void S_StartGameHandler(PacketSession session, IMessage packet)

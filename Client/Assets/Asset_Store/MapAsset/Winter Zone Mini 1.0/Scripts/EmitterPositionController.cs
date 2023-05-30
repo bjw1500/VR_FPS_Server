@@ -13,13 +13,11 @@ using UnityEngine;
 public class EmitterPositionController : MonoBehaviour
 {
 
-    public SnowController sc;
     public Transform PlayerOrCamera;
 
 	// Use this for initialization
 	void Start ()
     {
-        PlayerOrCamera = sc.playerOrCamera;
         if (PlayerOrCamera == null)
             Debug.Log("You should attach player object or camera parent object to EmitterPositionController script.");
 

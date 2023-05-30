@@ -52,7 +52,7 @@ namespace Server
 			Console.WriteLine($"내부 Server Ip Address :{ipHost.AddressList[1]} : {ipHost.AddressList[0]} \n");
 			//CheckIpAddress();
 
-			IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+			IPEndPoint endPoint = new IPEndPoint(ipAddr, 17100);
 
 			_listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
 			Console.WriteLine("Listening...");

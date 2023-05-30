@@ -52,9 +52,9 @@ public class Bullet : MonoBehaviour
             ContactPoint contact = collision.GetContact(0);
             GameObject decal = Instantiate(_impactPrefab, contact.point, Quaternion.LookRotation(contact.normal));
             decal.transform.SetParent(collision.transform);
-
-            pool.Release(this);
         }
+
+        pool.Release(this);
     }
 
     private void OnDisable()
