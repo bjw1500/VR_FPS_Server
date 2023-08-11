@@ -93,6 +93,16 @@ public class UI_Login : UI_Base
 
     public void EnterSingleGame(PointerEventData data) => EnterSingleGame();
 
+    // private void Start() {
+    //     StartCoroutine(login1());
+    // }
+
+    // IEnumerator login1()
+    // {
+    //     _serverIPText.text = "10.10.95.250";
+    //     yield return new WaitForSeconds(1.0f);
+    // }
+
     public void ChangeVRType(PointerEventData data)
     {
         if (_toggle.isOn == true)

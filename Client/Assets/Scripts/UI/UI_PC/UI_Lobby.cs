@@ -42,7 +42,7 @@ public class UI_Lobby : UI_Base
     Button _previousMapButton;
     [SerializeField] List<Button> _characterIcon;
 
-    [SerializeField] public const int _mapCount = 5;
+    [SerializeField] public const int _mapCount = 4;
     Image _mapImage;
     [Header("맵")]
     public Sprite[] _imageSlot = new Sprite[_mapCount];
@@ -64,8 +64,8 @@ public class UI_Lobby : UI_Base
         BindEvent(_previousMapButton.gameObject, PreviousMap, Define.UIEvent.Click);
 
         VrBindEvent(_gameStart.gameObject, GameStart);
-        VrBindEvent(_gameStart.gameObject, NextMap);
-        VrBindEvent(_gameStart.gameObject, PreviousMap);
+        VrBindEvent(_nextMapButton.gameObject, NextMap);
+        VrBindEvent(_previousMapButton.gameObject, PreviousMap);
 
         foreach (Transform child in characterSelectParent.transform)
             _characterIcon.Add(child.GetComponent<Button>());
@@ -73,10 +73,11 @@ public class UI_Lobby : UI_Base
         for (int i = 0; i < _characterIcon.Count; i++)
         {
             BindEvent(_characterIcon[i].gameObject, SelectedCharacter, Define.UIEvent.Click);
+            VrBindEvent(_characterIcon[i].gameObject, SelectedCharacter);
         }
 
-        GameObject go = transform.Find("UserGrid").gameObject;
-        foreach (Transform child in go.transform)
+        GameObject userSlot = transform.Find("UserGrid").gameObject;
+        foreach (Transform child in userSlot.transform)
         {
             child.gameObject.SetActive(true);      // <! 시작할 때 다 꺼주기
             charactersolots.Add(child.gameObject);
@@ -184,11 +185,11 @@ public class UI_Lobby : UI_Base
     {
         //누르면 다음 맵으로 이동. 
         MapId++;
-        if (MapId > _mapCount - 1)
+        if (MapId > _mapCount)
         {
             MapId = 1;
         }
-        _mapImage.sprite = _imageSlot[MapId];
+        _mapImage.sprite = _imageSlot[MapId - 1];
 
         //맵 이름을 바꿔줘야 할까? 
     }
@@ -200,7 +201,7 @@ public class UI_Lobby : UI_Base
         {
             MapId = _mapCount;
         }
-        _mapImage.sprite = _imageSlot[MapId];
+        _mapImage.sprite = _imageSlot[MapId - 1];
     }
 
     public void SelectedCharacter()
@@ -215,8 +216,8 @@ public class UI_Lobby : UI_Base
         C_SelectCharacter select = new C_SelectCharacter();
         select.PlayerId = mySlot._playerInfo.ObjectId;
         /*캐릭터 선택할 때 0으로 강제 돼서 주석 처리후 수정*/
-        //select.CharacterNumber = GameMng.I.extractInt == 0 ? GameMng.I.extractInt : extractInt;
-        select.CharacterNumber = extractInt;
+        select.CharacterNumber = GameMng.I.extractInt == 0 ? extractInt : GameMng.I.extractInt;
+        // select.CharacterNumber = extractInt;
         Managers.Network.Send(select);
     }
 }

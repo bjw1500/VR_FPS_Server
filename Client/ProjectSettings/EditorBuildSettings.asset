@@ -9,20 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Login.unity
     guid: 6444e436f1c844f4fbe7f73e747cb352
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: 5e446c82b53a9af46a8a196c37dcc195
-  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: b008e898e88c1354bb12877a1e27ab07
   - enabled: 1
-    path: Assets/Scenes/Vr/VR_Game.unity
-    guid: 08127ce1702754943b41c3ce3903e02c
-  - enabled: 1
-    path: Assets/Scenes/Vr/VR_Lobby.unity
-    guid: c64eefe9c91b2af408d79a6ed5326c19
-  - enabled: 1
-    path: Assets/Scenes/Vr/VR_Login.unity
-    guid: 10664757fed093b4e9d1966436ea8099
+    path: Assets/Scenes/Lobby.unity
+    guid: 5e446c82b53a9af46a8a196c37dcc195
   - enabled: 1
     path: Assets/Scenes/SingleGame.unity
     guid: 20a7d9e39fcb87c4b8aabeeecd82d314
@@ -35,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map001.unity
     guid: 365756507478d694b8867c9040ec341b
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Map000.unity
     guid: 29c75ecea7cf6924a84296d4eb38c71c

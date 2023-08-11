@@ -9,10 +9,12 @@ public class Bullet : MonoBehaviour
     public GameObject _impactPrefab;    //피탄 효과
     public int dmg;
     // public float speed;
-    private const float existTime = 10.0f;             //총알 생존 시간.
+    private const float existTime = 3.0f;             //총알 생존 시간.
     [SerializeField] Rigidbody rigid;
 
     IObjectPool<Bullet> pool;
+
+    [SerializeField] TrailRenderer trailRenderer = null;
 
     public void setPool(IObjectPool<Bullet> pool)
     {
@@ -53,12 +55,14 @@ public class Bullet : MonoBehaviour
             GameObject decal = Instantiate(_impactPrefab, contact.point, Quaternion.LookRotation(contact.normal));
             decal.transform.SetParent(collision.transform);
         }
-
+        
+        trailRenderer.Clear();
         pool.Release(this);
     }
 
     private void OnDisable()
     {
+        trailRenderer.Clear();
         rigid.velocity = Vector3.zero;
     }
 }

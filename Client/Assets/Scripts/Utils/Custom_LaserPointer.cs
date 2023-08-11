@@ -20,7 +20,7 @@ public class Custom_LaserPointer : MonoBehaviour
     // public event PointerEventHandler PointerClick;
     // public event PointerEventHandler PointerGrip;
     // public System.Action<PointerEventData> OnClickHandler = null;
-    [SerializeField] private float customdist = 100.0f;
+    [SerializeField] private float customdist = 9999.0f;
     Transform previousContact = null;
     private Vector3 dotVec = new Vector3(9999.0f, 9999.0f, 9999.0f);        // <! 레이저 끝 점 미국보내기
 
@@ -46,7 +46,7 @@ public class Custom_LaserPointer : MonoBehaviour
         pointer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         pointer.transform.parent = this.transform;
         pointer.transform.localPosition = dotVec;
-        pointer.transform.localScale = new Vector3(0.05f, 0.05f, 0.0001f);
+        pointer.transform.localScale = new Vector3(1f, 1f, 0.0001f);
         pointer.transform.localRotation = Quaternion.identity;
 
         SphereCollider spherecollider = pointer.GetComponent<SphereCollider>();
@@ -131,7 +131,7 @@ public class Custom_LaserPointer : MonoBehaviour
         {
             previousContact = null;
         }
-        if (bHit && hit.distance < 100f)
+        if (bHit && hit.distance < customdist)
         {
             dist = hit.distance;
         }

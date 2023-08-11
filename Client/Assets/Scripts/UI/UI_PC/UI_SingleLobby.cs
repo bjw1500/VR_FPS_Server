@@ -43,6 +43,8 @@ public class UI_SingleLobby : UI_Base
     [Header("맵")]
     public Sprite[] _imageSlot = new Sprite[_mapCount];
 
+    int extractInt;
+
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));
@@ -57,12 +59,17 @@ public class UI_SingleLobby : UI_Base
         BindEvent(_nextMapButton.gameObject, NextMap, Define.UIEvent.Click);
         BindEvent(_previousMapButton.gameObject, PreviousMap, Define.UIEvent.Click);
 
+        VrBindEvent(_gameStart.gameObject, GameStart);
+        VrBindEvent(_nextMapButton.gameObject, NextMap);
+        VrBindEvent(_previousMapButton.gameObject, PreviousMap);
+
         foreach (Transform child in characterSelectParent.transform)
             _characterIcon.Add(child.GetComponent<Button>());
 
         for (int i = 0; i < _characterIcon.Count; i++)
         {
             BindEvent(_characterIcon[i].gameObject, SelectedCharacter, Define.UIEvent.Click);
+            VrBindEvent(_characterIcon[i].gameObject, SelectedCharacter);
         }
 
         GameObject go = transform.Find("UserGrid").gameObject;
@@ -77,35 +84,42 @@ public class UI_SingleLobby : UI_Base
         CreateSinglePlayer();
     }
 
-    public void NextMap(PointerEventData eventData)
+
+    public void NextMap(PointerEventData eventData) => NextMap();
+
+    public void PreviousMap(PointerEventData eventData) => PreviousMap();
+
+    public void GameStart(PointerEventData eventData) => GameStart();
+
+    public void NextMap()
     {
         //누르면 다음 맵으로 이동. 
         MapId++;
-        if (MapId > _mapCount - 1)
+        if (MapId > _mapCount)
         {
-            MapId = 0;
+            MapId = 1;
         }
-        _mapImage.sprite = _imageSlot[MapId];
+        _mapImage.sprite = _imageSlot[MapId - 1];
 
         //맵 이름을 바꿔줘야 할까? 
     }
 
-    public void PreviousMap(PointerEventData eventData)
+    public void PreviousMap()
     {
         MapId--;
-        if (MapId < 0)
+        if (MapId < 1)
         {
-            MapId = _mapCount - 1;
+            MapId = _mapCount;
         }
-        _mapImage.sprite = _imageSlot[MapId];
+        _mapImage.sprite = _imageSlot[MapId - 1];
     }
 
     public void CreateSinglePlayer()
     {
-        foreach(GameObject go in charactersolots)
+        foreach (GameObject go in charactersolots)
         {
             UI_PlayerLobbySlot slot = go.GetComponent<UI_PlayerLobbySlot>();
-            if(slot == null)
+            if (slot == null)
             {
                 Debug.Log("UI_Lobby Error. UpdateRoom");
                 return;
@@ -140,7 +154,7 @@ public class UI_SingleLobby : UI_Base
         mySlot._playerInfo.ChracterId = number;
     }
 
-    public void GameStart(PointerEventData eventData)
+    public void GameStart()
     {
         Managers.Object._singlePlayer = mySlot._playerInfo;
         Managers.Object._mapId = MapId;
@@ -150,10 +164,13 @@ public class UI_SingleLobby : UI_Base
 
     public void SelectedCharacter(PointerEventData eventData)
     {
-        string extractInt = Regex.Replace(eventData.pointerClick.name, @"[^0-9]", "");
+        extractInt = int.Parse(Regex.Replace(eventData.pointerClick.name, @"[^0-9]", ""));
 
-        int number = int.Parse(extractInt);
+        UpdateSlot(extractInt);
+    }
 
-        UpdateSlot(number);
+    public void SelectedCharacter()
+    {
+        UpdateSlot(GameMng.I.extractInt == 0 ? extractInt : GameMng.I.extractInt);
     }
 }

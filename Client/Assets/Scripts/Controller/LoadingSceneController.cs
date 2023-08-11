@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class LoadingSceneController : MonoBehaviour
 {
     public static string nextScene;
-    [SerializeField] GameObject loadingBar;
+    [SerializeField] RectTransform loadingBar;
+
+    bool Test = false;
 
     public static bool flag = false;
 
@@ -44,13 +46,14 @@ public class LoadingSceneController : MonoBehaviour
         while (!op.isDone)
         {
             yield return null;
-
+            Debug.Log(op.progress);
             if (op.progress < 0.9f)
             {
-                loadingBar.transform.Rotate(new Vector3(0, 0, 50.0f * Time.deltaTime));
+                loadingBar.Rotate(new Vector3(0, 0, 360.0f * Time.deltaTime));
             }
             else
             {
+                loadingBar.Rotate(new Vector3(0, 0, 360.0f * Time.deltaTime));
                 yield return new WaitForSeconds(2.0f);
                 op.allowSceneActivation = true;
                 yield break;
@@ -69,16 +72,17 @@ public class LoadingSceneController : MonoBehaviour
 
             if (async.progress < 0.9f)
             {
-                loadingBar.transform.Rotate(new Vector3(0, 0, 50.0f * Time.deltaTime));
+                loadingBar.Rotate(new Vector3(0, 0, 360.0f * Time.deltaTime));
             }
             else
             {
+                loadingBar.Rotate(new Vector3(0, 0, 360.0f * Time.deltaTime));
                 yield return new WaitForSeconds(2.0f);
                 async.allowSceneActivation = true;
                 Debug.Log($"{nextScene}이 생성되었습니다.");
 
                 //싱글 게임이라면 패킷 보내지 않고 스킵.
-                if(GameMng.I.SingleGame == true)
+                if (GameMng.I.SingleGame == true)
                 {
                     yield break;
                 }

@@ -51,7 +51,6 @@ D:\DesignProject\capstone\myProject\Server\PacketGenerator\bin\PacketGenerator.d
 D:\DesignProject\capstone\myProject\Server\PacketGenerator\bin\PacketGenerator.pdb
 D:\DesignProject\capstone\myProject\Server\PacketGenerator\bin\Google.Protobuf.dll
 D:\DesignProject\capstone\myProject\Server\PacketGenerator\bin\System.Runtime.CompilerServices.Unsafe.dll
-D:\DesignProject\capstone\myProject\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.AssemblyReference.cache
 D:\DesignProject\capstone\myProject\Server\PacketGenerator\obj\Debug\PacketGenerator.GeneratedMSBuildEditorConfig.editorconfig
 D:\DesignProject\capstone\myProject\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfoInputs.cache
 D:\DesignProject\capstone\myProject\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfo.cs

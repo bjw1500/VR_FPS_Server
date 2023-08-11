@@ -50,7 +50,7 @@ namespace Server
 			//IPAddress ipAddr = IPAddress.Parse("121.168.117.240");
 
 			Console.WriteLine($"내부 Server Ip Address :{ipHost.AddressList[1]} : {ipHost.AddressList[0]} \n");
-			//CheckIpAddress();
+			CheckIpAddress();
 
 			IPEndPoint endPoint = new IPEndPoint(ipAddr, 17100);
 

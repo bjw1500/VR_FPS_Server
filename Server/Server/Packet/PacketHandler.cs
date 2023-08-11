@@ -243,44 +243,44 @@ class PacketHandler
 		C_CreateAccount createAccountPacket = packet as C_CreateAccount;
 		ClientSession clientSession = session as ClientSession;
 
-		//플레이어가 회원가입을 통해 Id와 password를 패킷으로 보낸다.
-		//그러면 서버가 해야할 역할은?
-		//데베에서 아이디를 검색해보고 없으면 생성, 있으면 불가능패킷을 보낸다.
+		////플레이어가 회원가입을 통해 Id와 password를 패킷으로 보낸다.
+		////그러면 서버가 해야할 역할은?
+		////데베에서 아이디를 검색해보고 없으면 생성, 있으면 불가능패킷을 보낸다.
 
-		using(AppDbContext db = new AppDbContext())
-        {
-			AccountDb findAccount = db.Accounts.
-				Where(a => a.AccountName == createAccountPacket.Id).FirstOrDefault();
+		//using(AppDbContext db = new AppDbContext())
+  //      {
+		//	AccountDb findAccount = db.Accounts.
+		//		Where(a => a.AccountName == createAccountPacket.Id).FirstOrDefault();
 
-			//만약 사용자가 만들려고 하는 아이디가 존재한다면,
-			if(findAccount != null)
-            {
-				S_FailedCreateAccount failedPacket = new S_FailedCreateAccount();
-				failedPacket.Information = "이미 존재하는 아이디입니다.";
-				clientSession.Send(failedPacket);
-				return;
-				//실패 패킷 보내기
-            }
-
-
-            //통과했으면 새로운 아이디를 만들어준다.
-
-            AccountDb newAccount = new AccountDb()
-            {
-                AccountName = createAccountPacket.Id,
-				AccountPassword = createAccountPacket.Password,
-            };
-            db.Accounts.Add(newAccount);
-            db.SaveChanges();
-			Console.WriteLine($"새로운 계정 {createAccountPacket.Id}가 생성되었습니다.");
-
-			//생성 성공 패킷 보내기.
-			S_SuccessCreateAccount successPacket = new S_SuccessCreateAccount();
-			successPacket.Information = "계정이 성공적으로 생성되었습니다.";
-			clientSession.Send(successPacket);
+		//	//만약 사용자가 만들려고 하는 아이디가 존재한다면,
+		//	if(findAccount != null)
+  //          {
+		//		S_FailedCreateAccount failedPacket = new S_FailedCreateAccount();
+		//		failedPacket.Information = "이미 존재하는 아이디입니다.";
+		//		clientSession.Send(failedPacket);
+		//		return;
+		//		//실패 패킷 보내기
+  //          }
 
 
-		}
+  //          //통과했으면 새로운 아이디를 만들어준다.
+
+  //          AccountDb newAccount = new AccountDb()
+  //          {
+  //              AccountName = createAccountPacket.Id,
+		//		AccountPassword = createAccountPacket.Password,
+  //          };
+  //          db.Accounts.Add(newAccount);
+  //          db.SaveChanges();
+		//	Console.WriteLine($"새로운 계정 {createAccountPacket.Id}가 생성되었습니다.");
+
+		//	//생성 성공 패킷 보내기.
+		//	S_SuccessCreateAccount successPacket = new S_SuccessCreateAccount();
+		//	successPacket.Information = "계정이 성공적으로 생성되었습니다.";
+		//	clientSession.Send(successPacket);
+
+
+		//}
 
 
 	}

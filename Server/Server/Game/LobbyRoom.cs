@@ -138,6 +138,8 @@ namespace Server
                 S_StartGame start = new S_StartGame();
                 start.MapId = startPacket.MapId;
                 BroadCast(start);
+
+
             }
         }
 
@@ -156,22 +158,31 @@ namespace Server
                 gameRoom.Push(gameRoom.SpawnItem, player);
                 gameRoom.Push(gameRoom.SpawnObject, player);
                 gameRoom.Push(gameRoom.StartTime);
+                player.LoadingFinished = true;
                 //player.LobbyRoom = null;
                 Console.WriteLine($"{player.Info.Player.Name}의 로딩이 끝났습니다.");
 
             }
+
 
             //이렇게 하면 플레이어가 로딩을 끝날 때마다 템이 생겨난다.
             //이걸 어떻게 해결하지?
             //1.맵에서 미리 아이템을 생성한다.
             //2.플레이어 개인은 로딩이 끝나면 그런 맵의 정보를 받는다.
 
-            //gameRoom.Push(gameRoom.SpawnItem);
-            //gameRoom.Push(gameRoom.SpawnObject);
-            
+            bool checkAllFinish = true;
+            foreach (Player player in _players.Values)
+            {
+                if (player.LoadingFinished == true)
+                    continue;
 
-            //Lobby에서 전부 퇴장시킨다.
-           // _players.Remove(playerId);
+                checkAllFinish = false;
+            }
+
+            if (checkAllFinish == true)
+                _players.Clear();
+
+
         }
 
         public void LeaveGame(int playerId)

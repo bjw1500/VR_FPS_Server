@@ -32,6 +32,8 @@ namespace Server
 
         public PlayerState State { get; set; }
 
+        public bool LoadingFinished = false;
+
         public StatInfo Stat
         {
             get { return Info.StatInfo; }

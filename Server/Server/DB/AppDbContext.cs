@@ -22,7 +22,7 @@ namespace Server.DB
         {
             options
                 .UseLoggerFactory(_logger)
-                .UseSqlServer(ConfigManager.Config == null ? _connectionString : ConfigManager.Config.connectionString); ;
+                .UseSqlServer(ConfigManager.Config.connectionString == null ? _connectionString : ConfigManager.Config.connectionString); ;
 
         }
 
